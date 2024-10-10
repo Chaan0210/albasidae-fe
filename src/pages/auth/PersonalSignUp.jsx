@@ -110,6 +110,7 @@ const PersonalSignUp = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(requestBody),
+          mode: "cors",
         }
       );
       console.log(window.location.origin);
