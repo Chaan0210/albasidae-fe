@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import S from "../../uis/RegistResumeUI";
+import S from "../../uis/RegistUI";
 
 const WorkTerm = () => {
   const [activeTab, setActiveTab] = useState("threemonth");

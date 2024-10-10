@@ -1,4 +1,4 @@
-import S from "../../uis/RegistResumeUI";
+import S from "../../uis/RegistUI";
 import React, { useState } from "react";
 
 const ResumeEducation = () => {

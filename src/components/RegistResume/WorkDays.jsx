@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import S from "../../uis/RegistResumeUI";
+import S from "../../uis/RegistUI";
 
 const WorkDays = () => {
   const [activeTab, setActiveTab] = useState("weekdays");

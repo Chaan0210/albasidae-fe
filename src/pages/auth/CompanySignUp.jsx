@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 
@@ -108,6 +109,7 @@ const CompanySignUp = () => {
     email: "",
     phone: "",
   });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -132,17 +134,22 @@ const CompanySignUp = () => {
     };
 
     try {
-      const response = await fetch("/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(
+        `https://6153-211-178-236-156.ngrok-free.app/api/users/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+          mode: "cors",
+        }
+      );
 
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("회원가입이 완료되었습니다.");
+        navigate("/");
       } else {
         alert("회원가입에 실패했습니다: " + data.message);
       }

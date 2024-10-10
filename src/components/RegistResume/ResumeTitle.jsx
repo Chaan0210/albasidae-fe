@@ -1,4 +1,4 @@
-import S from "../../uis/RegistResumeUI";
+import S from "../../uis/RegistUI";
 
 const ResumeTitle = () => {
   return (

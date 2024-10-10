@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import S from "../../uis/RegistResumeUI";
+import S from "../../uis/RegistUI";
 
 const WorkType = () => {
   const workTypeList = ["아르바이트", "계약직", "정규직", "인턴쉽", "프리랜서"];

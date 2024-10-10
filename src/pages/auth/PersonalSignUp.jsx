@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 
@@ -78,6 +79,7 @@ const PersonalSignUp = () => {
     email: "",
     phone: "",
   });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -103,7 +105,7 @@ const PersonalSignUp = () => {
 
     try {
       const response = await fetch(
-        `https://73f6-211-178-236-156.ngrok-free.app/api/users/register`,
+        `https://6153-211-178-236-156.ngrok-free.app/api/users/register`,
         {
           method: "POST",
           headers: {
@@ -117,6 +119,7 @@ const PersonalSignUp = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("회원가입이 완료되었습니다.");
+        navigate("/");
       } else {
         alert("회원가입에 실패했습니다: " + data.message);
       }

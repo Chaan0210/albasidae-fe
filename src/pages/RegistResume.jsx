@@ -1,4 +1,4 @@
-import S from "../uis/RegistResumeUI";
+import S from "../uis/RegistUI";
 import HeaderRegist from "../components/HeaderRegist";
 import ResumeProfile from "../components/RegistResume/ResumeProfile";
 import ResumeEducation from "../components/RegistResume/ResumeEducation";
