@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Repository for albasidae Front-end
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 실행
 
-## Available Scripts
+- node.js 설치
+- git clone https://github.com/gart09/albasidaeFE.git
 
-In the project directory, you can run:
+```
+# 의존성 설치
+npm install
 
-### `npm start`
+# 실행
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prettier 설정
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 코드 포맷팅을 통일하기 위함
+- vscode extension(Ctrl or Command + Shift + X)에서 Prettier 설치
+- 설정(Ctrl or Command + ,)에서 Default Formatter로 Prettier - Code formatter를 선택
+- Format On Save 옵션 체크
+- 이후 저장할 때마다 formatting이 잘 되는지 확인(세미콜론이 모든 코드 끝에 생성되고 불필요한 공백 등이 사라지게 됨)
 
-### `npm test`
+## 가이드
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Notion에서 새로운 업무 단위마다 티켓을 생성 후, Decription에 어떤 내용인지 작성해주세요.
+- 각 티켓의 ID명과 동일한 branch를 생성해주세요.
+- 개별 branch에서 작업을 모두 한 뒤, 모든 commit을 push하고 github에서 PR(Pull Request)을 합니다.
+- 하나의 branch의 내용이 너무 많지 않도록 만들어주세요.
+- 새로운 branch를 만들때, main branch에서 git pull을 하고 생성해주세요.
+- Commit message는 https://velog.io/@jiheon/Git-Commit-message-%EA%B7%9C%EC%B9%99 를 따라주세요.
+- 주의: **main branch에 절대 push 하지마세요.**
