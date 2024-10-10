@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
-import JobList from "./components/JobList";
+import JobList from "./components/Mainpage/JobList";
 import {
   BrowserRouter as Router,
   Route,

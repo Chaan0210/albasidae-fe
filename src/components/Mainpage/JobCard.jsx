@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as CompanyIcon } from "../images/CompanyIcon.svg";
+import { ReactComponent as CompanyIcon } from "../../images/CompanyIcon.svg";
 
 const S = {
   JobCardWrapper: styled.div`
