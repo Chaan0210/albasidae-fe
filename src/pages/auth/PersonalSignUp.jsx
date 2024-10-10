@@ -103,7 +103,7 @@ const PersonalSignUp = () => {
 
     try {
       const response = await fetch(
-        `${window.location.origin}/api/users/register`,
+        `https://73f6-211-178-236-156.ngrok-free.app/api/users/register`,
         {
           method: "POST",
           headers: {
@@ -112,7 +112,7 @@ const PersonalSignUp = () => {
           body: JSON.stringify(requestBody),
         }
       );
-
+      console.log(window.location.origin);
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("회원가입이 완료되었습니다.");
