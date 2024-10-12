@@ -1,82 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
-
-const S = {
-  Wrapper: styled.div``,
-  Container: styled.div`
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 10px 40px 10px 40px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  `,
-  Title: styled.div`
-    font-size: 27px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding: 15px 0 15px 0;
-  `,
-  InputWrapper: styled.div``,
-  Input: styled.input`
-    width: 96.5%;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    padding: 15px 0px 15px 15px;
-    outline: none;
-  `,
-  DoubleWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    align-items: center;
-  `,
-  InputFirst: styled.input`
-    width: 95%;
-    border: none;
-    padding: 15px 0px 15px 5px;
-    border-bottom: 1px solid #ddd;
-    font-size: 16px;
-    outline: none;
-  `,
-  InputSecond: styled.input`
-    width: 95%;
-    border: none;
-    padding: 15px 0px 15px 5px;
-    font-size: 16px;
-    outline: none;
-  `,
-  Button: styled.button`
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 10px;
-    font-weight: bold;
-    background-color: #fdf25d;
-    border: 1px solid #fae04b;
-    margin-bottom: 20px;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
-  `,
-};
+import S from "../../uis/SignupUI";
 
 const PersonalSignUp = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
     name: "",
     birthDate: "",
-    email: "",
     phone: "",
   });
   const navigate = useNavigate();
@@ -93,12 +26,11 @@ const PersonalSignUp = () => {
     }
 
     const requestBody = {
-      username: formData.username,
+      email: formData.email,
       password: formData.password,
-      role: "user",
+      role: "USER",
       name: formData.name,
       birthDate: formData.birthDate,
-      email: formData.email,
       phone: formData.phone,
       businessNumber: "",
     };
@@ -121,6 +53,7 @@ const PersonalSignUp = () => {
         alert("회원가입이 완료되었습니다.");
         navigate("/");
       } else {
+        console.error("서버 응답:", data);
         alert("회원가입에 실패했습니다: " + data.message);
       }
     } catch (error) {
@@ -138,10 +71,10 @@ const PersonalSignUp = () => {
 
         <S.InputWrapper>
           <S.Input
-            type="text"
-            name="username"
-            placeholder="아이디 (4~15자 영문, 숫자)"
-            value={formData.username}
+            type="email"
+            name="email"
+            placeholder="이메일"
+            value={formData.email}
             onChange={handleChange}
           />
 
@@ -176,13 +109,7 @@ const PersonalSignUp = () => {
             value={formData.birthDate}
             onChange={handleChange}
           />
-          <S.Input
-            type="email"
-            name="email"
-            placeholder="이메일"
-            value={formData.email}
-            onChange={handleChange}
-          />
+
           <S.DoubleWrapper>
             <S.InputFirst
               type="text"
@@ -191,11 +118,13 @@ const PersonalSignUp = () => {
               value={formData.phone}
               onChange={handleChange}
             />
-            {/* <S.InputSecond type="text"
+            <S.InputSecond
+              type="text"
               name="verificationCode"
-              placeholder="인증번호"
+              placeholder="인증번호(아직 구현 안함)"
               value={formData.verificationCode}
-              onChange={handleChange} /> */}
+              onChange={handleChange}
+            />
           </S.DoubleWrapper>
         </S.InputWrapper>
 
