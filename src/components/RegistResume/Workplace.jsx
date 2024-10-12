@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import S from "../../uis/RegistUI";
 
-const ResumeTitle = () => {
+const Workplace = () => {
   const locationList = ["서울"];
   const [location, setLocation] = useState([]);
   const handleLocationChange = (e) => {
@@ -30,4 +30,4 @@ const ResumeTitle = () => {
   );
 };
 
-export default ResumeTitle;
+export default Workplace;

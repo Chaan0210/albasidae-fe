@@ -141,7 +141,7 @@ const S = {
   `,
   CheckBoxWrapper: styled.div`
     display: flex;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
     margin-left: 20px;
     padding: 10px;
@@ -167,6 +167,69 @@ const S = {
     &:hover {
       opacity: 0.8;
     }
+  `,
+  Button: styled.button`
+    padding: 5px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    border: 1px solid ${(props) => (props.isSelected ? "#2f6df6" : "#ccc")};
+    border-radius: 10px;
+    background-color: ${(props) => (props.isSelected ? "#5194f6" : "#fff")};
+    color: ${(props) => (props.isSelected ? "#fff" : "#000")};
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #5194f6;
+      color: #fff;
+      border-color: #2f6df6;
+    }
+  `,
+  InputWrapper: styled.div``,
+  ImagePreview: styled.div``,
+  DirectInput: styled.input`
+    margin-left: 9px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+  `,
+  ImageContainer: styled.div`
+    margin: 10px 0px 10px 20px;
+  `,
+  NoticeInput: styled.input`
+    padding: 10px;
+    width: 97.3%;
+    margin: 10px 0px 10px 20px;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  `,
+  PayInput: styled.input`
+    margin-left: 20px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  `,
+  DatePickerWrapper: styled.div``,
+  DateInput: styled.input`
+    padding: 4px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  `,
+  AgeSelectWrapper: styled.div`
+    display: flex;
+    align-items: center;
+  `,
+  Select: styled.select`
+    margin: 0 5px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
   `,
 };
 
