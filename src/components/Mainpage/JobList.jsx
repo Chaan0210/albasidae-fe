@@ -6,6 +6,7 @@ import styled from "styled-components";
 const S = {
   JobListWrapper: styled.div`
     padding: 15px;
+    white-space: nowrap;
   `,
   Title: styled.div`
     font-size: 20px;

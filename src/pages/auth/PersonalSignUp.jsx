@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/SignupUI";
+import { AuthContext } from "../../components/auth/AutContext";
 
 const PersonalSignUp = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ const PersonalSignUp = () => {
     phone: "",
   });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -51,9 +54,9 @@ const PersonalSignUp = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("회원가입이 완료되었습니다.");
+        login(data.data.token, "PERSONAL");
         navigate("/");
       } else {
-        console.error("서버 응답:", data);
         alert(data.message);
       }
     } catch (error) {

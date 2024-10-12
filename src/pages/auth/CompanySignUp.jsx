@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/SignupUI";
+import { AuthContext } from "../../components/auth/AutContext";
 
 const CompanySignUp = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ const CompanySignUp = () => {
     phone: "",
   });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -26,11 +29,11 @@ const CompanySignUp = () => {
     }
 
     const requestBody = {
+      email: formData.email,
       password: formData.password,
       role: "COMPANY",
       name: "",
       birthDate: "",
-      email: formData.email,
       phone: formData.phone,
       businessNumber: formData.businessnum,
     };
@@ -51,9 +54,10 @@ const CompanySignUp = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("회원가입이 완료되었습니다.");
+        login(data.data.token, "COMPANY");
         navigate("/");
       } else {
-        alert("회원가입에 실패했습니다: " + data.message);
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -68,7 +72,11 @@ const CompanySignUp = () => {
         <S.Title>기업회원가입</S.Title>
         <S.InputWrapper>
           <S.InputButton>
-            <S.Certify>본인명의 휴대폰으로 인증 가능</S.Certify>
+            <S.Certify>
+              본인명의 휴대폰으로 인증 가능
+              <br />
+              (아직 구현 안함)
+            </S.Certify>
             <S.CertifyButton>인증하기</S.CertifyButton>
           </S.InputButton>
           <S.Input

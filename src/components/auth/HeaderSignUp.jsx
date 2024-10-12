@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as UOSLogo } from "../../images/UOSLogo.svg";
+import { AuthContext } from "./AutContext";
 
 const S = {
   HeaderWrapper: styled.header`
@@ -20,6 +21,7 @@ const S = {
     font-size: 15px;
   `,
   Login: styled.div`
+    cursor: pointer;
     font-size: 15px;
   `,
   Right: styled.div`
@@ -48,6 +50,8 @@ const S = {
 };
 
 const HeaderSignUp = () => {
+  const { isLoggedIn, logout } = useContext(AuthContext);
+
   return (
     <S.HeaderWrapper>
       <S.Left>
@@ -62,9 +66,13 @@ const HeaderSignUp = () => {
           <S.Home>Home</S.Home>
         </S.Link>
         <S.Split>|</S.Split>
-        <S.Link to="/login" className="link">
-          <S.Login>로그인</S.Login>
-        </S.Link>
+        {isLoggedIn ? (
+          <S.Login onClick={logout}>로그아웃</S.Login>
+        ) : (
+          <S.Link to="/login" className="link">
+            <S.Login>로그인</S.Login>
+          </S.Link>
+        )}
       </S.Right>
     </S.HeaderWrapper>
   );

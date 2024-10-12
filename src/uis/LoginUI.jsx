@@ -15,6 +15,7 @@ const S = {
     text-align: center;
     font-weight: bold;
     padding: 10px 0 7px 0;
+    white-space: nowrap;
   `,
   SubText: styled.div`
     font-size: 14px;
@@ -72,7 +73,7 @@ const S = {
     border: 1px solid
       ${({ activeTab }) => (activeTab === "personal" ? "#fae04b" : "#2f6df6")};
     color: black;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;

@@ -1,3 +1,5 @@
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import S from "../uis/RegistUI";
 import HeaderRegist from "../components/HeaderRegist";
 import ResumeProfile from "../components/RegistResume/ResumeProfile";
@@ -10,8 +12,22 @@ import WorkType from "../components/RegistResume/WorkType";
 import WorkTerm from "../components/RegistResume/WorkTerm";
 import WorkDays from "../components/RegistResume/WorkDays";
 import SelfIntroduce from "../components/RegistResume/SelfIntroduce";
+import { AuthContext } from "../components/auth/AutContext";
 
 const RegistResume = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn, role } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else if (role !== ("PERSONAL" || "ADMIN")) {
+      alert("이 페이지에 접근할 권한이 없습니다.");
+      navigate("/");
+    }
+  }, [isLoggedIn, role, navigate]);
+
   return (
     <S.Wrapper>
       <HeaderRegist />

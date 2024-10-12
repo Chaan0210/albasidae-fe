@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import HeaderLogin from "../../components/auth/HeaderLogin";
 import S from "../../uis/LoginUI";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../components/auth/AutContext";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("personal");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async () => {
     const role = activeTab === "personal" ? "PERSONAL" : "COMPANY";
@@ -32,8 +34,7 @@ const Login = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("로그인 성공");
-        navigate("/");
-        localStorage.setItem("token", data.data.token);
+        login(data.data.token, role);
         navigate("/");
       } else {
         console.error("서버 응답:", data);

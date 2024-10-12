@@ -11,8 +11,10 @@ const S = {
     transition: all 0.3s ease;
     &:hover {
       transform: none;
+      box-shadow: 0px 0px 7px grey;
     }
     height: 85px;
+    min-width: 100px;
   `,
   CompanyName: styled.h3`
     margin: 0;

@@ -11,6 +11,13 @@ body {
   font-family: "Hahmlet", serif; /* 전역 폰트 설정 */
 }
 
+button,
+input,
+textarea,
+select {
+  font-family: inherit; /* 부모 요소 (body)의 폰트를 상속받도록 설정 */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -53,7 +53,7 @@ const S = {
   Button: styled.button`
     width: 100%;
     padding: 15px;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 10px;
     font-weight: bold;
     background-color: #fdf25d;
@@ -67,7 +67,7 @@ const S = {
   CompanyButton: styled.button`
     width: 100%;
     padding: 15px;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 10px;
     font-weight: bold;
     background-color: #5194f6;
