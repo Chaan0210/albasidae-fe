@@ -6,6 +6,7 @@ import { AuthContext } from "./AutContext";
 
 const S = {
   HeaderWrapper: styled.header`
+    white-space: nowrap;
     border-bottom: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
