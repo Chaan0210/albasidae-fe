@@ -28,7 +28,7 @@ const PersonalSignUp = () => {
     const requestBody = {
       email: formData.email,
       password: formData.password,
-      role: "USER",
+      role: "PERSONAL",
       name: formData.name,
       birthDate: formData.birthDate,
       phone: formData.phone,
@@ -54,7 +54,7 @@ const PersonalSignUp = () => {
         navigate("/");
       } else {
         console.error("서버 응답:", data);
-        alert("회원가입에 실패했습니다: " + data.message);
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error:", error);

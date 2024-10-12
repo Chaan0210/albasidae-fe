@@ -3,9 +3,6 @@ import HeaderRegist from "../components/HeaderRegist";
 import Age from "../components/RegistNotice/Age";
 import Deadline from "../components/RegistNotice/Deadline";
 import Gender from "../components/RegistNotice/Gender";
-import ManagerEmail from "../components/RegistNotice/ManagerEmail";
-import ManagerName from "../components/RegistNotice/ManagerName";
-import ManagerPhone from "../components/RegistNotice/ManagerPhone";
 import NoticeCareer from "../components/RegistNotice/NoticeCareer";
 import NoticeCompanyContent from "../components/RegistNotice/NoticeCompanyContent";
 import NoticeCompanyImage from "../components/RegistNotice/NoticeCompanyImage";
@@ -19,12 +16,15 @@ import WorkPay from "../components/RegistNotice/WorkPay";
 import WorkTerm from "../components/RegistNotice/WorkTerm";
 import WorkTime from "../components/RegistNotice/WorkTime";
 import WorkType from "../components/RegistNotice/WorkType";
+import ResumeProfile from "../components/RegistResume/ResumeProfile";
 
 const RegistNotice = () => {
   return (
     <S.Wrapper>
       <HeaderRegist />
       <S.MainContainer>
+        <S.Title>담당자 정보</S.Title>
+        <ResumeProfile />
         <S.Title>근무처 정보</S.Title>
         <S.SubTitleWrapper>
           <S.SubTitle>공고제목</S.SubTitle>
@@ -112,22 +112,6 @@ const RegistNotice = () => {
         <S.SubTitleWrapper>
           <S.SubTitle>지원방법</S.SubTitle>
           <SubmitMethod />
-        </S.SubTitleWrapper>
-
-        <S.Title>담당자 정보</S.Title>
-        <S.SubTitleWrapper>
-          <S.SubTitle>담당자명</S.SubTitle>
-          <ManagerName />
-        </S.SubTitleWrapper>
-
-        <S.SubTitleWrapper>
-          <S.SubTitle>&nbsp;이메일&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <ManagerEmail />
-        </S.SubTitleWrapper>
-
-        <S.SubTitleWrapper>
-          <S.SubTitle>&nbsp;연락처&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <ManagerPhone />
         </S.SubTitleWrapper>
 
         <S.SubmitButton>공고 작성 완료</S.SubmitButton>

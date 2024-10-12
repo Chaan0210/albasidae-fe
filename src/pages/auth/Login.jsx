@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("personal");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    const role = activeTab === "personal" ? "PERSONAL" : "COMPANY";
     const requestBody = {
-      username,
+      email,
       password,
+      role,
     };
     try {
       const response = await fetch(
@@ -34,13 +36,15 @@ const Login = () => {
         localStorage.setItem("token", data.data.token);
         navigate("/");
       } else {
-        alert("로그인 실패: " + data.message);
+        console.error("서버 응답:", data);
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
       alert("서버 오류가 발생했습니다.");
     }
   };
+
   return (
     <S.Wrapper>
       <HeaderLogin />
@@ -70,10 +74,10 @@ const Login = () => {
 
         <S.InputWrapper>
           <S.Input
-            type="text"
-            placeholder="아이디"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            placeholder="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <S.Input
             type="password"

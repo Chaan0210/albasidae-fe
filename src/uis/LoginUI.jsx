@@ -64,7 +64,6 @@ const S = {
     padding: 15px 0px 15px 15px;
     outline: none;
   `,
-
   LoginButton: styled.button`
     width: 100%;
     padding: 15px;
