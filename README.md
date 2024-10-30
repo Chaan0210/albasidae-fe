@@ -3,7 +3,7 @@
 ## 프로젝트 실행
 
 - node.js 설치
-- git clone https://github.com/gart09/albasidaeFE.git
+- git clone https://github.com/AlbaSidaeUOS/AlbaSidae-FE.git
 
 ```
 # 의존성 설치
