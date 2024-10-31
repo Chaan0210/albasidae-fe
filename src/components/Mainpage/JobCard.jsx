@@ -6,14 +6,14 @@ const S = {
   JobCardWrapper: styled.div`
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding: 20px;
+    padding: 25px 20px 12px 20px;
     text-align: center;
     transition: all 0.3s ease;
     &:hover {
       transform: none;
-      box-shadow: 0px 0px 7px grey;
+      box-shadow: 0px 0px 8px grey;
     }
-    height: 85px;
+    height: 100px;
     min-width: 100px;
   `,
   CompanyName: styled.h3`

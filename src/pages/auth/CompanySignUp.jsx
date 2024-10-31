@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/SignupUI";
-import { AuthContext } from "../../components/auth/AutContext";
+import { AuthContext } from "../../components/auth/AuthContext";
 
 const CompanySignUp = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +14,7 @@ const CompanySignUp = () => {
     phone: "",
   });
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { signup } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({
@@ -40,7 +40,8 @@ const CompanySignUp = () => {
 
     try {
       const response = await fetch(
-        `https://6153-211-178-236-156.ngrok-free.app/api/users/register`,
+        // `https://6153-211-178-236-156.ngrok-free.app/api/users/register`,
+        "http://localhost:8080/api/users/register",
         {
           method: "POST",
           headers: {
@@ -54,7 +55,7 @@ const CompanySignUp = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("회원가입이 완료되었습니다.");
-        login(data.data.token, "COMPANY");
+        signup(data.data.token, "COMPANY", formData.email);
         navigate("/");
       } else {
         alert(data.message);

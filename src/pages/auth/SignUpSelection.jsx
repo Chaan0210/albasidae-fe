@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import { ReactComponent as ProfileImage } from "../../images/ProfileImage.svg";
+import { ReactComponent as CompanyImage } from "../../images/CompanyIcon.svg";
 
 const S = {
   Wrapper: styled.div``,
@@ -63,6 +64,10 @@ const S = {
   ImageContainer: styled.div`
     padding: 30px 0 0 0;
   `,
+  CompanyImage: styled(CompanyImage)`
+    width: 60px;
+    height: 60px;
+  `,
 };
 
 const SignUpSelection = () => {
@@ -83,7 +88,7 @@ const SignUpSelection = () => {
         </S.Card>
         <S.Card>
           <S.ImageContainer>
-            <ProfileImage />
+            <S.CompanyImage />
           </S.ImageContainer>
           <S.CardTitle>기업 회원</S.CardTitle>
           <S.Explanation>

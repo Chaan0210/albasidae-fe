@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as UOSLogo } from "../images/UOSLogo.svg";
-import { AuthContext } from "./auth/AutContext";
+import { AuthContext } from "./auth/AuthContext";
 
 const S = {
   HeaderWrapper: styled.header`

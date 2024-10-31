@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import S from "../../uis/RegistUI";
 
-const Age = () => {
-  const [selectedAge, setSelectedAge] = useState(null);
-  const [minAge, setMinAge] = useState("");
-  const [maxAge, setMaxAge] = useState("");
+const Age = ({ value, onChange }) => {
+  const selectedAge = value === "any" ? "any" : value ? "select" : null;
+
+  const [minAge, maxAge] =
+    value && value.includes("~") ? value.split("~") : ["", ""];
 
   const handleSelectAge = (age) => {
-    setSelectedAge(age);
+    if (age === "any") {
+      onChange("any");
+    } else {
+      onChange(`${minAge}~${maxAge}`);
+    }
   };
 
   const handleMinAgeChange = (e) => {
-    setMinAge(e.target.value);
+    const newMinAge = e.target.value;
+    onChange(`${newMinAge}~${maxAge}`);
   };
 
   const handleMaxAgeChange = (e) => {
-    setMaxAge(e.target.value);
+    const newMaxAge = e.target.value;
+    onChange(`${minAge}~${newMaxAge}`);
   };
 
   return (

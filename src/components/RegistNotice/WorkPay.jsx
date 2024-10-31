@@ -1,9 +1,14 @@
 import S from "../../uis/RegistUI";
 
-const WorkPay = () => {
+const WorkPay = ({ value, onChange }) => {
   return (
     <div>
-      <S.PayInput type="text" placeholder="예) 12000" />
+      <S.PayInput
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="예) 12000"
+      />
       &nbsp;원
     </div>
   );

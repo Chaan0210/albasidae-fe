@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import HeaderLogin from "../../components/auth/HeaderLogin";
 import S from "../../uis/LoginUI";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../components/auth/AutContext";
+import { AuthContext } from "../../components/auth/AuthContext";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("personal");
@@ -20,7 +20,8 @@ const Login = () => {
     };
     try {
       const response = await fetch(
-        "https://6153-211-178-236-156.ngrok-free.app/api/users/login",
+        // "https://6153-211-178-236-156.ngrok-free.app/api/users/login",
+        "http://localhost:8080/api/users/login",
         {
           method: "POST",
           headers: {
@@ -33,8 +34,8 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok && data.result === true) {
-        alert("로그인 성공");
-        login(data.data.token, role);
+        alert(data.message);
+        login(data.data.token, role, email);
         navigate("/");
       } else {
         console.error("서버 응답:", data);

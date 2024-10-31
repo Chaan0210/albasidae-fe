@@ -107,6 +107,34 @@ const S = {
       opacity: 0.7;
     }
   `,
+  TabWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+  `,
+  TabLeft: styled.div`
+    text-align: center;
+    flex: 1;
+    padding: 10px 50px 10px 50px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px 0 0 10px;
+    background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
+    font-weight: ${({ active }) => (active ? "bold" : "normal")};
+  `,
+  TabRight: styled.div`
+    text-align: center;
+    flex: 1;
+    padding: 10px 50px 10px 50px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0px 10px 10px 0px;
+    background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
+    font-weight: ${({ active }) => (active ? "bold" : "normal")};
+  `,
 };
 
 export default S;

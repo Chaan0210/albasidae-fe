@@ -12,7 +12,7 @@ import WorkType from "../components/RegistResume/WorkType";
 import WorkTerm from "../components/RegistResume/WorkTerm";
 import WorkDays from "../components/RegistResume/WorkDays";
 import SelfIntroduce from "../components/RegistResume/SelfIntroduce";
-import { AuthContext } from "../components/auth/AutContext";
+import { AuthContext } from "../components/auth/AuthContext";
 
 const RegistResume = () => {
   const navigate = useNavigate();

@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import S from "../../uis/RegistUI";
 
-const NoticeCompanyImage = () => {
-  const [image, setImage] = useState(null);
+const NoticeCompanyImage = ({ value, onChange }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(URL.createObjectURL(file));
+      onChange(file);
     }
   };
+
   return (
     <S.ImageContainer>
       <S.InputWrapper>
         <input type="file" accept="image/*" onChange={handleImageChange} />
       </S.InputWrapper>
-      {image && (
+      {value && (
         <S.ImagePreview>
           <img
-            src={image}
+            src={URL.createObjectURL(value)}
             alt="Company"
-            style={{ width: "100%", borderRadius: "5px" }}
+            style={{ width: "100%" }}
           />
         </S.ImagePreview>
       )}

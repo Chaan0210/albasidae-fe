@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import S from "../../uis/RegistUI";
 
 const Workplace = () => {
-  const locationList = ["서울"];
+  const locationList = ["휘경동", "전농동", "이문동", "답십리동", "청량리동"];
   const [location, setLocation] = useState([]);
   const handleLocationChange = (e) => {
     const selectedLocation = e.target.value;
