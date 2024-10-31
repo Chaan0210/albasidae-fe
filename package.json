@@ -14,7 +14,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "HOST=localhost DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -37,5 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://6153-211-178-236-156.ngrok-free.app"
+  "proxy": "http://localhost:8080"
 }
