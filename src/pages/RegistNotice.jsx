@@ -62,6 +62,8 @@ const RegistNotice = () => {
 
   const handleSubmit = () => {
     console.log(formData);
+    alert("공고 등록이 완료되었습니다.");
+    navigate("/");
   };
 
   return (

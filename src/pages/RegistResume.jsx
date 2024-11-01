@@ -48,6 +48,8 @@ const RegistResume = () => {
 
   const handleSubmit = () => {
     console.log(formData);
+    alert("이력서 등록이 완료되었습니다.");
+    navigate("/");
   };
 
   return (
