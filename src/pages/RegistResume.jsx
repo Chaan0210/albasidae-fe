@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../uis/RegistUI";
 import HeaderRegist from "../components/HeaderRegist";
@@ -17,6 +17,17 @@ import { AuthContext } from "../components/auth/AuthContext";
 const RegistResume = () => {
   const navigate = useNavigate();
   const { isLoggedIn, role } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    title: "",
+    education: "",
+    career: "",
+    place: [],
+    category: [],
+    type: [],
+    term: "",
+    days: "",
+    selfIntroduction: "",
+  });
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -28,6 +39,17 @@ const RegistResume = () => {
     }
   }, [isLoggedIn, role, navigate]);
 
+  const handleChange = (field) => (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    console.log(formData);
+  };
+
   return (
     <S.Wrapper>
       <HeaderRegist />
@@ -36,40 +58,52 @@ const RegistResume = () => {
         <ResumeProfile />
 
         <S.Title>이력서 제목</S.Title>
-        <ResumeTitle />
+        <ResumeTitle value={formData.title} onChange={handleChange("title")} />
 
         <S.Title>학력</S.Title>
-        <ResumeEducation />
+        <ResumeEducation
+          value={formData.education}
+          onChange={handleChange("education")}
+        />
 
         <S.Title>경력</S.Title>
-        <ResumeCareer />
+        <ResumeCareer
+          value={formData.career}
+          onChange={handleChange("career")}
+        />
 
         <S.Title>희망근무 조건</S.Title>
         <S.SubTitleWrapper>
           <S.SubTitle>희망근무지</S.SubTitle>
-          <Workplace />
+          <Workplace value={formData.place} onChange={handleChange("place")} />
         </S.SubTitleWrapper>
         <S.SubTitleWrapper>
           <S.SubTitle>희망업직종</S.SubTitle>
-          <WorkCategory />
+          <WorkCategory
+            value={formData.category}
+            onChange={handleChange("category")}
+          />
         </S.SubTitleWrapper>
 
         <S.SubTitleWrapper>
           <S.SubTitle>근무형태&nbsp;&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <WorkType />
+          <WorkType value={formData.type} onChange={handleChange("type")} />
         </S.SubTitleWrapper>
         <S.SubTitleWrapper>
           <S.SubTitle>근무기간&nbsp;&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <WorkTerm />
+          <WorkTerm value={formData.term} onChange={handleChange("term")} />
         </S.SubTitleWrapper>
         <S.SubTitleWrapper>
           <S.SubTitle>근무요일&nbsp;&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <WorkDays />
+          <WorkDays value={formData.days} onChange={handleChange("days")} />
         </S.SubTitleWrapper>
         <S.Title>자기소개서</S.Title>
-        <SelfIntroduce />
+        <SelfIntroduce
+          value={formData.selfIntroduction}
+          onChange={handleChange("selfIntroduction")}
+        />
 
-        <S.SubmitButton>이력서 작성 완료</S.SubmitButton>
+        <S.SubmitButton onClick={handleSubmit}>이력서 작성 완료</S.SubmitButton>
       </S.MainContainer>
     </S.Wrapper>
   );

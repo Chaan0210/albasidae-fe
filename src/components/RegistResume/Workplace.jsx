@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import S from "../../uis/RegistUI";
 
-const Workplace = () => {
+const Workplace = ({ value = [], onChange }) => {
   const locationList = ["휘경동", "전농동", "이문동", "답십리동", "청량리동"];
-  const [location, setLocation] = useState([]);
+
   const handleLocationChange = (e) => {
     const selectedLocation = e.target.value;
-    if (location.includes(selectedLocation)) {
-      setLocation(location.filter((type) => type !== selectedLocation));
+    if (value.includes(selectedLocation)) {
+      onChange(value.filter((type) => type !== selectedLocation));
     } else {
-      setLocation([...location, selectedLocation]);
+      onChange([...value, selectedLocation]);
     }
   };
   return (
@@ -20,7 +20,7 @@ const Workplace = () => {
             type="checkbox"
             name="location"
             value={type}
-            checked={location.includes(type)}
+            checked={value.includes(type)}
             onChange={handleLocationChange}
           />
           {type}

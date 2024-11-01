@@ -72,7 +72,7 @@ const S = {
       activeTab === "personal" ? "#fdf25d" : "#5194f6"};
     border: 1px solid
       ${({ activeTab }) => (activeTab === "personal" ? "#fae04b" : "#2f6df6")};
-    color: black;
+    color: ${({ activeTab }) => (activeTab === "personal" ? "black" : "white")};
     font-size: 18px;
     border-radius: 10px;
     cursor: pointer;

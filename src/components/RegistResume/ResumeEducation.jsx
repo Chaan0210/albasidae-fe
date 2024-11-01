@@ -1,19 +1,28 @@
 import S from "../../uis/RegistUI";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const ResumeEducation = () => {
+const ResumeEducation = ({ value, onChange }) => {
   const selectList = [
+    "대학교 1학년 재학 중",
+    "대학교 2학년 재학 중",
+    "대학교 3학년 재학 중",
+    "대학교 4학년 재학 중",
+    "대학 졸업",
     "대학원",
-    "대학(4년)",
-    "대학(2, 3년)",
-    "고등학교",
-    "중학교",
-    "초등학교",
   ];
-  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value]);
+
+  const [selected, setSelected] = useState(value);
+
   const handleSelectChange = (e) => {
-    setSelected(e.target.value);
+    const newValue = e.target.value;
+    setSelected(newValue);
+    onChange(newValue);
   };
+
   return (
     <S.SubTitleWrapper>
       <S.SubTitle>최종학력</S.SubTitle>

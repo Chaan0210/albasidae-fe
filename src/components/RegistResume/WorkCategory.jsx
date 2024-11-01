@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import S from "../../uis/RegistUI";
 
-const WorkCategory = () => {
+const WorkCategory = ({ value = [], onChange }) => {
   const occupationList = [
     "외식, 음료",
     "유통, 판매",
@@ -17,13 +17,13 @@ const WorkCategory = () => {
     "운전, 배달",
     "병원, 간호, 연구",
   ];
-  const [occupation, setOccupation] = useState([]);
+
   const handleOccupationChange = (e) => {
     const selectedOccupation = e.target.value;
-    if (occupation.includes(selectedOccupation)) {
-      setOccupation(occupation.filter((type) => type !== selectedOccupation));
+    if (value.includes(selectedOccupation)) {
+      onChange(value.filter((type) => type !== selectedOccupation));
     } else {
-      setOccupation([...occupation, selectedOccupation]);
+      onChange([...value, selectedOccupation]);
     }
   };
   return (
@@ -34,7 +34,7 @@ const WorkCategory = () => {
             type="checkbox"
             name="occupation"
             value={type}
-            checked={occupation.includes(type)}
+            checked={value.includes(type)}
             onChange={handleOccupationChange}
           />
           {type}

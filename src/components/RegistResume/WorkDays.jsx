@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import S from "../../uis/RegistUI";
 
-const WorkDays = () => {
-  const [activeTab, setActiveTab] = useState("weekdays");
+const WorkDays = ({ value, onChange }) => {
   return (
     <S.TabWrapper>
       <S.TabLeft
-        active={activeTab === "weekdays"}
-        onClick={() => setActiveTab("weekdays")}
+        active={value === "weekdays"}
+        onClick={() => onChange("weekdays")}
       >
         &nbsp;&nbsp;평일&nbsp;&nbsp;
       </S.TabLeft>
       <S.TabMiddle
-        active={activeTab === "weekend"}
-        onClick={() => setActiveTab("weekend")}
+        active={value === "weekend"}
+        onClick={() => onChange("weekend")}
       >
         &nbsp;&nbsp;주말&nbsp;&nbsp;
       </S.TabMiddle>
       <S.TabRight
-        active={activeTab === "regardless"}
-        onClick={() => setActiveTab("regardless")}
+        active={value === "regardless"}
+        onClick={() => onChange("regardless")}
       >
         요일무관
       </S.TabRight>
