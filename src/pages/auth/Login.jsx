@@ -8,6 +8,7 @@ const Login = () => {
   const [activeTab, setActiveTab] = useState("personal");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -34,12 +35,10 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok && data.result === true) {
-        alert(data.message);
         login(data.data.token, role, email);
         navigate("/");
       } else {
-        console.error("서버 응답:", data);
-        alert(data.message);
+        setErrorMessage(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -88,7 +87,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </S.InputWrapper>
-
+        {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         <S.LoginButton activeTab={activeTab} onClick={handleLogin}>
           로그인
         </S.LoginButton>

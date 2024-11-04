@@ -135,6 +135,12 @@ const S = {
     background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
   `,
+  ErrorMessage: styled.div`
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 20px;
+  `,
 };
 
 export default S;

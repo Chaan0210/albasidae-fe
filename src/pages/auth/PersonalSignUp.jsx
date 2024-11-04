@@ -12,20 +12,50 @@ const PersonalSignUp = () => {
     name: "",
     birthDate: "",
     phone: "",
+    gender: "",
   });
-  const [activeTab, setActiveTab] = useState("male");
+  const [activeTab, setActiveTab] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { signup } = useContext(AuthContext);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "phone" && !/^[0-9]*$/.test(value)) {
+      return;
+    }
+    if (name === "birthDate" && (!/^[0-9]*$/.test(value) || value.length > 6)) {
+      return;
+    }
+    if (name === "password" && value.length > 15) {
+      return;
+    }
+    if (name === "confirmPassword" && value.length > 15) {
+      return;
+    }
+    if (name === "phone" && value.length > 11) {
+      return;
+    }
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
+    });
+  };
+  const handleGenderChange = (gender) => {
+    setActiveTab(gender);
+    setFormData({
+      ...formData,
+      gender,
     });
   };
   const handleSubmit = async () => {
+    if (Object.values(formData).some((field) => field === "")) {
+      setErrorMessage("모든 필드를 입력해주세요.");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -37,6 +67,7 @@ const PersonalSignUp = () => {
       birthDate: formData.birthDate,
       phone: formData.phone,
       businessNumber: "",
+      gender: formData.gender,
     };
 
     try {
@@ -55,11 +86,10 @@ const PersonalSignUp = () => {
       console.log(window.location.origin);
       const data = await response.json();
       if (response.ok && data.result === true) {
-        alert("회원가입이 완료되었습니다.");
         signup(data.data.token, "PERSONAL", formData.email);
         navigate("/");
       } else {
-        alert(data.message);
+        setErrorMessage(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -87,7 +117,7 @@ const PersonalSignUp = () => {
             <S.InputFirst
               type="password"
               name="password"
-              placeholder="비밀번호 (8~15자)"
+              placeholder="비밀번호(8~15자)"
               value={formData.password}
               onChange={handleChange}
             />
@@ -116,14 +146,14 @@ const PersonalSignUp = () => {
           />
           <S.TabWrapper>
             <S.TabLeft
-              active={activeTab === "male"}
-              onClick={() => setActiveTab("male")}
+              active={activeTab === "남"}
+              onClick={() => handleGenderChange("남")}
             >
               남
             </S.TabLeft>
             <S.TabRight
-              active={activeTab === "female"}
-              onClick={() => setActiveTab("female")}
+              active={activeTab === "여"}
+              onClick={() => handleGenderChange("여")}
             >
               여
             </S.TabRight>
@@ -145,7 +175,7 @@ const PersonalSignUp = () => {
             />
           </S.DoubleWrapper>
         </S.InputWrapper>
-
+        {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         <S.Button onClick={handleSubmit}>가입하기</S.Button>
       </S.Container>
     </S.Wrapper>

@@ -9,22 +9,44 @@ const CompanySignUp = () => {
     password: "",
     confirmPassword: "",
     name: "",
-    birthDate: "",
     email: "",
     phone: "",
+    businessNumber: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { signup } = useContext(AuthContext);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "phone" && !/^[0-9]*$/.test(value)) {
+      return;
+    }
+    if (name === "password" && value.length > 15) {
+      return;
+    }
+    if (name === "confirmPassword" && value.length > 15) {
+      return;
+    }
+    if (name === "businessNumber" && !/^[0-9]*$/.test(value)) {
+      return;
+    }
+    if (name === "phone" && value.length > 11) {
+      return;
+    }
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
   const handleSubmit = async () => {
+    if (Object.values(formData).some((field) => field === "")) {
+      setErrorMessage("모든 필드를 입력해주세요.");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -32,10 +54,10 @@ const CompanySignUp = () => {
       email: formData.email,
       password: formData.password,
       role: "COMPANY",
-      name: "",
+      name: formData.name,
       birthDate: "",
       phone: formData.phone,
-      businessNumber: formData.businessnum,
+      businessNumber: formData.businessNumber,
     };
 
     try {
@@ -54,11 +76,10 @@ const CompanySignUp = () => {
 
       const data = await response.json();
       if (response.ok && data.result === true) {
-        alert("회원가입이 완료되었습니다.");
         signup(data.data.token, "COMPANY", formData.email);
         navigate("/");
       } else {
-        alert(data.message);
+        setErrorMessage(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -72,14 +93,14 @@ const CompanySignUp = () => {
       <S.Container>
         <S.Title>기업회원가입</S.Title>
         <S.InputWrapper>
-          <S.InputButton>
+          {/* <S.InputButton>
             <S.Certify>
               본인명의 휴대폰으로 인증 가능
               <br />
               (아직 구현 안함)
             </S.Certify>
             <S.CertifyButton>인증하기</S.CertifyButton>
-          </S.InputButton>
+          </S.InputButton> */}
           <S.Input
             type="email"
             name="email"
@@ -91,7 +112,7 @@ const CompanySignUp = () => {
             <S.InputFirst
               type="password"
               name="password"
-              placeholder="비밀번호 (8~15자)"
+              placeholder="비밀번호(8~15자)"
               value={formData.password}
               onChange={handleChange}
             />
@@ -106,12 +127,36 @@ const CompanySignUp = () => {
 
           <S.Input
             type="email"
-            name="businessnum"
+            name="businessNumber"
             placeholder="사업자번호"
-            value={formData.businessnum}
+            value={formData.businessNumber}
             onChange={handleChange}
           />
+          <S.Input
+            type="text"
+            name="name"
+            placeholder="이름"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <S.DoubleWrapper>
+            <S.InputFirst
+              type="text"
+              name="phone"
+              placeholder="휴대폰 번호"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            <S.InputSecond
+              type="text"
+              name="verificationCode"
+              placeholder="인증번호(아직 구현 안함)"
+              value={formData.verificationCode}
+              onChange={handleChange}
+            />
+          </S.DoubleWrapper>
         </S.InputWrapper>
+        {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         <S.CompanyButton onClick={handleSubmit}>가입하기</S.CompanyButton>
       </S.Container>
     </S.Wrapper>

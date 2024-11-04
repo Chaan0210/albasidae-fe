@@ -64,9 +64,8 @@ const ResumeProfile = () => {
       <S.ProfileInfo>
         <S.InfoRow>
           <S.Name>{userData?.name}</S.Name>
-          <S.InfoValue>{userData?.gender}</S.InfoValue>
+          <S.InfoValue>({userData?.gender})</S.InfoValue>
           <S.InfoValue>{age !== null ? `${age + 1}세` : ""}</S.InfoValue>
-
           <S.Link to="/userinfochange" className="link">
             <S.EditButton>회원정보 수정</S.EditButton>
           </S.Link>

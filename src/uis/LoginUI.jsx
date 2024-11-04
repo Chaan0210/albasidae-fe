@@ -95,6 +95,12 @@ const S = {
     color: #ddd;
     font-size: 14px;
   `,
+  ErrorMessage: styled.div`
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 10px;
+  `,
 };
 
 export default S;
