@@ -34,6 +34,10 @@ const S = {
     }
     li {
       cursor: pointer;
+      &:hover {
+        color: #004094;
+        font-weight: bold;
+      }
     }
   `,
   HeaderButtons: styled.div`
