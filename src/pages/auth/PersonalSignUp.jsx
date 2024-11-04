@@ -49,6 +49,11 @@ const PersonalSignUp = () => {
     });
   };
   const handleSubmit = async () => {
+    if (formData.phone.length !== 11) {
+      setErrorMessage("유효한 전화번호를 입력하세요.");
+      return;
+    }
+
     if (Object.values(formData).some((field) => field === "")) {
       setErrorMessage("모든 필드를 입력해주세요.");
       return;

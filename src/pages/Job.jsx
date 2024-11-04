@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import MOCK_JobData from "../mock/mock-jobData";
 import S from "../uis/JobUI";
@@ -11,7 +11,7 @@ const Job = () => {
   const navigate = useNavigate();
   const handleClick = (id) => navigate(`/job/${id}`);
 
-  const handleFilterChange = (filters) => {
+  const handleFilterChange = useCallback((filters) => {
     const {
       selectedWorkTerms,
       selectedDays,
@@ -43,7 +43,7 @@ const Job = () => {
       );
     });
     setFilteredJobs(filtered);
-  };
+  }, []);
 
   return (
     <>

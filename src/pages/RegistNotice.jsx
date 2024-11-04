@@ -18,9 +18,9 @@ import WorkPay from "../components/RegistNotice/WorkPay";
 import WorkTerm from "../components/RegistNotice/WorkTerm";
 import WorkTime from "../components/RegistNotice/WorkTime";
 import WorkType from "../components/RegistNotice/WorkType";
+import Workplace from "../components/RegistNotice/Workplace";
 import ResumeProfile from "../components/RegistResume/ResumeProfile";
 import { AuthContext } from "../components/auth/AuthContext";
-import Workplace from "../components/RegistResume/Workplace";
 
 const RegistNotice = () => {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const RegistNotice = () => {
     age: "",
     deadline: "",
     submitMethod: [],
-    place: [],
+    place: "",
   });
 
   useEffect(() => {

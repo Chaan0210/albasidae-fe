@@ -81,7 +81,8 @@ const S = {
     align-items: center;
     font-size: 13px;
     &:hover {
-      text-decoration: underline;
+      font-weight: bold;
+      color: #004094;
     }
   `,
   SignUp: styled.div`
@@ -89,7 +90,8 @@ const S = {
     align-items: center;
     font-size: 13px;
     &:hover {
-      text-decoration: underline;
+      font-weight: bold;
+      color: #004094;
     }
   `,
   Profile: styled.div`
