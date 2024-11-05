@@ -46,6 +46,12 @@ const Login = () => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
     <S.Wrapper>
       <HeaderLogin />
@@ -79,6 +85,7 @@ const Login = () => {
             placeholder="이메일"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
           <S.Input
             type="password"
@@ -86,6 +93,7 @@ const Login = () => {
             value={password}
             maxLength="15"
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
         </S.InputWrapper>
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}

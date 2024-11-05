@@ -87,15 +87,22 @@ const S = {
     color: red;
     font-size: 14px;
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
+  `,
+  SuccessMessage: styled.div`
+    color: green;
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 25px;
   `,
 };
 
 const UserInfoChange = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, email } = useContext(AuthContext);
+  const { isLoggedIn, email, role } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [formData, setFormData] = useState({
     role: "",
     name: "",
@@ -129,24 +136,67 @@ const UserInfoChange = () => {
   };
   const handleGenderChange = (gender) => {
     setActiveTab(gender);
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       gender,
-    });
+    }));
   };
   const handleSubmit = async () => {
-    const { name, birthDate, gender, phone } = formData;
+    const { name, birthDate, gender, phone, password } = formData;
+    setErrorMessage("");
+    setSuccessMessage("");
     if (formData.phone.length !== 11) {
       setErrorMessage("유효한 전화번호를 입력하세요.");
       return;
     }
-    if (formData.password !== formData.confirmPassword) {
+    if (password && password !== formData.confirmPassword) {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
-    if (!name || !birthDate || !gender || !phone) {
+    if (
+      !name ||
+      (formData.role === "PERSONAL" && (!birthDate || !gender)) ||
+      !phone
+    ) {
       setErrorMessage("모든 필드를 입력하세요.");
       return;
+    }
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    const requestBody = {
+      email: email,
+      password: password || "",
+      name: name,
+      birthDate: birthDate,
+      gender: gender,
+      phone: phone,
+      role: "PERSONAL",
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/users/${encodeURIComponent(email)}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+          mode: "cors",
+        }
+      );
+
+      const result = await response.json();
+      if (response.ok) {
+        setSuccessMessage("사용자 정보가 수정되었습니다.");
+        navigate("/userinfochange");
+      } else {
+        setErrorMessage(result.message || "사용자 정보 수정에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error submitting user data: ", error);
+      setErrorMessage("서버 오류가 발생했습니다.");
     }
   };
 
@@ -170,9 +220,7 @@ const UserInfoChange = () => {
               password: "",
               confirmPassword: "",
             });
-            if (data.data.gender === "남" || data.data.gender === "여") {
-              setActiveTab(data.data.gender);
-            }
+            setActiveTab(data.data.gender);
           } else {
             console.error("Fail to fetch : ", data.message);
           }
@@ -181,7 +229,6 @@ const UserInfoChange = () => {
         }
       };
       fetchUserData();
-      console.log(formData);
     }
   }, [isLoggedIn, navigate, email]);
 
@@ -193,7 +240,12 @@ const UserInfoChange = () => {
           <S.Title>필수정보 변경</S.Title>
           <S.InfoRow>
             <S.Label>이메일(변경 불가)</S.Label>
-            <S.Input type="text" value={email} readOnly />
+            <S.Input
+              type="text"
+              value={email}
+              style={{ backgroundColor: "#f0f0f0" }}
+              readOnly
+            />
           </S.InfoRow>
           <S.InfoRow>
             <S.Label>이름</S.Label>
@@ -205,33 +257,38 @@ const UserInfoChange = () => {
               onChange={handleChange}
             />
           </S.InfoRow>
-          <S.InfoRow>
-            <S.Label>생년월일</S.Label>
-            <S.Input
-              type="text"
-              name="birthDate"
-              placeholder="생년월일(6자리)"
-              value={formData.birthDate}
-              onChange={handleChange}
-            />
-          </S.InfoRow>
-          <S.InfoRow>
-            <S.Label>성별</S.Label>
-            <S.TabWrapper>
-              <S.TabLeft
-                active={activeTab === "남"}
-                onClick={() => handleGenderChange("남")}
-              >
-                남
-              </S.TabLeft>
-              <S.TabRight
-                active={activeTab === "여"}
-                onClick={() => handleGenderChange("여")}
-              >
-                여
-              </S.TabRight>
-            </S.TabWrapper>
-          </S.InfoRow>
+          {role === "PERSONAL" && (
+            <>
+              <S.InfoRow>
+                <S.Label>생년월일</S.Label>
+                <S.Input
+                  type="text"
+                  name="birthDate"
+                  placeholder="생년월일(6자리)"
+                  value={formData.birthDate}
+                  onChange={handleChange}
+                />
+              </S.InfoRow>
+              <S.InfoRow>
+                <S.Label>성별</S.Label>
+                <S.TabWrapper>
+                  <S.TabLeft
+                    active={activeTab === "남"}
+                    onClick={() => handleGenderChange("남")}
+                  >
+                    남
+                  </S.TabLeft>
+                  <S.TabRight
+                    active={activeTab === "여"}
+                    onClick={() => handleGenderChange("여")}
+                  >
+                    여
+                  </S.TabRight>
+                </S.TabWrapper>
+              </S.InfoRow>
+            </>
+          )}
+
           <S.InfoRow>
             <S.Label>휴대폰</S.Label>
             <S.Input
@@ -243,7 +300,7 @@ const UserInfoChange = () => {
             />
           </S.InfoRow>
           <S.InfoRow>
-            <S.Label>비밀번호</S.Label>
+            <S.Label>수정 비밀번호</S.Label>
             <S.Input
               type="password"
               name="password"
@@ -263,6 +320,9 @@ const UserInfoChange = () => {
             />
           </S.InfoRow>
           {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+          {successMessage && (
+            <S.SuccessMessage>{successMessage}</S.SuccessMessage>
+          )}
           <S.EditButton onClick={handleSubmit}>수정완료</S.EditButton>
         </S.Container>
       </S.Wrapper>
