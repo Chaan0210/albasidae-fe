@@ -9,7 +9,11 @@ const FilterGroup = ({ onFilterChange }) => {
     selectedRegions: [],
     selectedOccupations: [],
   });
-  const [activeFilter, setActiveFilter] = useState(null);
+  const [activeFilters, setActiveFilters] = useState({
+    region: false,
+    occupation: false,
+    work: false,
+  });
 
   const filterOptions = {
     workTerms: [
@@ -79,7 +83,10 @@ const FilterGroup = ({ onFilterChange }) => {
   }, [selectedFilters, onFilterChange]);
 
   const handleFilterToggle = (filter) => {
-    setActiveFilter((prevFilter) => (prevFilter === filter ? null : filter));
+    setActiveFilters((prevFilters) => ({
+      ...prevFilters,
+      [filter]: !prevFilters[filter],
+    }));
   };
 
   const renderFilterButtons = (filterKey, options) => (
@@ -110,7 +117,7 @@ const FilterGroup = ({ onFilterChange }) => {
             근무조건
           </S.StyledButton>
 
-          {activeFilter === "region" && (
+          {activeFilters.region && (
             <S.FilterBox>
               <S.FilterSection>
                 <S.FilterTitle>지역</S.FilterTitle>
@@ -119,7 +126,7 @@ const FilterGroup = ({ onFilterChange }) => {
             </S.FilterBox>
           )}
 
-          {activeFilter === "occupation" && (
+          {activeFilters.occupation && (
             <S.FilterBox>
               <S.FilterSection>
                 <S.FilterTitle>하는일</S.FilterTitle>
@@ -131,7 +138,7 @@ const FilterGroup = ({ onFilterChange }) => {
             </S.FilterBox>
           )}
 
-          {activeFilter === "work" && (
+          {activeFilters.work && (
             <S.FilterBox>
               <S.FilterSection>
                 <S.FilterTitle>근무기간</S.FilterTitle>

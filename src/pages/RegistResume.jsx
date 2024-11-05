@@ -31,7 +31,6 @@ const RegistResume = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      alert("로그인이 필요합니다.");
       navigate("/login");
     } else if (role !== ("PERSONAL" || "ADMIN")) {
       alert("이 페이지에 접근할 권한이 없습니다.");

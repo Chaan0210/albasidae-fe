@@ -24,13 +24,13 @@ import { AuthContext } from "../components/auth/AuthContext";
 
 const RegistNotice = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, role } = useContext(AuthContext);
+  const { isLoggedIn, role, email } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     noticeTitle: "",
     noticeCompanyName: "",
     noticeCompanyContent: "",
-    noticeCompanyImage: null,
-    peopleNum: "",
+    noticeCompanyImage: "test",
+    peopleNum: 0,
     workCategory: [],
     workType: [],
     noticeCareer: "",
@@ -47,7 +47,6 @@ const RegistNotice = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      alert("로그인이 필요합니다.");
       navigate("/login");
     } else if (role !== "COMPANY" && role !== "ADMIN") {
       alert("이 페이지에 접근할 권한이 없습니다.");
@@ -62,10 +61,74 @@ const RegistNotice = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const emptyFields = Object.entries(formData).filter(
+      ([key, value]) => value === "" || value.length === 0
+    );
+    if (emptyFields.length > 0) {
+      const missingFields = emptyFields.map(([key]) => key).join(", ");
+      alert(`다음 필드를 입력해주세요: ${missingFields}`);
+      return;
+    }
+    const requestBody = {
+      id: 0,
+      title: formData.noticeTitle,
+      companyName: formData.noticeCompanyName,
+      companyContent: formData.noticeCompanyContent,
+      companyImage: formData.noticeCompanyImage,
+      place: formData.place,
+      workCategory: formData.workCategory,
+      workType: formData.workType,
+      peopleNum: formData.peopleNum,
+      career: formData.noticeCareer,
+      workTerm: formData.workTerm,
+      workDays: formData.workDays,
+      workTime: formData.workTime,
+      pay: formData.workPay,
+      gender: formData.gender,
+      age: formData.age,
+      deadline: formData.deadline,
+      submitMethod: formData.submitMethod,
+      company: {
+        id: 0,
+        email: "",
+        password: "", // 필요 시 적절히 수정
+        name: "", // 필요 시 적절히 수정
+        birthDate: "", // 필요 시 적절히 수정
+        gender: "", // 필요 시 적절히 수정
+        phone: "", // 필요 시 적절히 수정
+        businessNumber: "", // 필요 시 적절히 수정
+        image: "", // 필요 시 적절히 수정
+        role: "COMPANY", // 필요 시 적절히 수정
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/job-posts?email=${encodeURIComponent(
+          email
+        )}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+          mode: "cors",
+        }
+      );
+      const data = await response.json();
+      if (response.ok && data.result === true) {
+        alert("공고 등록이 완료되었습니다.");
+        navigate("/");
+      } else {
+        alert(data.message || "공고 등록에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("서버 오류가 발생했습니다.");
+    }
     console.log(formData);
-    alert("공고 등록이 완료되었습니다.");
-    navigate("/");
   };
 
   return (

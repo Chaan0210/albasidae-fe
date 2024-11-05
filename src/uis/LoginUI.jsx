@@ -6,7 +6,7 @@ const S = {
   Container: styled.div`
     max-width: 500px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 50px auto;
     padding: 20px 35px 20px 35px;
   `,

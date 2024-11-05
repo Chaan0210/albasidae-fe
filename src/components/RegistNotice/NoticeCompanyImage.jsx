@@ -5,7 +5,8 @@ const NoticeCompanyImage = ({ value, onChange }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      onChange(file);
+      const imageUrl = URL.createObjectURL(file);
+      onChange(imageUrl);
     }
   };
 
@@ -16,11 +17,7 @@ const NoticeCompanyImage = ({ value, onChange }) => {
       </S.InputWrapper>
       {value && (
         <S.ImagePreview>
-          <img
-            src={URL.createObjectURL(value)}
-            alt="Company"
-            style={{ width: "100%" }}
-          />
+          <img src={value} alt="Company" style={{ width: "100%" }} />
         </S.ImagePreview>
       )}
     </S.ImageContainer>

@@ -7,7 +7,7 @@ import { AuthContext } from "../auth/AuthContext";
 const ResumeProfile = () => {
   const navigate = useNavigate();
   const profile = mockData[0];
-  const { isLoggedIn, role, email } = useContext(AuthContext);
+  const { isLoggedIn, email } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [age, setAge] = useState(null);
 
@@ -53,7 +53,7 @@ const ResumeProfile = () => {
       };
       fetchUserData();
     }
-  }, [isLoggedIn, role, navigate, email]);
+  }, [isLoggedIn, navigate, email]);
 
   return (
     <S.ProfileContainer>

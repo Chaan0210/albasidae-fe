@@ -88,7 +88,6 @@ const PersonalSignUp = () => {
           mode: "cors",
         }
       );
-      console.log(window.location.origin);
       const data = await response.json();
       if (response.ok && data.result === true) {
         signup(data.data.token, "PERSONAL", formData.email);
