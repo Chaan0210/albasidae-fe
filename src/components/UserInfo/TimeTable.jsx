@@ -38,10 +38,17 @@ const S = {
     background-color: ${(props) => (props.selected ? "#004094" : "white")};
   `,
   Button: styled.button`
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 10px;
+    border: none;
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    &:hover {
+      background-color: #ccc;
+    }
   `,
 };
 
@@ -78,6 +85,10 @@ const TimeTable = () => {
     return selectedCells.includes(`${day}-${hour}`);
   };
 
+  const clearSelectedCells = () => {
+    setSelectedCells([]);
+  };
+
   return (
     <S.Wrapper>
       <S.Table onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
@@ -105,6 +116,7 @@ const TimeTable = () => {
           ))}
         </tbody>
       </S.Table>
+      <S.Button onClick={clearSelectedCells}>모두 지우기</S.Button>
       {/* <S.Button onClick={() => console.log(selectedCells)}>
         선택된 시간 출력
       </S.Button> */}
