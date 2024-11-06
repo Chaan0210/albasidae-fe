@@ -17,7 +17,7 @@ const S = {
   `,
   Title: styled.div`
     white-space: nowrap;
-    diplay: flex;
+    display: flex;
     font-size: 40px;
     font-weight: bold;
     padding-bottom: 7px;

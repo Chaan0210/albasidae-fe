@@ -319,6 +319,17 @@ const UserInfoChange = () => {
               onChange={handleChange}
             />
           </S.InfoRow>
+          {role === "PERSONAL" && (
+            <>
+              <S.Title>선택정보 변경</S.Title>
+              <S.InfoRow>
+                <S.Label>프로필 이미지</S.Label>
+              </S.InfoRow>
+              <S.InfoRow>
+                <S.Label>시간표 입력</S.Label>
+              </S.InfoRow>
+            </>
+          )}
           {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
           {successMessage && (
             <S.SuccessMessage>{successMessage}</S.SuccessMessage>

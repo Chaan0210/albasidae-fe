@@ -248,6 +248,31 @@ const S = {
     font-weight: bold;
     color: #333;
   `,
+  PaginationContainer: styled.div`
+    margin-top: 20px;
+  `,
+
+  PaginationButton: styled.button`
+    background-color: ${(props) => (props.active ? "#4CAF50" : "#f0f0f0")};
+    color: ${(props) => (props.active ? "#ffffff" : "#333")};
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: ${(props) => (props.active ? "#45a049" : "#e0e0e0")};
+    }
+
+    &:disabled {
+      background-color: #dcdcdc;
+      cursor: not-allowed;
+      color: #aaa;
+    }
+  `,
 };
 
 export default S;

@@ -95,10 +95,10 @@ const S = {
   `,
   EducationSelect: styled.select`
     margin-left: 20px;
-    padding: 10px;
+    padding: 7px 10px 7px 10px;
     font-size: 16px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
   `,
