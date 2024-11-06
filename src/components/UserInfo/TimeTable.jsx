@@ -24,6 +24,8 @@ const S = {
     height: 23px;
     text-align: center;
     &:nth-child(1) {
+      text-align: right;
+      vertical-align: top;
       width: 25px;
     }
   `,
@@ -44,7 +46,7 @@ const S = {
 };
 
 const TimeTable = () => {
-  const hours = [9, 10, 11, 12, 1, 2, 3, 4, 5, 6];
+  const hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
   const days = ["월", "화", "수", "목", "금", "토", "일"];
   const [selectedCells, setSelectedCells] = useState([]);
   const isDragging = useRef(false);
