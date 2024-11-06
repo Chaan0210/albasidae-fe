@@ -5,12 +5,15 @@ import S from "../../uis/FindUI";
 const FindPassword = () => {
   const [activeTab, setActiveTab] = useState("personal");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [formData, setFormData] = useState({
     role: "",
     email: "",
     name: "",
     phone: "",
     businessNumber: "",
+    password: "",
+    confirmPassword: "",
   });
 
   useEffect(() => {
@@ -28,6 +31,12 @@ const FindPassword = () => {
     if (name === "businessNumber" && !/^[0-9]*$/.test(value)) {
       return;
     }
+    if (name === "password" && value.length > 15) {
+      return;
+    }
+    if (name === "confirmPassword" && value.length > 15) {
+      return;
+    }
     setErrorMessage("");
     setFormData((prevData) => ({
       ...prevData,
@@ -35,13 +44,70 @@ const FindPassword = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (activeTab === "personal") {
+      if (
+        !formData.email ||
+        !formData.name ||
+        !formData.phone ||
+        !formData.password ||
+        !formData.confirmPassword
+      ) {
+        setErrorMessage("모든 필드를 입력해주세요.");
+        setSuccessMessage("");
+        return;
+      }
+    } else if (activeTab === "company") {
+      if (
+        !formData.email ||
+        !formData.businessNumber ||
+        !formData.name ||
+        !formData.phone ||
+        !formData.password ||
+        !formData.confirmPassword
+      ) {
+        setErrorMessage("모든 필드를 입력해주세요.");
+        setSuccessMessage("");
+        return;
+      }
+    }
     if (formData.phone.length !== 11) {
       setErrorMessage("유효한 전화번호를 입력하세요.");
+      setSuccessMessage("");
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
+      setSuccessMessage("");
       return;
     }
     setErrorMessage("");
-    console.log(formData);
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/users/find-password?email=${formData.email}&name=${formData.name}&phone=${formData.phone}&role=${formData.role}&businessNumber=${formData.businessNumber}&newPassword=${formData.password}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        setSuccessMessage("비밀번호가 성공적으로 변경되었습니다.");
+        setErrorMessage("");
+      } else {
+        setErrorMessage(
+          data.message || "비밀번호 찾기에 실패했습니다. 다시 시도해주세요."
+        );
+        setSuccessMessage("");
+      }
+    } catch (error) {
+      setErrorMessage("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.");
+      setSuccessMessage("");
+    }
   };
 
   return (
@@ -90,11 +156,25 @@ const FindPassword = () => {
                 value={formData.name}
                 onChange={handleChange}
               />
-              <S.InputSecond
+              <S.InputFirst
                 type="text"
                 name="phone"
                 placeholder="휴대폰(- 제외 번호 입력)"
                 value={formData.phone}
+                onChange={handleChange}
+              />
+              <S.InputFirst
+                type="password"
+                name="password"
+                placeholder="새로운 비밀번호 입력(8~15자)"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <S.InputSecond
+                type="password"
+                name="confirmPassword"
+                placeholder="비밀번호 재입력"
+                value={formData.confirmPassword}
                 onChange={handleChange}
               />
             </S.MultiWrapper>
@@ -122,16 +202,33 @@ const FindPassword = () => {
               value={formData.name}
               onChange={handleChange}
             />
-            <S.InputSecond
+            <S.InputFirst
               type="text"
               name="phone"
               placeholder="휴대폰(- 제외 번호 입력)"
               value={formData.phone}
               onChange={handleChange}
             />
+            <S.InputFirst
+              type="password"
+              name="password"
+              placeholder="새로운 비밀번호 입력(8~15자)"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <S.InputSecond
+              type="password"
+              name="confirmPassword"
+              placeholder="비밀번호 재입력"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
           </S.MultiWrapper>
         )}
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+        {successMessage && (
+          <S.SuccessMessage>{successMessage}</S.SuccessMessage>
+        )}
         <S.Button activeTab={activeTab} onClick={handleSubmit}>
           {activeTab === "personal"
             ? "개인회원 비밀번호 찾기"

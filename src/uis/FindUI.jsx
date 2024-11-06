@@ -122,6 +122,12 @@ const S = {
     text-align: center;
     padding-bottom: 20px;
   `,
+  SuccessMessage: styled.div`
+    color: green;
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 20px;
+  `,
 };
 
 export default S;
