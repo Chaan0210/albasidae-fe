@@ -25,7 +25,7 @@ import { AuthContext } from "../components/auth/AuthContext";
 const RegistNotice = () => {
   const navigate = useNavigate();
   const { isLoggedIn, role, email } = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     noticeTitle: "",
     noticeCompanyName: "",
@@ -60,19 +60,26 @@ const RegistNotice = () => {
       ...prevData,
       [field]: value,
     }));
-    setErrorMessage("");
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: "",
+    }));
   };
 
   const handleSubmit = async () => {
-    const emptyFields = Object.entries(formData).filter(
-      ([key, value]) => value === "" || value.length === 0
-    );
-    if (emptyFields.length > 0) {
-      setErrorMessage("모든 필드를 입력해주세요.");
-      // const missingFields = emptyFields.map(([key]) => key).join(", ");
-      // alert(`다음 필드를 입력해주세요: ${missingFields}`);
+    const newErrors = {};
+
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value === "" || value.length === 0) {
+        newErrors[key] = "모든 필드를 입력해주세요.";
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
+
     const formDataToSend = new FormData();
     formDataToSend.append("companyImage", formData.noticeCompanyImage);
 
@@ -121,7 +128,6 @@ const RegistNotice = () => {
       console.error("Error:", error);
       alert("서버 오류가 발생했습니다.");
     }
-    console.log(formData);
   };
 
   return (
@@ -140,7 +146,9 @@ const RegistNotice = () => {
               value={formData.noticeTitle}
               onChange={handleChange("noticeTitle")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.noticeTitle && (
+              <S.ErrorMessage>{errors.noticeTitle}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -151,7 +159,9 @@ const RegistNotice = () => {
               value={formData.noticeCompanyName}
               onChange={handleChange("noticeCompanyName")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.noticeCompanyName && (
+              <S.ErrorMessage>{errors.noticeCompanyName}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -162,9 +172,12 @@ const RegistNotice = () => {
               value={formData.noticeCompanyContent}
               onChange={handleChange("noticeCompanyContent")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.noticeCompanyContent && (
+              <S.ErrorMessage>{errors.noticeCompanyContent}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
+
         <S.SubTitleWrapper>
           <S.SubTitle>근무 장소</S.SubTitle>
           <S.ComponentWrapper>
@@ -172,9 +185,10 @@ const RegistNotice = () => {
               value={formData.place}
               onChange={handleChange("place")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.place && <S.ErrorMessage>{errors.place}</S.ErrorMessage>}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
+
         <S.SubTitleWrapper>
           <S.SubTitle>근무처 사진</S.SubTitle>
           <S.ComponentWrapper>
@@ -182,7 +196,9 @@ const RegistNotice = () => {
               value={formData.noticeCompanyImage}
               onChange={handleChange("noticeCompanyImage")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.noticeCompanyImage && (
+              <S.ErrorMessage>{errors.noticeCompanyImage}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -194,7 +210,9 @@ const RegistNotice = () => {
               value={formData.workCategory}
               onChange={handleChange("workCategory")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.workCategory && (
+              <S.ErrorMessage>{errors.workCategory}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -205,7 +223,9 @@ const RegistNotice = () => {
               value={formData.workType}
               onChange={handleChange("workType")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.workType && (
+              <S.ErrorMessage>{errors.workType}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -216,7 +236,9 @@ const RegistNotice = () => {
               value={formData.peopleNum}
               onChange={handleChange("peopleNum")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.peopleNum && (
+              <S.ErrorMessage>{errors.peopleNum}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -229,7 +251,9 @@ const RegistNotice = () => {
               value={formData.noticeCareer}
               onChange={handleChange("noticeCareer")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.noticeCareer && (
+              <S.ErrorMessage>{errors.noticeCareer}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -241,9 +265,9 @@ const RegistNotice = () => {
               value={formData.workTerm}
               onChange={handleChange("workTerm")}
             />
-            {errorMessage && (
+            {errors.workTerm && (
               <S.ErrorMessage style={{ marginLeft: "75px" }}>
-                {errorMessage}
+                {errors.workTerm}
               </S.ErrorMessage>
             )}
           </S.ComponentWrapper>
@@ -256,7 +280,9 @@ const RegistNotice = () => {
               value={formData.workDays}
               onChange={handleChange("workDays")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.workDays && (
+              <S.ErrorMessage>{errors.workDays}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -267,7 +293,9 @@ const RegistNotice = () => {
               value={formData.workTime}
               onChange={handleChange("workTime")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.workTime && (
+              <S.ErrorMessage>{errors.workTime}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -280,7 +308,9 @@ const RegistNotice = () => {
               value={formData.workPay}
               onChange={handleChange("workPay")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.workPay && (
+              <S.ErrorMessage>{errors.workPay}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -289,7 +319,7 @@ const RegistNotice = () => {
           <S.SubTitle>성별</S.SubTitle>
           <S.ComponentWrapper>
             <Gender value={formData.gender} onChange={handleChange("gender")} />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.gender && <S.ErrorMessage>{errors.gender}</S.ErrorMessage>}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -297,7 +327,7 @@ const RegistNotice = () => {
           <S.SubTitle>연령</S.SubTitle>
           <S.ComponentWrapper>
             <Age value={formData.age} onChange={handleChange("age")} />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.age && <S.ErrorMessage>{errors.age}</S.ErrorMessage>}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -309,7 +339,9 @@ const RegistNotice = () => {
               value={formData.deadline}
               onChange={handleChange("deadline")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.deadline && (
+              <S.ErrorMessage>{errors.deadline}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -320,7 +352,9 @@ const RegistNotice = () => {
               value={formData.submitMethod}
               onChange={handleChange("submitMethod")}
             />
-            {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+            {errors.submitMethod && (
+              <S.ErrorMessage>{errors.submitMethod}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 

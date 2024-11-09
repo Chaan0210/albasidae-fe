@@ -6,7 +6,6 @@ const S = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
   `,
   Table: styled.table`
     border-collapse: collapse;
@@ -20,34 +19,50 @@ const S = {
     user-select: none;
     color: #aaa;
     border: 1px solid #ddd;
-    width: 67px;
-    height: 23px;
+    width: 60px;
+    height: 20px;
     text-align: center;
     &:nth-child(1) {
       text-align: right;
       vertical-align: top;
-      width: 25px;
+      width: 15px;
     }
   `,
   Td: styled.td`
     border: 1px solid #ddd;
     width: 100px;
-    height: 50px;
+    height: 30px;
     text-align: center;
     cursor: pointer;
     background-color: ${(props) => (props.selected ? "#004094" : "white")};
   `,
   Button: styled.button`
     width: 100%;
-    background-color: #ddd;
+    background-color: #fdf25d;
     border-radius: 10px;
     border: none;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.2s ease;
     &:hover {
-      background-color: #ccc;
+      background-color: #fae04b;
+    }
+  `,
+  DeleteButton: styled.button`
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid red;
+    color: red;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+      background-color: #eee;
     }
   `,
 };
@@ -116,10 +131,10 @@ const TimeTable = () => {
           ))}
         </tbody>
       </S.Table>
-      <S.Button onClick={clearSelectedCells}>모두 지우기</S.Button>
-      {/* <S.Button onClick={() => console.log(selectedCells)}>
-        선택된 시간 출력
-      </S.Button> */}
+      <S.DeleteButton onClick={clearSelectedCells}>모두 지우기</S.DeleteButton>
+      <S.Button onClick={() => console.log(selectedCells)}>
+        시간표 입력
+      </S.Button>
     </S.Wrapper>
   );
 };

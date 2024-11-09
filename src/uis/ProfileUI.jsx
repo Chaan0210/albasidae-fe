@@ -12,24 +12,28 @@ const S = {
     display: flex;
     gap: 20px;
     flex-direction: column;
+    padding-bottom: 50px;
   `,
   TopWrapper: styled.div`
     margin: 40px auto 0px auto;
-    min-width: 1030px;
+    min-width: 1000px;
     gap: 10px;
     display: flex;
     flex-direction: row;
     white-space: nowrap;
   `,
   ProfileContainer: styled.div`
-    flex: 1;
+    flex: 0.7;
     background-color: white;
     border-radius: 20px;
     padding: 20px;
   `,
   RightContainer: styled.div`
-    flex: 3;
-    flex-direction: column;
+    flex: 1;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: auto;
   `,
   ResumeContainer: styled.div`
     background-color: white;
@@ -38,17 +42,41 @@ const S = {
     border-radius: 20px;
     font-size: 20px;
   `,
-  ContentWrapper: styled.div`
+  Left: styled.div`
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  `,
+  TopLeft: styled.div`
     display: flex;
     flex-direction: row;
     gap: 10px;
   `,
+  ContentWrapper: styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  `,
+  ContentLeft: styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex: 1;
+  `,
+  ContentRight: styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex: 1;
+  `,
   ContentContainer: styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1;
     background-color: white;
     padding: 20px;
     border-radius: 20px;
@@ -59,23 +87,16 @@ const S = {
     }
   `,
   BottomContainer: styled.div`
-    margin: 0px auto;
-    min-width: 1000px;
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 20px;
   `,
-  UserInfo: styled.div`
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  `,
+  UserInfo: styled.div``,
   SettingIcon: styled.button`
     width: 30px;
     height: 30px;
     margin-left: auto;
-    margin-bottom: -30px;
+    margin-bottom: 20px;
     background-color: #ddd;
     border-radius: 50%;
     padding: 3px;
@@ -91,8 +112,8 @@ const S = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
-    margin: 0 10px 0 10px;
+    gap: 30px;
+    justify-content: center;
   `,
   UserImage: styled.img`
     width: 110px;
@@ -121,6 +142,9 @@ const S = {
     margin: 10px;
     cursor: pointer;
     transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+    }
   `,
   PaperPlaneIcon: styled(PaperPlaneIcon)`
     width: 45px;

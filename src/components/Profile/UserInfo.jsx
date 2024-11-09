@@ -100,14 +100,14 @@ const UserInfo = () => {
 
         <S.UserName>{formData.name}</S.UserName>
       </S.UserInfoTop>
-      <S.UserInfoBottom>
+      {/* <S.UserInfoBottom>
         <S.BottomText>스크랩알바</S.BottomText>
         0건
       </S.UserInfoBottom>
       <S.UserInfoBottom>
         <S.BottomText>관심기업</S.BottomText>
         0건
-      </S.UserInfoBottom>
+      </S.UserInfoBottom> */}
     </S.UserInfo>
   );
 };

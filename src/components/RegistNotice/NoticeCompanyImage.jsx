@@ -5,13 +5,15 @@ const NoticeCompanyImage = ({ value, onChange }) => {
   const [previewUrl, setPreviewUrl] = React.useState(null);
 
   useEffect(() => {
-    if (value) {
+    if (value instanceof Blob) {
       const objectUrl = URL.createObjectURL(value);
       setPreviewUrl(objectUrl);
 
       return () => {
         URL.revokeObjectURL(objectUrl);
       };
+    } else {
+      setPreviewUrl(null);
     }
   }, [value]);
 

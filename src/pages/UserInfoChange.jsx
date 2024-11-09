@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderRegist from "../components/HeaderRegist";
 import styled from "styled-components";
 import { AuthContext } from "../components/auth/AuthContext";
-import TimeTable from "../components/UserInfo/TimeTable";
+// import TimeTable from "../components/UserInfo/TimeTable";
 // import ProfileImage from "../components/UserInfo/ProfileImage";
 
 const S = {
@@ -321,20 +321,20 @@ const UserInfoChange = () => {
               onChange={handleChange}
             />
           </S.InfoRow>
-          {role === "PERSONAL" && (
+          {/* {role === "PERSONAL" && (
             <>
               <br />
               <S.Title>선택정보 변경</S.Title>
-              {/* <S.InfoRow>
+              <S.InfoRow>
                 <S.Label>프로필 이미지</S.Label>
                 <ProfileImage />
-              </S.InfoRow> */}
+              </S.InfoRow>
               <S.InfoRow>
                 <S.Label>시간표 입력</S.Label>
               </S.InfoRow>
               <TimeTable />
             </>
-          )}
+          )} */}
           {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
           {successMessage && (
             <S.SuccessMessage>{successMessage}</S.SuccessMessage>
