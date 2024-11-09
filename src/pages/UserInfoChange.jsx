@@ -4,7 +4,7 @@ import HeaderRegist from "../components/HeaderRegist";
 import styled from "styled-components";
 import { AuthContext } from "../components/auth/AuthContext";
 import TimeTable from "../components/UserInfo/TimeTable";
-import ProfileImage from "../components/UserInfo/ProfileImage";
+// import ProfileImage from "../components/UserInfo/ProfileImage";
 
 const S = {
   Wrapper: styled.div`
@@ -325,10 +325,10 @@ const UserInfoChange = () => {
             <>
               <br />
               <S.Title>선택정보 변경</S.Title>
-              <S.InfoRow>
+              {/* <S.InfoRow>
                 <S.Label>프로필 이미지</S.Label>
                 <ProfileImage />
-              </S.InfoRow>
+              </S.InfoRow> */}
               <S.InfoRow>
                 <S.Label>시간표 입력</S.Label>
               </S.InfoRow>

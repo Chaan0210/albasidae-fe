@@ -81,14 +81,6 @@ const ResumeProfile = () => {
           <S.InfoLabel>이메일</S.InfoLabel>
           <S.InfoValue>{userData?.email}</S.InfoValue>
         </S.InfoRow>
-        {/* <S.InfoRow>
-          <S.InfoLabel>주소</S.InfoLabel>
-          <S.InfoValue>
-            &nbsp; &nbsp;
-            {profile.address.city} {profile.address.district}{" "}
-            {profile.address.street} {profile.address.num}
-          </S.InfoValue>
-        </S.InfoRow> */}
       </S.ProfileInfo>
     </S.ProfileContainer>
   );

@@ -84,6 +84,7 @@ const S = {
       font-weight: bold;
       color: #004094;
     }
+    cursor: pointer;
   `,
   SignUp: styled.div`
     display: flex;
@@ -93,6 +94,7 @@ const S = {
       font-weight: bold;
       color: #004094;
     }
+    cursor: pointer;
   `,
   Profile: styled.div`
     display: flex;
@@ -163,6 +165,11 @@ const S = {
     white-space: nowrap;
     color: white;
   `,
+  TopContainer: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  `,
 };
 
 const Header = () => {
@@ -173,16 +180,23 @@ const Header = () => {
       <S.MainHeader>
         <S.Profile>
           {isLoggedIn ? (
-            <S.Login onClick={logout}>로그아웃</S.Login>
+            <S.TopContainer>
+              <S.Login onClick={logout}>로그아웃</S.Login>
+              <S.Split>|</S.Split>
+              <S.Link to="/userinfochange" className="link">
+                <S.Login>회원정보 수정</S.Login>
+              </S.Link>
+            </S.TopContainer>
           ) : (
-            <>
+            <S.TopContainer>
               <S.Link to="/login" className="link">
                 <S.Login>로그인</S.Login>
               </S.Link>
+              <S.Split>|</S.Split>
               <S.Link to="/signup" className="link">
                 <S.SignUp>회원가입</S.SignUp>
               </S.Link>
-            </>
+            </S.TopContainer>
           )}
         </S.Profile>
 
@@ -216,7 +230,7 @@ const Header = () => {
               <S.Link to="/resume">인재정보</S.Link>
             </li>
             <li>
-              <S.Link to="/userinfochange">회원정보</S.Link>
+              <S.Link to="/profile">회원정보</S.Link>
             </li>
           </ul>
         </S.Nav>

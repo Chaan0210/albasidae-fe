@@ -19,6 +19,7 @@ import FindID from "./pages/auth/FindID";
 import FindPassword from "./pages/auth/FindPassword";
 import UserInfoChange from "./pages/UserInfoChange";
 import JobDetail from "./pages/JobDetail";
+import Profile from "./pages/Profile";
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/find-id" element={<FindID />} />
         <Route path="/find-password" element={<FindPassword />} />
         <Route path="/userinfochange" element={<UserInfoChange />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

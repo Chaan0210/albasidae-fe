@@ -132,6 +132,7 @@ const JobDetail = () => {
         </InfoContainer>
         <S.JobDetailContainer>
           <S.InfoTitle>{"상세 모집내용"}</S.InfoTitle>
+          <S.CompanyImage src={job.companyImage} />
         </S.JobDetailContainer>
         <S.JobDetailContainer>
           <S.InfoTitle>{"지원방법"}</S.InfoTitle>

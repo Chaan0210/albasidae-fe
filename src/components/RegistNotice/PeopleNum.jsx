@@ -14,7 +14,7 @@ const PeopleNum = ({ value, onChange }) => {
 
   const handleSelectPeopleNum = (peoplenum) => {
     if (peoplenum === "direct") {
-      onChange(""); // 초기값으로 빈 문자열 설정
+      onChange("");
     } else {
       const numValue = peoplenum === "one" ? 1 : peoplenum === "ten" ? 10 : 100;
       onChange(numValue);
