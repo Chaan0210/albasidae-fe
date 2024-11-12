@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import S from "../uis/RegistUI";
 import HeaderRegist from "../components/HeaderRegist";
 import Age from "../components/RegistNotice/Age";
@@ -22,8 +22,9 @@ import Workplace from "../components/RegistNotice/Workplace";
 import ResumeProfile from "../components/RegistResume/ResumeProfile";
 import { AuthContext } from "../components/auth/AuthContext";
 
-const RegistNotice = () => {
+const EditJob = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -52,8 +53,28 @@ const RegistNotice = () => {
     } else if (role !== "COMPANY" && role !== "ADMIN") {
       alert("이 페이지에 접근할 권한이 없습니다.");
       navigate("/");
+    } else if (location.state?.job) {
+      setFormData({
+        noticeTitle: location.state.job.title,
+        noticeCompanyName: location.state.job.companyName,
+        noticeCompanyContent: location.state.job.companyContent,
+        noticeCompanyImage: location.state.job.companyImage,
+        peopleNum: location.state.job.peopleNum,
+        workCategory: location.state.job.workCategory,
+        workType: location.state.job.workType,
+        noticeCareer: location.state.job.career,
+        workTerm: location.state.job.workTerm,
+        workDays: location.state.job.workDays,
+        workTime: location.state.job.workTime,
+        workPay: location.state.job.pay,
+        gender: location.state.job.gender,
+        age: location.state.job.age,
+        deadline: location.state.job.deadline,
+        submitMethod: location.state.job.submitMethod,
+        place: location.state.job.place,
+      });
     }
-  }, [isLoggedIn, role, navigate]);
+  }, [isLoggedIn, role, navigate, location.state]);
 
   const handleChange = (field) => (value) => {
     setFormData((prevData) => ({
@@ -81,7 +102,7 @@ const RegistNotice = () => {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append("companyImage", formData.noticeCompanyImage);
+    formDataToSend.append("updatedCompanyImage", formData.noticeCompanyImage);
 
     const jobPostData = {
       title: formData.noticeTitle,
@@ -102,27 +123,27 @@ const RegistNotice = () => {
       submitMethod: formData.submitMethod,
     };
     formDataToSend.append(
-      "jobPost",
+      "updatedJobPost",
       new Blob([JSON.stringify(jobPostData)], { type: "application/json" })
     );
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/job-posts?email=${encodeURIComponent(
-          email
-        )}`,
+        `http://localhost:8080/api/job-posts/${
+          location.state.job.id
+        }?email=${encodeURIComponent(email)}`,
         {
-          method: "POST",
+          method: "PUT",
           body: formDataToSend,
           mode: "cors",
         }
       );
       const data = await response.json();
       if (response.ok && data.result === true) {
-        alert("공고 등록이 완료되었습니다.");
-        navigate("/");
+        alert("공고 수정이 완료되었습니다.");
+        navigate("/job");
       } else {
-        alert(data.message || "공고 등록에 실패했습니다.");
+        alert(data.message || "공고 수정에 실패했습니다.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -354,10 +375,10 @@ const RegistNotice = () => {
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
-        <S.SubmitButton onClick={handleSubmit}>공고 작성 완료</S.SubmitButton>
+        <S.SubmitButton onClick={handleSubmit}>공고 수정 완료</S.SubmitButton>
       </S.MainContainer>
     </S.Wrapper>
   );
 };
 
-export default RegistNotice;
+export default EditJob;

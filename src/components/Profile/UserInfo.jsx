@@ -10,6 +10,8 @@ const UserInfo = () => {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
+    email: "",
+    phone: "",
   });
   const fileInputRef = useRef(null);
 
@@ -21,9 +23,15 @@ const UserInfo = () => {
         );
         const data = await response.json();
         if (response.ok && data.result) {
+          const formattedPhone = data.data.phone.replace(
+            /(\d{3})(\d{4})(\d{4})/,
+            "$1-$2-$3"
+          );
           setFormData({
             name: data.data.name,
             image: data.data.image,
+            email: data.data.email,
+            phone: formattedPhone,
           });
         } else {
           console.error("Fail to fetch : ", data.message);
@@ -100,14 +108,14 @@ const UserInfo = () => {
 
         <S.UserName>{formData.name}</S.UserName>
       </S.UserInfoTop>
-      {/* <S.UserInfoBottom>
-        <S.BottomText>스크랩알바</S.BottomText>
-        0건
+      <S.UserInfoBottom>
+        <S.BottomText>이메일</S.BottomText>
+        <S.BottomData>{formData.email}</S.BottomData>
       </S.UserInfoBottom>
       <S.UserInfoBottom>
-        <S.BottomText>관심기업</S.BottomText>
-        0건
-      </S.UserInfoBottom> */}
+        <S.BottomText>연락처</S.BottomText>
+        <S.BottomData>{formData.phone}</S.BottomData>
+      </S.UserInfoBottom>
     </S.UserInfo>
   );
 };

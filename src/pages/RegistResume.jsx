@@ -16,7 +16,8 @@ import { AuthContext } from "../components/auth/AuthContext";
 
 const RegistResume = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, role } = useContext(AuthContext);
+  const { isLoggedIn, role, email } = useContext(AuthContext);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     title: "",
     education: "",
@@ -43,12 +44,60 @@ const RegistResume = () => {
       ...prevData,
       [field]: value,
     }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: "",
+    }));
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
-    alert("이력서 등록이 완료되었습니다.");
-    navigate("/");
+  const handleSubmit = async () => {
+    const newErrors = {};
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value === "" || value.length === 0) {
+        newErrors[key] = "모든 필드를 입력해주세요.";
+      }
+    });
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const requestBody = {
+      id: "",
+      resumeTitle: formData.title,
+      selfIntroduction: formData.selfIntroduction,
+      educationLevel: formData.education,
+      preferredWorkLocation: formData.place,
+      preferredJobTypes: formData.type,
+      employmentTypes: formData.category,
+      workPeriod: formData.term,
+      workDays: formData.days,
+      user: [],
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/resumes?email=${encodeURIComponent(email)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+          mode: "cors",
+        }
+      );
+      const data = await response.json();
+      if (response.ok && data.result === true) {
+        alert("이력서 등록이 완료되었습니다.");
+        navigate("/");
+      } else {
+        alert(data.message || "이력서 등록에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("서버 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -59,50 +108,100 @@ const RegistResume = () => {
         <ResumeProfile />
 
         <S.Title>이력서 제목</S.Title>
-        <ResumeTitle value={formData.title} onChange={handleChange("title")} />
+        <S.ComponentWrapper>
+          <ResumeTitle
+            value={formData.title}
+            onChange={handleChange("title")}
+          />
+          {errors.title && <S.ErrorMessage>{errors.title}</S.ErrorMessage>}
+        </S.ComponentWrapper>
 
         <S.Title>학력</S.Title>
-        <ResumeEducation
-          value={formData.education}
-          onChange={handleChange("education")}
-        />
+        <S.SubTitleWrapper>
+          <S.SubTitle>최종학력</S.SubTitle>
+          <S.ComponentWrapper>
+            <ResumeEducation
+              value={formData.education}
+              onChange={handleChange("education")}
+            />
+            {errors.education && (
+              <S.ErrorMessage>{errors.education}</S.ErrorMessage>
+            )}
+          </S.ComponentWrapper>
+        </S.SubTitleWrapper>
 
         <S.Title>경력</S.Title>
-        <ResumeCareer
-          value={formData.career}
-          onChange={handleChange("career")}
-        />
+        <S.ComponentWrapper>
+          <ResumeCareer
+            value={formData.career}
+            onChange={handleChange("career")}
+          />
+          {errors.career && <S.ErrorMessage>{errors.career}</S.ErrorMessage>}
+        </S.ComponentWrapper>
 
         <S.Title>희망근무 조건</S.Title>
         <S.SubTitleWrapper>
           <S.SubTitle>희망근무지</S.SubTitle>
-          <Workplace value={formData.place} onChange={handleChange("place")} />
+          <S.ComponentWrapper>
+            <Workplace
+              value={formData.place}
+              onChange={handleChange("place")}
+            />
+            {errors.place && <S.ErrorMessage>{errors.place}</S.ErrorMessage>}
+          </S.ComponentWrapper>
         </S.SubTitleWrapper>
         <S.SubTitleWrapper>
           <S.SubTitle>희망업직종</S.SubTitle>
-          <WorkCategory
-            value={formData.category}
-            onChange={handleChange("category")}
-          />
+          <S.ComponentWrapper>
+            <WorkCategory
+              value={formData.category}
+              onChange={handleChange("category")}
+            />
+            {errors.category && (
+              <S.ErrorMessage>{errors.category}</S.ErrorMessage>
+            )}
+          </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
         <S.SubTitleWrapper>
-          <S.SubTitle>근무형태&nbsp;&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <WorkType value={formData.type} onChange={handleChange("type")} />
+          <S.SubTitle>근무형태</S.SubTitle>
+          <S.ComponentWrapper>
+            <WorkType value={formData.type} onChange={handleChange("type")} />
+            {errors.type && <S.ErrorMessage>{errors.type}</S.ErrorMessage>}
+          </S.ComponentWrapper>
         </S.SubTitleWrapper>
         <S.SubTitleWrapper>
-          <S.SubTitle>근무기간&nbsp;&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <WorkTerm value={formData.term} onChange={handleChange("term")} />
+          <S.SubTitle>근무기간</S.SubTitle>
+          <S.ComponentWrapper>
+            <WorkTerm value={formData.term} onChange={handleChange("term")} />
+            {errors.term && (
+              <S.ErrorMessage style={{ marginLeft: "75px" }}>
+                {errors.term}
+              </S.ErrorMessage>
+            )}
+          </S.ComponentWrapper>
         </S.SubTitleWrapper>
         <S.SubTitleWrapper>
-          <S.SubTitle>근무요일&nbsp;&nbsp;&nbsp;&nbsp;</S.SubTitle>
-          <WorkDays value={formData.days} onChange={handleChange("days")} />
+          <S.SubTitle>근무요일</S.SubTitle>
+          <S.ComponentWrapper>
+            <WorkDays value={formData.days} onChange={handleChange("days")} />
+            {errors.days && (
+              <S.ErrorMessage style={{ marginLeft: "75px" }}>
+                {errors.days}
+              </S.ErrorMessage>
+            )}
+          </S.ComponentWrapper>
         </S.SubTitleWrapper>
         <S.Title>자기소개서</S.Title>
-        <SelfIntroduce
-          value={formData.selfIntroduction}
-          onChange={handleChange("selfIntroduction")}
-        />
+        <S.ComponentWrapper>
+          <SelfIntroduce
+            value={formData.selfIntroduction}
+            onChange={handleChange("selfIntroduction")}
+          />
+          {errors.selfIntroduction && (
+            <S.ErrorMessage>{errors.selfIntroduction}</S.ErrorMessage>
+          )}
+        </S.ComponentWrapper>
 
         <S.SubmitButton onClick={handleSubmit}>이력서 작성 완료</S.SubmitButton>
       </S.MainContainer>

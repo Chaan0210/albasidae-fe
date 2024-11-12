@@ -19,7 +19,9 @@ import FindID from "./pages/auth/FindID";
 import FindPassword from "./pages/auth/FindPassword";
 import UserInfoChange from "./pages/UserInfoChange";
 import JobDetail from "./pages/JobDetail";
-import Profile from "./pages/Profile";
+import EditJob from "./pages/EditJob";
+import PersonalProfile from "./pages/PersonalProfile";
+import CompanyProfile from "./pages/CompanyProfile";
 
 function App() {
   const location = useLocation();
@@ -35,13 +37,15 @@ function App() {
         <Route path="/signup/company" element={<CompanySignUp />} />
         <Route path="/job" element={<Job />} />
         <Route path="/job/:id" element={<JobDetail />} />
+        <Route path="/editjob/:id" element={<EditJob />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/registresume" element={<RegistResume />} />
         <Route path="/registnotice" element={<RegistNotice />} />
         <Route path="/find-id" element={<FindID />} />
         <Route path="/find-password" element={<FindPassword />} />
         <Route path="/userinfochange" element={<UserInfoChange />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/personal" element={<PersonalProfile />} />
+        <Route path="/profile/company" element={<CompanyProfile />} />
       </Routes>
     </div>
   );

@@ -24,19 +24,16 @@ const ResumeEducation = ({ value, onChange }) => {
   };
 
   return (
-    <S.SubTitleWrapper>
-      <S.SubTitle>최종학력</S.SubTitle>
-      <S.EducationSelect value={selected} onChange={handleSelectChange}>
-        <option value="" disabled>
-          선택
+    <S.EducationSelect value={selected} onChange={handleSelectChange}>
+      <option value="" disabled>
+        선택
+      </option>
+      {selectList.map((education, index) => (
+        <option key={index} value={education}>
+          {education}
         </option>
-        {selectList.map((education, index) => (
-          <option key={index} value={education}>
-            {education}
-          </option>
-        ))}
-      </S.EducationSelect>
-    </S.SubTitleWrapper>
+      ))}
+    </S.EducationSelect>
   );
 };
 

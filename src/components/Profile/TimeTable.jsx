@@ -7,6 +7,15 @@ const S = {
     flex-direction: column;
     align-items: center;
   `,
+  TableTitle: styled.div`
+    font-size: 20px;
+    font-weight: bold;
+  `,
+  TableDescription: styled.div`
+    font-size: 12px;
+    color: #bbb;
+    margin-bottom: 5px;
+  `,
   Table: styled.table`
     border-collapse: collapse;
     table-layout: fixed;
@@ -106,6 +115,11 @@ const TimeTable = () => {
 
   return (
     <S.Wrapper>
+      <S.TableTitle>시간표</S.TableTitle>
+      <S.TableDescription>
+        자신의 학교 시간표나 일정을 입력해주세요.
+        <br /> 이 시간을 제외한 알바를 추천해드려요!
+      </S.TableDescription>
       <S.Table onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
         <thead>
           <tr>

@@ -279,6 +279,30 @@ const S = {
     width: 200px;
     height: 200px;
   `,
+  DeleteButton: styled.button`
+    color: red;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 8px 15px;
+    &:hover {
+      background-color: #eee;
+    }
+  `,
+  EditButton: styled.button`
+    color: #2f6df6;
+    background-color: white;
+    border: 1px solid #2f6df6;
+    border-radius: 10px;
+    padding: 8px 15px;
+    &:hover {
+      background-color: #eee;
+    }
+    margin-right: 20px;
+  `,
+  ButtonGroup: styled.div`
+    display: flex;
+  `,
 };
 
 export default S;

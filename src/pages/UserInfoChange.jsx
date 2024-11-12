@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import HeaderRegist from "../components/HeaderRegist";
 import styled from "styled-components";
 import { AuthContext } from "../components/auth/AuthContext";
-// import TimeTable from "../components/UserInfo/TimeTable";
-// import ProfileImage from "../components/UserInfo/ProfileImage";
 
 const S = {
   Wrapper: styled.div`
@@ -97,11 +95,30 @@ const S = {
     text-align: center;
     padding-bottom: 25px;
   `,
+  ButtonGroup: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  `,
+  WithdrawButton: styled.button`
+    width: 99%;
+    padding: 15px;
+    color: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      background-color: #eee;
+    }
+  `,
 };
 
 const UserInfoChange = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, email, role } = useContext(AuthContext);
+  const { isLoggedIn, email, role, logout } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -234,6 +251,33 @@ const UserInfoChange = () => {
     }
   }, [isLoggedIn, navigate, email]);
 
+  const handleDelete = async () => {
+    const confirmation = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
+    if (!confirmation) return;
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/users/${encodeURIComponent(email)}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("회원 탈퇴 되었습니다.");
+        logout();
+        navigate("/");
+      } else {
+        const data = await response.json();
+        setErrorMessage(data.message || "Failed to delete.");
+      }
+    } catch (error) {
+      console.error("회원 탈퇴 중 오류 발생: ", error);
+      setErrorMessage("서버 오류가 발생했습니다. 나중에 다시 시도해주세요.");
+    }
+  };
+
   return (
     <>
       <HeaderRegist />
@@ -321,25 +365,16 @@ const UserInfoChange = () => {
               onChange={handleChange}
             />
           </S.InfoRow>
-          {/* {role === "PERSONAL" && (
-            <>
-              <br />
-              <S.Title>선택정보 변경</S.Title>
-              <S.InfoRow>
-                <S.Label>프로필 이미지</S.Label>
-                <ProfileImage />
-              </S.InfoRow>
-              <S.InfoRow>
-                <S.Label>시간표 입력</S.Label>
-              </S.InfoRow>
-              <TimeTable />
-            </>
-          )} */}
           {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
           {successMessage && (
             <S.SuccessMessage>{successMessage}</S.SuccessMessage>
           )}
-          <S.EditButton onClick={handleSubmit}>수정완료</S.EditButton>
+          <S.ButtonGroup>
+            <S.EditButton onClick={handleSubmit}>수정완료</S.EditButton>
+            <S.WithdrawButton onClick={handleDelete}>
+              회원 탈퇴
+            </S.WithdrawButton>
+          </S.ButtonGroup>
         </S.Container>
       </S.Wrapper>
     </>

@@ -5,6 +5,7 @@ import { ReactComponent as ChatIcon } from "../images/ChatIcon.svg";
 import { ReactComponent as GlassesIcon } from "../images/GlassesIcon.svg";
 import { ReactComponent as AlgorithmIcon } from "../images/AlgorithmIcon.svg";
 import { ReactComponent as PersonCheckIcon } from "../images/PersonCheckIcon.svg";
+import { ReactComponent as UOSLogo } from "../images/UOSLogo.svg";
 
 const S = {
   Wrapper: styled.div`
@@ -91,12 +92,12 @@ const S = {
     padding: 30px;
     border-radius: 20px;
   `,
+
   UserInfo: styled.div``,
   SettingIcon: styled.button`
     width: 30px;
     height: 30px;
     margin-left: auto;
-    margin-bottom: 20px;
     background-color: #ddd;
     border-radius: 50%;
     padding: 3px;
@@ -129,12 +130,18 @@ const S = {
   `,
   UserInfoBottom: styled.div`
     display: flex;
-    justify-content: space-between;
-    margin: 0 10px 0px 10px;
+    margin: 10px 10px 10px 10px;
+    align-items: center;
   `,
   BottomText: styled.div`
+    flex: 1;
     color: grey;
     font-size: 14px;
+  `,
+  BottomData: styled.div`
+    flex: 2.2;
+    font-size: 15px;
+    color: black;
   `,
   ProfileImage: styled(ProfileImage)`
     width: 100px;
@@ -171,6 +178,7 @@ const S = {
     height: 50px;
   `,
   ImageWrapper: styled.div`
+    margin-bottom: 10px;
     width: 110px;
     height: 110px;
     border-radius: 50%;
@@ -178,7 +186,24 @@ const S = {
     &:hover img {
       opacity: 0.5;
     }
+    cursor: pointer;
     position: relative;
+    &:hover::after {
+      content: "수정";
+      position: absolute;
+      bottom: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: black;
+      color: white;
+      font-size: 16px;
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+  `,
+  UOSLogo: styled(UOSLogo)`
+    width: 80px;
+    height: 80px;
   `,
 };
 

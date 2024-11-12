@@ -61,24 +61,25 @@ const S = {
   `,
   ResumeTitle: styled.input`
     padding: 10px;
-    width: 97.3%;
-    margin: 20px 0 20px 0;
+    width: 90%;
+    margin: 20px 0 0px 20px;
     outline: none;
     border: 1px solid #ddd;
     border-radius: 10px;
   `,
+
   ResumeContent: styled.input`
     padding: 10px 10px 80px 10px;
-    width: 97.3%;
-    margin: 20px 0 20px 0;
+    width: 90%;
+    margin: 20px 0 0 20px;
     outline: none;
     border: 1px solid #ddd;
     border-radius: 10px;
   `,
   CareerContent: styled.input`
     padding: 10px 10px 80px 10px;
-    width: 97.3%;
-    margin: 20px 0 20px 0;
+    width: 90%;
+    margin: 20px 0 0 20px;
     outline: none;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -103,13 +104,13 @@ const S = {
     border-radius: 10px;
     outline: none;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 20px;
   `,
   TabWrapper: styled.div`
     display: flex;
     flex-wrap: wrap;
     min-width: 1000px;
-    margin-left: 72px;
+    margin-left: 75px;
   `,
   TabLeft: styled.div`
     text-align: center;
@@ -180,11 +181,11 @@ const S = {
     background-color: ${(props) => (props.isSelected ? "#004094" : "#fff")};
     color: ${(props) => (props.isSelected ? "#fff" : "#000")};
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all ease 0.3s;
     &:hover {
       background-color: #004094;
       color: #fff;
-      border: none;
+      border: 1px solid #004094;
     }
   `,
   InputWrapper: styled.div`
@@ -246,8 +247,9 @@ const S = {
     margin-left: 20px;
   `,
   ComponentWrapper: styled.div`
-    flex: 5.5;
+    flex: 5.4;
     width: 100%;
+    margin: 10px;
   `,
   PayContainer: styled.div`
     margin-left: 10px;

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import S from "../uis/JobUI";
+import { AuthContext } from "../components/auth/AuthContext";
 
 const InfoRow = ({ label, content }) => (
   <S.InfoRow>
@@ -15,14 +16,10 @@ const InfoContainer = ({ title, children }) => (
     <S.InfoContainerColumn>{children}</S.InfoContainerColumn>
   </S.JobDetailContainer>
 );
-const JobDetailHeader = ({ companyName, title }) => (
-  <S.JobDetailContainer>
-    <S.DetailCompanyName>{companyName}</S.DetailCompanyName>
-    <S.DetailJobTitle>{title}</S.DetailJobTitle>
-  </S.JobDetailContainer>
-);
 
 const JobDetail = () => {
+  const navigate = useNavigate();
+  const { email } = useContext(AuthContext) || {};
   const { id } = useParams();
   const [job, setJob] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -76,6 +73,36 @@ const JobDetail = () => {
     fetchJobData();
   }, [id]);
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/job-posts/${id}?email=${encodeURIComponent(
+          email
+        )}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("공고가 삭제되었습니다.");
+        navigate("/job");
+      } else {
+        const data = await response.json();
+        setErrorMessage(data.message || "Failed to delete the job post.");
+      }
+    } catch (error) {
+      console.error("Error deleting job post: ", error);
+      setErrorMessage("An error occurred while trying to delete the job post.");
+    }
+  };
+
+  const handleEdit = () => {
+    navigate(`/editjob/${id}`, { state: { job } });
+  };
+
   if (errorMessage) {
     return <div>{errorMessage}</div>;
   }
@@ -88,7 +115,16 @@ const JobDetail = () => {
     <>
       <Header />
       <S.DetailPageFrame>
-        <JobDetailHeader companyName={job.companyName} title={job.title} />
+        <S.JobDetailContainer>
+          <S.DetailCompanyName>{job.companyName}</S.DetailCompanyName>
+          <S.DetailJobTitle>{job.title}</S.DetailJobTitle>
+          {email && email === job.company?.email && (
+            <S.ButtonGroup>
+              <S.EditButton onClick={handleEdit}>공고 수정</S.EditButton>
+              <S.DeleteButton onClick={handleDelete}>공고 삭제</S.DeleteButton>
+            </S.ButtonGroup>
+          )}
+        </S.JobDetailContainer>
         <S.JobDetailContainer>
           <S.InfoContainerRow>
             <S.InfoColumn>
