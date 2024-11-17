@@ -72,9 +72,11 @@ const S = {
   EditButton: styled.button`
     width: 99%;
     padding: 15px;
-    background-color: #fdf25d;
-    border: 1px solid #fae04b;
-    color: black;
+    background-color: ${({ role }) =>
+      role === "COMPANY" ? "#5194f6" : "#fdf25d"};
+    border: ${({ role }) =>
+      role === "COMPANY" ? "1px solid #2f6df6" : "1px solid #fae04b"};
+    color: ${({ role }) => (role === "COMPANY" ? "white" : "black")};
     font-size: 18px;
     border-radius: 10px;
     font-weight: bold;
@@ -370,7 +372,9 @@ const UserInfoChange = () => {
             <S.SuccessMessage>{successMessage}</S.SuccessMessage>
           )}
           <S.ButtonGroup>
-            <S.EditButton onClick={handleSubmit}>수정완료</S.EditButton>
+            <S.EditButton role={role} onClick={handleSubmit}>
+              수정완료
+            </S.EditButton>
             <S.WithdrawButton onClick={handleDelete}>
               회원 탈퇴
             </S.WithdrawButton>
