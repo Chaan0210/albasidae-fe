@@ -3,7 +3,7 @@ import S from "../../uis/JobUI";
 import JobTable from "./JobTable";
 import { useNavigate } from "react-router-dom";
 
-const jobsPerPage = 20;
+const jobsPerPage = 10;
 
 const JobPagination = ({ filteredJobs }) => {
   const jobs = filteredJobs;

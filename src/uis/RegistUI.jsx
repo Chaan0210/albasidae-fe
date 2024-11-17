@@ -163,7 +163,7 @@ const S = {
     padding: 20px;
     margin: 20px 0 20px 0px;
     font-size: 20px;
-    font-weightl: bold;
+    font-weight: bold;
     background-color: #fdf25d;
     border: 1px solid #fae04b;
     border-radius: 10px;

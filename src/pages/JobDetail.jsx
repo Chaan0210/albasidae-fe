@@ -19,7 +19,7 @@ const InfoContainer = ({ title, children }) => (
 
 const JobDetail = () => {
   const navigate = useNavigate();
-  const { email } = useContext(AuthContext) || {};
+  const { email, role } = useContext(AuthContext) || {};
   const { id } = useParams();
   const [job, setJob] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -74,6 +74,8 @@ const JobDetail = () => {
   }, [id]);
 
   const handleDelete = async () => {
+    const confirmation = window.confirm("공고를 삭제하시겠습니까?");
+    if (!confirmation) return;
     try {
       const response = await fetch(
         `http://localhost:8080/api/job-posts/${id}?email=${encodeURIComponent(
@@ -103,13 +105,32 @@ const JobDetail = () => {
     navigate(`/editjob/${id}`, { state: { job } });
   };
 
-  if (errorMessage) {
-    return <div>{errorMessage}</div>;
-  }
-
-  if (!job) {
-    return <div>Loading...</div>;
-  }
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/job-applications/apply/${id}?email=${encodeURIComponent(
+          email
+        )}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+        }
+      );
+      if (response.ok) {
+        alert("알바 지원 성공!");
+        navigate(0);
+      } else {
+        const data = await response.json();
+        setErrorMessage(data.message || "Failed to apply the job.");
+      }
+    } catch (error) {
+      console.error("Error applying: ", error);
+      setErrorMessage("An error occurred while trying to apply the job.");
+    }
+  };
 
   return (
     <>
@@ -176,6 +197,10 @@ const JobDetail = () => {
         <S.JobDetailContainer>
           <S.InfoTitle>{"기업정보"}</S.InfoTitle>
         </S.JobDetailContainer>
+        {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+        {role === "PERSONAL" && (
+          <S.SubmitButton onClick={handleSubmit}>알바 지원하기</S.SubmitButton>
+        )}
       </S.DetailPageFrame>
     </>
   );

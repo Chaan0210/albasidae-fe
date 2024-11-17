@@ -254,7 +254,7 @@ const UserInfoChange = () => {
   }, [isLoggedIn, navigate, email]);
 
   const handleDelete = async () => {
-    const confirmation = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
+    const confirmation = window.confirm("회원 탈퇴를 하시겠습니까?");
     if (!confirmation) return;
     try {
       const response = await fetch(

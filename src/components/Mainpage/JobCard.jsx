@@ -15,6 +15,8 @@ const S = {
     }
     height: 100px;
     min-width: 100px;
+    background-color: white;
+    cursor: pointer;
   `,
   CompanyName: styled.h3`
     margin: 0;

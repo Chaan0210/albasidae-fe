@@ -51,7 +51,7 @@ const S = {
   FilterButton: styled.button`
     padding: 0.5rem 1rem;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 0.9rem;
     color: ${({ active }) => (active ? "white" : "#333")};
     background-color: ${({ active }) => (active ? "#333" : "white")};
@@ -65,7 +65,7 @@ const S = {
   StyledButton: styled.button`
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     appearance: none;
     color: #333;
@@ -82,7 +82,7 @@ const S = {
     max-width: 1075px;
     padding: 10px 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #f9f9f9;
   `,
 
@@ -260,7 +260,7 @@ const S = {
     border: 1px solid #ddd;
     padding: 10px 15px;
     margin: 0 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -302,6 +302,27 @@ const S = {
   `,
   ButtonGroup: styled.div`
     display: flex;
+  `,
+  SubmitButton: styled.button`
+    width: 100%;
+    max-width: 1135px;
+    padding: 20px;
+    margin: 20px auto;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #fdf25d;
+    border: 1px solid #fae04b;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
+  ErrorMessage: styled.div`
+    color: red;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
   `,
 };
 
