@@ -67,6 +67,7 @@ const RegistResume = () => {
       resumeTitle: formData.title,
       selfIntroduction: formData.selfIntroduction,
       educationLevel: formData.education,
+      career: formData.career,
       preferredWorkLocation: formData.place,
       preferredJobTypes: formData.type,
       employmentTypes: formData.category,
