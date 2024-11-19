@@ -42,24 +42,34 @@ const S = {
     width: 100px;
     height: 100px;
   `,
+  CompanyImage: styled.img`
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  `,
 };
 
-const JobCard = ({ company, title, location }) => {
+const JobCard = ({ companyName, title, place, companyImage, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <S.JobCardWrapper
+      onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered ? (
         <S.IconWrapper>
-          <S.CompanyIcon />
+          {companyImage ? (
+            <S.CompanyImage src={companyImage} alt={`${companyName} 이미지`} />
+          ) : (
+            <S.CompanyIcon />
+          )}
         </S.IconWrapper>
       ) : (
         <>
-          <S.CompanyName>{company}</S.CompanyName>
+          <S.CompanyName>{companyName}</S.CompanyName>
           <S.JobTitle>{title}</S.JobTitle>
-          <S.JobLocation>{location}</S.JobLocation>
+          <S.JobLocation>{place}</S.JobLocation>
         </>
       )}
     </S.JobCardWrapper>

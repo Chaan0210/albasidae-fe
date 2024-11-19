@@ -302,6 +302,7 @@ const S = {
   `,
   ButtonGroup: styled.div`
     display: flex;
+    margin-bottom: 20px;
   `,
   SubmitButton: styled.button`
     width: 100%;

@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 const resumesPerPage = 10;
 
-const ResumePagination = ({ resumes }) => {
+const ResumePagination = ({ resumes = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedResumes, setPaginatedResumes] = useState([]);
   const navigate = useNavigate();
+
   const handleClick = (id) => navigate(`/resume/${id}`);
 
   useEffect(() => {

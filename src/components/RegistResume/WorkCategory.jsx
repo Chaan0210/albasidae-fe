@@ -18,14 +18,14 @@ const WorkCategory = ({ value = [], onChange }) => {
     "병원, 간호, 연구",
   ];
 
-  const handleOccupationChange = (e) => {
-    const selectedOccupation = e.target.value;
+  const handleOccupationChange = (selectedOccupation) => {
     if (value.includes(selectedOccupation)) {
       onChange(value.filter((type) => type !== selectedOccupation));
     } else {
       onChange([...value, selectedOccupation]);
     }
   };
+
   return (
     <S.CheckBoxWrapper>
       {occupationList.map((type) => (
@@ -35,7 +35,7 @@ const WorkCategory = ({ value = [], onChange }) => {
             name="occupation"
             value={type}
             checked={value.includes(type)}
-            onChange={handleOccupationChange}
+            onChange={() => handleOccupationChange(type)}
           />
           {type}
         </S.CheckBoxLabel>

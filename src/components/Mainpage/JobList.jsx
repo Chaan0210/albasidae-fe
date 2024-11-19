@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import JobCard from "./JobCard";
-import mockData from "../../mock/mock-job";
 import styled from "styled-components";
 
 const S = {
@@ -32,28 +32,76 @@ const S = {
 };
 
 const JobList = () => {
+  const [latestJobs, setLatestJobs] = useState([]);
+  const [popularJobs, setPopularJobs] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchLatestJobs = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/job-posts/sorted?sort=latest"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch latest job posts");
+        }
+        const data = await response.json();
+        setLatestJobs(data.data);
+      } catch (error) {
+        alert("최신 채용 정보를 가져오는 중 오류가 발생했습니다.");
+        console.error(error);
+      }
+    };
+
+    const fetchPopularJobs = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/job-posts/sorted?sort=popular"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch popular job posts");
+        }
+        const data = await response.json();
+        setPopularJobs(data.data);
+      } catch (error) {
+        alert("인기 채용 정보를 가져오는 중 오류가 발생했습니다.");
+        console.error(error);
+      }
+    };
+    fetchLatestJobs();
+    fetchPopularJobs();
+  }, []);
+
+  const handleCardClick = (jobId) => {
+    navigate(`/job/${jobId}`);
+  };
+
   return (
     <S.Background>
       <S.JobListWrapper>
         <S.Title>인기 채용정보</S.Title>
         <S.JobCards>
-          {mockData.map((job, index) => (
+          {popularJobs.map((job, index) => (
             <JobCard
               key={index}
-              company={job.company}
+              companyName={job.companyName}
               title={job.title}
-              location={job.location}
+              place={job.place}
+              companyImage={job.companyImage}
+              onClick={() => handleCardClick(job.id)}
             />
           ))}
         </S.JobCards>
         <S.Title>최신 채용정보</S.Title>
         <S.JobCards>
-          {mockData.map((job, index) => (
+          {latestJobs.map((job, index) => (
             <JobCard
               key={index}
-              company={job.company}
+              companyName={job.companyName}
               title={job.title}
-              location={job.location}
+              place={job.place}
+              companyImage={job.companyImage}
+              onClick={() => handleCardClick(job.id)}
             />
           ))}
         </S.JobCards>

@@ -4,8 +4,7 @@ import S from "../../uis/RegistUI";
 const WorkType = ({ value = [], onChange }) => {
   const workTypeList = ["아르바이트", "계약직", "정규직", "인턴쉽", "프리랜서"];
 
-  const handleWorkTypeChange = (e) => {
-    const selectedWorkType = e.target.value;
+  const handleWorkTypeChange = (selectedWorkType) => {
     if (value.includes(selectedWorkType)) {
       onChange(value.filter((type) => type !== selectedWorkType));
     } else {
@@ -22,7 +21,7 @@ const WorkType = ({ value = [], onChange }) => {
             name="workType"
             value={type}
             checked={value.includes(type)}
-            onChange={handleWorkTypeChange}
+            onChange={() => handleWorkTypeChange(type)}
           />
           {type}
         </S.CheckBoxLabel>

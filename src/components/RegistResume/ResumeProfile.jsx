@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import mockData from "../../mock/mock-profile";
 import S from "../../uis/RegistUI";
 import { AuthContext } from "../auth/AuthContext";
 
 const ResumeProfile = () => {
   const navigate = useNavigate();
-  const profile = mockData[0];
   const { isLoggedIn, email, role } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [age, setAge] = useState(null);
@@ -57,9 +55,13 @@ const ResumeProfile = () => {
 
   return (
     <S.ProfileContainer>
-      <S.ProfileImage>
-        <img src={profile.picture} alt="Profile" />
-      </S.ProfileImage>
+      {userData?.image ? (
+        <S.ProfileImage>
+          <img src={userData?.image} alt="Profile" />
+        </S.ProfileImage>
+      ) : (
+        <S.StandardProfileImage />
+      )}
 
       <S.ProfileInfo>
         <S.InfoRow>

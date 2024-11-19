@@ -137,14 +137,14 @@ const JobDetail = () => {
       <Header />
       <S.DetailPageFrame>
         <S.JobDetailContainer>
-          <S.DetailCompanyName>{job.companyName}</S.DetailCompanyName>
-          <S.DetailJobTitle>{job.title}</S.DetailJobTitle>
           {email && email === job.company?.email && (
             <S.ButtonGroup>
               <S.EditButton onClick={handleEdit}>공고 수정</S.EditButton>
               <S.DeleteButton onClick={handleDelete}>공고 삭제</S.DeleteButton>
             </S.ButtonGroup>
           )}
+          <S.DetailCompanyName>{job.companyName}</S.DetailCompanyName>
+          <S.DetailJobTitle>{job.title}</S.DetailJobTitle>
         </S.JobDetailContainer>
         <S.JobDetailContainer>
           <S.InfoContainerRow>
