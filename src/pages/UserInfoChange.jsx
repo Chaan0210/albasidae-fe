@@ -54,6 +54,8 @@ const S = {
     font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 10px 0 0 10px;
+    transition: all 0.3s ease;
+
     background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
   `,
@@ -66,6 +68,8 @@ const S = {
     border: 1px solid #ddd;
     border-left: none;
     border-radius: 0px 10px 10px 0px;
+    transition: all 0.3s ease;
+
     background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
   `,

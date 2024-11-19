@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import S from "../uis/JobUI";
 import { AuthContext } from "../components/auth/AuthContext";
+import Modal from "../components/Job/Modal";
 
 const InfoRow = ({ label, content }) => (
   <S.InfoRow>
@@ -23,6 +24,7 @@ const JobDetail = () => {
   const { id } = useParams();
   const [job, setJob] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [wageType, wage] = job.pay ? job.pay.split(" ") : ["", ""];
   const getTranslatedWorkTerm = (term) => {
     switch (term) {
@@ -73,6 +75,12 @@ const JobDetail = () => {
     fetchJobData();
   }, [id]);
 
+  useEffect(() => {
+    if (errorMessage) {
+      setShowModal(false);
+    }
+  }, [errorMessage]);
+
   const handleDelete = async () => {
     const confirmation = window.confirm("공고를 삭제하시겠습니까?");
     if (!confirmation) return;
@@ -106,6 +114,7 @@ const JobDetail = () => {
   };
 
   const handleSubmit = async () => {
+    setErrorMessage("");
     try {
       const response = await fetch(
         `http://localhost:8080/api/job-applications/apply/${id}?email=${encodeURIComponent(
@@ -199,7 +208,18 @@ const JobDetail = () => {
         </S.JobDetailContainer>
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         {role === "PERSONAL" && (
-          <S.SubmitButton onClick={handleSubmit}>알바 지원하기</S.SubmitButton>
+          <>
+            <S.SubmitButton onClick={() => setShowModal(true)}>
+              알바 지원하기
+            </S.SubmitButton>
+            <Modal
+              show={showModal}
+              onClose={() => setShowModal(false)}
+              onConfirm={handleSubmit}
+              title={job.title}
+              name={job.companyName}
+            />
+          </>
         )}
       </S.DetailPageFrame>
     </>

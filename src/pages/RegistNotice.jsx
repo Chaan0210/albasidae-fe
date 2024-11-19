@@ -27,23 +27,23 @@ const RegistNotice = () => {
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    noticeTitle: "",
-    noticeCompanyName: "",
-    noticeCompanyContent: "",
+    noticeTitle: "Default",
+    noticeCompanyName: "Company_default",
+    noticeCompanyContent: "Content_default",
     noticeCompanyImage: "",
-    peopleNum: 0,
-    workCategory: [],
-    workType: [],
-    noticeCareer: "",
-    workTerm: "",
-    workDays: [],
-    workTime: "",
-    workPay: "",
-    gender: "",
-    age: "",
-    deadline: "",
-    submitMethod: [],
-    place: "",
+    peopleNum: 1,
+    workCategory: ["외식, 음료"],
+    workType: ["아르바이트"],
+    noticeCareer: "any",
+    workTerm: "under_three_month",
+    workDays: ["월요일"],
+    workTime: "any",
+    workPay: "시급 12000",
+    gender: "any",
+    age: "any",
+    deadline: "상시모집",
+    submitMethod: ["온라인지원"],
+    place: "휘경동",
   });
 
   useEffect(() => {
@@ -70,7 +70,10 @@ const RegistNotice = () => {
     const newErrors = {};
 
     Object.entries(formData).forEach(([key, value]) => {
-      if (value === "" || value.length === 0) {
+      if (
+        key !== "noticeCompanyImage" &&
+        (value === "" || value.length === 0)
+      ) {
         newErrors[key] = "모든 필드를 입력해주세요.";
       }
     });
@@ -196,9 +199,6 @@ const RegistNotice = () => {
               value={formData.noticeCompanyImage}
               onChange={handleChange("noticeCompanyImage")}
             />
-            {errors.noticeCompanyImage && (
-              <S.ErrorMessage>{errors.noticeCompanyImage}</S.ErrorMessage>
-            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
@@ -354,7 +354,9 @@ const RegistNotice = () => {
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 
-        <S.SubmitButton onClick={handleSubmit}>공고 작성 완료</S.SubmitButton>
+        <S.NoticeSubmitButton onClick={handleSubmit}>
+          공고 작성 완료
+        </S.NoticeSubmitButton>
       </S.MainContainer>
     </S.Wrapper>
   );

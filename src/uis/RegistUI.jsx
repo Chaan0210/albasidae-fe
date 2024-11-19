@@ -124,6 +124,7 @@ const S = {
     font-size: 13px;
     border: 1px solid #ddd;
     border-radius: 10px 0 0 10px;
+    transition: all 0.3s ease;
     background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
   `,
@@ -134,6 +135,8 @@ const S = {
     font-size: 13px;
     border: 1px solid #ddd;
     border-left: none;
+    transition: all 0.3s ease;
+
     background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
   `,
@@ -143,6 +146,7 @@ const S = {
     cursor: pointer;
     font-size: 13px;
     border: 1px solid #ddd;
+    transition: all 0.3s ease;
     border-left: none;
     border-radius: 0px 10px 10px 0px;
     background-color: ${({ active }) => (active ? "#fff" : "#f7f7f7")};
@@ -177,11 +181,26 @@ const S = {
       opacity: 0.8;
     }
   `,
+  NoticeSubmitButton: styled.button`
+    width: 99%;
+    padding: 20px;
+    margin: 20px 0 20px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #5194f6;
+    border: 1px solid #2f6df6;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
   Button: styled.button`
     padding: 13px 23px;
     font-size: 16px;
     margin: 0 10px 0 0;
-    border: 1px solid #ccc;
+    border: 1px solid ${(props) => (props.isSelected ? "#004094" : "#ccc")};
     border-radius: 10px;
     background-color: ${(props) => (props.isSelected ? "#004094" : "#fff")};
     color: ${(props) => (props.isSelected ? "#fff" : "#000")};

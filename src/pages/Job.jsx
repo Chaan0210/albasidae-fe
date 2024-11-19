@@ -5,75 +5,69 @@ import FilterGroup from "../components/Job/FilterGroup";
 import JobPagination from "../components/Job/JobPagination";
 
 const Job = () => {
-  const [jobs, setJobs] = useState([]); // 초기 데이터를 저장
-  const [filteredJobs, setFilteredJobs] = useState([]); // 필터링된 데이터를 저장
+  const [filteredJobs, setFilteredJobs] = useState([]);
 
-  const handleFilterChange = useCallback(
-    (filters) => {
-      const {
-        selectedWorkTerms,
-        selectedDays,
-        selectedTimes,
-        selectedRegions,
-        selectedOccupations,
-      } = filters;
+  const fetchFilteredJobs = async (filters) => {
+    const url = filters
+      ? "http://localhost:8080/api/job-posts/filter"
+      : "http://localhost:8080/api/job-posts";
 
-      const filtered = jobs.filter((job) => {
-        const matchesWorkTerms =
-          !selectedWorkTerms.length || selectedWorkTerms.includes(job.workTerm);
-        const matchesDays =
-          !selectedDays.length ||
-          selectedDays.some((day) => job.workDays.includes(day));
-        const matchesTimes =
-          !selectedTimes.length || selectedTimes.includes(job.workTime);
-        const matchesRegions =
-          !selectedRegions.length || selectedRegions.includes(job.location);
-        const matchesOccupations =
-          !selectedOccupations.length ||
-          selectedOccupations.includes(job.workCategory);
+    const options = filters
+      ? {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(filters),
+        }
+      : {};
 
-        return (
-          matchesWorkTerms &&
-          matchesDays &&
-          matchesTimes &&
-          matchesRegions &&
-          matchesOccupations
-        );
-      });
-      setFilteredJobs(filtered);
-    },
-    [jobs]
-  );
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to fetch job data");
+      }
+      const responseData = await response.json();
+      setFilteredJobs(responseData?.data || []);
+    } catch (error) {
+      console.error("Failed to fetch: ", error);
+    }
+  };
+
+  const handleFilterChange = useCallback((filters) => {
+    const {
+      selectedWorkTerms,
+      selectedDays,
+      selectedTimes,
+      selectedRegions,
+      selectedOccupations,
+    } = filters;
+
+    if (
+      !selectedWorkTerms.length &&
+      !selectedDays.length &&
+      !selectedTimes.length &&
+      !selectedRegions.length &&
+      !selectedOccupations.length
+    ) {
+      fetchFilteredJobs(null);
+    } else {
+      const requestPayload = {
+        id: 0,
+        workLocations: selectedRegions,
+        workCategories: selectedOccupations,
+        workTerms: selectedWorkTerms,
+        workDays: selectedDays,
+        workTimeCategory: selectedTimes,
+        useTimeTable: false,
+      };
+
+      fetchFilteredJobs(requestPayload);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchJobData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/job-posts`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch job data");
-        }
-        const responseData = await response.json();
-        const data = responseData?.data || [];
-
-        if (Array.isArray(data)) {
-          const jobsWithDefaults = data.map((job) => ({
-            ...job,
-            workDays: job.workDays || [],
-            workTerm: job.workTerm || "",
-            location: job.location || "",
-            workCategory: job.workCategory || "",
-          }));
-
-          setJobs(jobsWithDefaults);
-          setFilteredJobs(jobsWithDefaults);
-        } else {
-          throw new Error("Expected data to be an array");
-        }
-      } catch (error) {
-        console.error("Fail to fetch: ", error);
-      }
-    };
-    fetchJobData();
+    fetchFilteredJobs(null);
   }, []);
 
   return (
@@ -81,7 +75,6 @@ const Job = () => {
       <Header />
       <S.PageFrame>
         <FilterGroup onFilterChange={handleFilterChange} />
-        {/* <JobTable jobs={filteredJobs} onRowClick={handleClick} /> */}
         <JobPagination filteredJobs={filteredJobs} />
       </S.PageFrame>
     </>

@@ -13,6 +13,10 @@ const JobPagination = ({ filteredJobs }) => {
   const handleClick = (id) => navigate(`/job/${id}`);
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [jobs]);
+
+  useEffect(() => {
     const startIndex = (currentPage - 1) * jobsPerPage;
     const endIndex = startIndex + jobsPerPage;
 
