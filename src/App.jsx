@@ -24,6 +24,7 @@ import PersonalProfile from "./pages/PersonalProfile";
 import CompanyProfile from "./pages/CompanyProfile";
 import ResumeDetail from "./pages/ResumeDetail";
 import EditResume from "./pages/EditResume";
+import JobMap from "./pages/JobMap";
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function App() {
         <Route path="/userinfochange" element={<UserInfoChange />} />
         <Route path="/profile/personal" element={<PersonalProfile />} />
         <Route path="/profile/company" element={<CompanyProfile />} />
+        <Route path="/jobmap" element={<JobMap />} />
       </Routes>
     </div>
   );

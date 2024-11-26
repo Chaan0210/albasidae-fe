@@ -20,6 +20,7 @@ import WorkTime from "../components/RegistNotice/WorkTime";
 import WorkType from "../components/RegistNotice/WorkType";
 import Workplace from "../components/RegistNotice/Workplace";
 import ResumeProfile from "../components/RegistResume/ResumeProfile";
+import WorkAddress from "../components/RegistNotice/WorkAddress";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const RegistNotice = () => {
@@ -44,6 +45,7 @@ const RegistNotice = () => {
     deadline: "상시모집",
     submitMethod: ["온라인지원"],
     place: "휘경동",
+    address: "서울 동대문구 망우로 74",
   });
 
   useEffect(() => {
@@ -169,7 +171,7 @@ const RegistNotice = () => {
         </S.SubTitleWrapper>
 
         <S.SubTitleWrapper>
-          <S.SubTitle>주요 사업내용</S.SubTitle>
+          <S.SubTitle>업무내용</S.SubTitle>
           <S.ComponentWrapper>
             <NoticeCompanyContent
               value={formData.noticeCompanyContent}
@@ -189,6 +191,19 @@ const RegistNotice = () => {
               onChange={handleChange("place")}
             />
             {errors.place && <S.ErrorMessage>{errors.place}</S.ErrorMessage>}
+          </S.ComponentWrapper>
+        </S.SubTitleWrapper>
+
+        <S.SubTitleWrapper>
+          <S.SubTitle>근무 상세주소</S.SubTitle>
+          <S.ComponentWrapper>
+            <WorkAddress
+              value={formData.address}
+              onChange={handleChange("address")}
+            />
+            {errors.address && (
+              <S.ErrorMessage>{errors.address}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 

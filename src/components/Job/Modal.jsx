@@ -70,7 +70,6 @@ const S = {
     padding: 10px;
     border: 1px solid #bbb;
     border-radius: 10px;
-    color: #bbb;
   `,
 };
 
@@ -92,9 +91,7 @@ const Modal = ({ show, onClose, onConfirm, title, name }) => {
           </S.Job>
           <S.SubTitle>이력서</S.SubTitle>
           <S.SubTitle>사장님(인사담당자님)께 한마디</S.SubTitle>
-          <S.ResumeInput>
-            지원 동기나 각오를 간단하게 작성해주세요.
-          </S.ResumeInput>
+          <S.ResumeInput placeholder="지원 동기나 각오를 간단하게 작성해주세요."></S.ResumeInput>
         </S.ModalBody>
         <S.ModalFooter>
           <S.ModalButton onClick={onClose}>취소</S.ModalButton>

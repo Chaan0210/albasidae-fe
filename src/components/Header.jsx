@@ -242,6 +242,9 @@ const Header = () => {
                 회원정보
               </S.Link>
             </li>
+            <li>
+              <S.Link to="/jobmap">알바맵</S.Link>
+            </li>
           </ul>
         </S.Nav>
 
