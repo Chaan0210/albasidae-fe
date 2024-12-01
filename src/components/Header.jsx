@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as UOSLogo } from "../images/UOSLogo.svg";
@@ -174,7 +174,7 @@ const S = {
 
 const Header = () => {
   const { isLoggedIn, role, logout } = useContext(AuthContext);
-
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <S.HeaderWrapper>
       <S.MainHeader>
@@ -243,7 +243,17 @@ const Header = () => {
               </S.Link>
             </li>
             <li>
-              <S.Link to="/jobmap">알바맵</S.Link>
+              <S.Link
+                style={{
+                  color: isHovered ? "#004094" : "#5194f6",
+                  fontWeight: "bold",
+                }}
+                to="/jobmap"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                알바 한눈에 보기
+              </S.Link>
             </li>
           </ul>
         </S.Nav>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../uis/CompanyProfileUI";
 import Header from "../components/Header";
@@ -6,7 +6,8 @@ import UserInfo from "../components/Profile/UserInfo";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const CompanyProfile = () => {
-  const { isLoggedIn, role } = useContext(AuthContext);
+  const { isLoggedIn, role, email } = useContext(AuthContext);
+  const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     if (!isLoggedIn) {
@@ -15,10 +16,30 @@ const CompanyProfile = () => {
       alert("이 페이지에 접근할 권한이 없습니다.");
       navigate("/");
     }
-  }, [isLoggedIn, role, navigate]);
+    const fetchJobData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/job-posts?${encodeURIComponent(email)}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch job data");
+        }
+        const responseData = await response.json();
+        const data = responseData?.data || [];
+        setJobs(data);
+      } catch (error) {
+        console.error("Fail to fetch: ", error);
+      }
+    };
+    fetchJobData();
+  }, [isLoggedIn, role, navigate, email]);
 
   const handleNavigate = (path) => {
     navigate(path);
+  };
+
+  const handleJobClick = (jobId) => {
+    navigate(`/job/${jobId}`);
   };
 
   return (
@@ -42,20 +63,22 @@ const CompanyProfile = () => {
           </S.TopComponent>
 
           <S.BottomContainer>
-            내 공고목록
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <S.MainTitle>내 공고목록</S.MainTitle>
+            {jobs.length > 0 ? (
+              jobs.map((job) => (
+                <S.JobList key={job.id} onClick={() => handleJobClick(job.id)}>
+                  <S.JobTitle>{job.title}</S.JobTitle>
+                  <S.JobDetails>
+                    회사 이름: {job.title} | 마감기한 : {job.deadline}
+                  </S.JobDetails>
+                </S.JobList>
+              ))
+            ) : (
+              <div>등록된 공고가 없습니다.</div>
+            )}
           </S.BottomContainer>
           <S.BottomContainer>
-            공고지원현황
+            <S.MainTitle>공고지원현황</S.MainTitle>
             <br />
             <br />
             <br />

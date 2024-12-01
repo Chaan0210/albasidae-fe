@@ -38,7 +38,7 @@ const RegistNotice = () => {
     noticeCareer: "any",
     workTerm: "under_three_month",
     workDays: ["월요일"],
-    workTime: "any",
+    workTime: "1~23",
     workPay: "시급 12000",
     gender: "any",
     age: "any",
@@ -105,6 +105,7 @@ const RegistNotice = () => {
       age: formData.age,
       deadline: formData.deadline,
       submitMethod: formData.submitMethod,
+      placeDetail: formData.address,
     };
     formDataToSend.append(
       "jobPost",

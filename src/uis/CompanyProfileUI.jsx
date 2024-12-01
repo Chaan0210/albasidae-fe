@@ -69,6 +69,27 @@ const S = {
     padding: 30px;
     border-radius: 20px;
   `,
+  MainTitle: styled.div`
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+  `,
+  JobList: styled.div`
+    display: flex;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    &:hover {
+      background-color: #f8f8f8;
+    }
+  `,
+  JobTitle: styled.div`
+    font-size: 18px;
+    flex: 1;
+  `,
+  JobDetails: styled.div`
+    font-size: 18px;
+    flex: 3;
+  `,
 };
 
 export default S;
