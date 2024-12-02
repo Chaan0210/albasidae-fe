@@ -1,10 +1,12 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import S from "../uis/JobUI";
 import Header from "../components/Header";
 import FilterGroup from "../components/Job/FilterGroup";
 import JobPagination from "../components/Job/JobPagination";
+import { AuthContext } from "../components/auth/AuthContext";
 
 const Job = () => {
+  const { email } = useContext(AuthContext);
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   const fetchFilteredJobs = async (filters) => {
@@ -34,37 +36,43 @@ const Job = () => {
     }
   };
 
-  const handleFilterChange = useCallback((filters) => {
-    const {
-      selectedWorkTerms,
-      selectedDays,
-      selectedTimes,
-      selectedRegions,
-      selectedOccupations,
-    } = filters;
+  const handleFilterChange = useCallback(
+    (filters) => {
+      const {
+        selectedWorkTerms = [],
+        selectedDays = [],
+        selectedTimes = [],
+        selectedRegions = [],
+        selectedOccupations = [],
+        useTimeTable = false,
+      } = filters;
 
-    if (
-      !selectedWorkTerms.length &&
-      !selectedDays.length &&
-      !selectedTimes.length &&
-      !selectedRegions.length &&
-      !selectedOccupations.length
-    ) {
-      fetchFilteredJobs(null);
-    } else {
-      const requestPayload = {
-        id: 0,
-        workLocations: selectedRegions,
-        workCategories: selectedOccupations,
-        workTerms: selectedWorkTerms,
-        workDays: selectedDays,
-        workTimeCategory: selectedTimes,
-        useTimeTable: false,
-      };
+      if (
+        !selectedWorkTerms.length &&
+        !selectedDays.length &&
+        !selectedTimes.length &&
+        !selectedRegions.length &&
+        !selectedOccupations.length &&
+        !useTimeTable
+      ) {
+        fetchFilteredJobs(null);
+      } else {
+        const requestPayload = {
+          id: 0,
+          email: email || "",
+          workLocations: selectedRegions,
+          workCategories: selectedOccupations,
+          workTerms: selectedWorkTerms,
+          workDays: selectedDays,
+          workTimeCategory: selectedTimes,
+          useTimeTable: useTimeTable,
+        };
 
-      fetchFilteredJobs(requestPayload);
-    }
-  }, []);
+        fetchFilteredJobs(requestPayload);
+      }
+    },
+    [email]
+  );
 
   useEffect(() => {
     fetchFilteredJobs(null);

@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import styled from "styled-components";
+import { AuthContext } from "../auth/AuthContext";
 
 const S = {
   Wrapper: styled.div`
@@ -77,10 +78,71 @@ const S = {
 };
 
 const TimeTable = () => {
+  const { email } = useContext(AuthContext);
   const hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
   const days = ["월", "화", "수", "목", "금", "토", "일"];
   const [selectedCells, setSelectedCells] = useState([]);
+  const [isExisting, setIsExisting] = useState(false);
   const isDragging = useRef(false);
+
+  useEffect(() => {
+    const fetchTimeTable = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/timetable/${encodeURIComponent(email)}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch timetable data");
+        }
+        const responseData = await response.json();
+        const data = responseData?.data;
+
+        if (data) {
+          setIsExisting(true);
+          const preSelectedCells = [];
+          if (data.monday) {
+            data.monday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`월-${hour}`);
+            });
+          }
+          if (data.tuesday) {
+            data.tuesday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`화-${hour}`);
+            });
+          }
+          if (data.wednesday) {
+            data.wednesday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`수-${hour}`);
+            });
+          }
+          if (data.thursday) {
+            data.thursday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`목-${hour}`);
+            });
+          }
+          if (data.friday) {
+            data.friday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`금-${hour}`);
+            });
+          }
+          if (data.saturday) {
+            data.saturday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`토-${hour}`);
+            });
+          }
+          if (data.sunday) {
+            data.sunday.split(", ").forEach((hour) => {
+              preSelectedCells.push(`일-${hour}`);
+            });
+          }
+          setSelectedCells(preSelectedCells);
+        }
+      } catch (error) {
+        console.error("Failed to fetch timetable data: ", error);
+      }
+    };
+    fetchTimeTable();
+  }, [email]);
 
   const toggleCell = (day, hour) => {
     const cell = `${day}-${hour}`;
@@ -113,11 +175,86 @@ const TimeTable = () => {
     setSelectedCells([]);
   };
 
+  const handleSubmit = async () => {
+    const timetable = {
+      email: email,
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: [],
+      sunday: [],
+      registered: true,
+    };
+
+    selectedCells.forEach((cell) => {
+      const [day, hour] = cell.split("-");
+      switch (day) {
+        case "월":
+          timetable.monday.push(hour);
+          break;
+        case "화":
+          timetable.tuesday.push(hour);
+          break;
+        case "수":
+          timetable.wednesday.push(hour);
+          break;
+        case "목":
+          timetable.thursday.push(hour);
+          break;
+        case "금":
+          timetable.friday.push(hour);
+          break;
+        case "토":
+          timetable.saturday.push(hour);
+          break;
+        case "일":
+          timetable.sunday.push(hour);
+          break;
+        default:
+          break;
+      }
+    });
+
+    timetable.monday = timetable.monday.join(", ");
+    timetable.tuesday = timetable.tuesday.join(", ");
+    timetable.wednesday = timetable.wednesday.join(", ");
+    timetable.thursday = timetable.thursday.join(", ");
+    timetable.friday = timetable.friday.join(", ");
+    timetable.saturday = timetable.saturday.join(", ");
+    timetable.sunday = timetable.sunday.join(", ");
+
+    try {
+      const method = isExisting ? "PUT" : "POST";
+      const response = await fetch(
+        `http://localhost:8080/api/timetable/${encodeURIComponent(email)}`,
+        {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(timetable),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to register timetable");
+      }
+      alert("시간표가 성공적으로 등록되었습니다!");
+    } catch (error) {
+      console.log(timetable);
+
+      console.error("Failed to submit timetable: ", error);
+      alert("시간표 등록에 실패했습니다.");
+    }
+  };
+
   return (
     <S.Wrapper>
       <S.TableTitle>시간표</S.TableTitle>
       <S.TableDescription>
-        자신의 학교 시간표나 일정을 입력해주세요.
+        자신의 학교 시간표나 일정을 클릭 또는 드래그를 통해 입력해주세요.
         <br /> 이 시간을 제외한 알바를 추천해드려요!
       </S.TableDescription>
       <S.Table onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
@@ -146,9 +283,7 @@ const TimeTable = () => {
         </tbody>
       </S.Table>
       <S.DeleteButton onClick={clearSelectedCells}>모두 지우기</S.DeleteButton>
-      <S.Button onClick={() => console.log(selectedCells)}>
-        시간표 입력
-      </S.Button>
+      <S.Button onClick={handleSubmit}>시간표 입력</S.Button>
     </S.Wrapper>
   );
 };

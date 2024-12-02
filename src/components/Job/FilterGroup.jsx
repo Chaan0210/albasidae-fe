@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import S from "../../uis/JobUI";
+import { AuthContext } from "../auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const FilterGroup = ({ onFilterChange }) => {
+  const navigate = useNavigate();
+  const { isLoggedIn, role } = useContext(AuthContext);
   const [selectedFilters, setSelectedFilters] = useState({
     selectedWorkTerms: [],
     selectedDays: [],
     selectedTimes: [],
     selectedRegions: [],
     selectedOccupations: [],
+    useTimeTable: false,
   });
   const [activeFilters, setActiveFilters] = useState({
     region: false,
@@ -24,8 +29,8 @@ const FilterGroup = ({ onFilterChange }) => {
       "기간 무관",
     ],
     days: [
-      "평일(월,화,수,목,금)",
-      "주말(토,일)",
+      "평일",
+      "주말",
       "월요일",
       "화요일",
       "수요일",
@@ -75,24 +80,68 @@ const FilterGroup = ({ onFilterChange }) => {
   const toggleSelection = (filterKey, value) => {
     setSelectedFilters((prevFilters) => {
       let updatedValue = value;
+      let updatedSelection = [];
+      if (filterKey === "selectedDays") {
+        if (value === "평일") {
+          const weekdays = ["월요일", "화요일", "수요일", "목요일", "금요일"];
+          updatedSelection = prevFilters[filterKey].some((day) =>
+            weekdays.includes(day)
+          )
+            ? prevFilters[filterKey].filter((day) => !weekdays.includes(day))
+            : [...prevFilters[filterKey], ...weekdays];
+        } else if (value === "주말") {
+          const weekends = ["토요일", "일요일"];
+          updatedSelection = prevFilters[filterKey].some((day) =>
+            weekends.includes(day)
+          )
+            ? prevFilters[filterKey].filter((day) => !weekends.includes(day))
+            : [...prevFilters[filterKey], ...weekends];
+        } else {
+          updatedSelection = prevFilters[filterKey].includes(value)
+            ? prevFilters[filterKey].filter((item) => item !== value)
+            : [...prevFilters[filterKey], value];
+        }
+      } else {
+        if (filterKey === "selectedWorkTerms" && workTermMapping[value]) {
+          updatedValue = workTermMapping[value];
+        }
 
-      if (filterKey === "selectedWorkTerms" && workTermMapping[value]) {
-        updatedValue = workTermMapping[value];
+        updatedSelection = prevFilters[filterKey].includes(updatedValue)
+          ? prevFilters[filterKey].filter((item) => item !== updatedValue)
+          : [...prevFilters[filterKey], updatedValue];
       }
 
-      const updatedSelection = prevFilters[filterKey].includes(updatedValue)
-        ? prevFilters[filterKey].filter((item) => item !== updatedValue)
-        : [...prevFilters[filterKey], updatedValue];
-      return {
+      const updatedFilters = {
         ...prevFilters,
         [filterKey]: updatedSelection,
       };
+
+      onFilterChange(updatedFilters);
+
+      return updatedFilters;
     });
   };
 
-  useEffect(() => {
-    onFilterChange(selectedFilters);
-  }, [selectedFilters, onFilterChange]);
+  const toggleTimeTableFilter = () => {
+    if (!isLoggedIn) {
+      alert("시간표 맞춤 필터 기능을 사용하기 위해 로그인 해주세요.");
+      navigate("/login");
+      return;
+    } else if (role !== "PERSONAL" && role !== "ADMIN") {
+      alert("기업회원은 이 기능을 사용할 수 없습니다.");
+      navigate("/");
+      return;
+    }
+
+    setSelectedFilters((prevFilters) => {
+      const updatedFilters = {
+        ...prevFilters,
+        useTimeTable: !prevFilters.useTimeTable,
+      };
+      onFilterChange(updatedFilters);
+      return updatedFilters;
+    });
+  };
 
   const handleFilterToggle = (filter) => {
     setActiveFilters((prevFilters) => ({
@@ -106,8 +155,9 @@ const FilterGroup = ({ onFilterChange }) => {
       {options.map((option) => {
         const isActive =
           filterKey === "selectedWorkTerms"
-            ? selectedFilters[filterKey].includes(workTermMapping[option])
-            : selectedFilters[filterKey].includes(option);
+            ? selectedFilters[filterKey]?.includes(workTermMapping[option]) ??
+              false
+            : selectedFilters[filterKey]?.includes(option) ?? false;
 
         return (
           <S.FilterButton
@@ -146,8 +196,8 @@ const FilterGroup = ({ onFilterChange }) => {
           </S.StyledButton>
 
           <S.StyledButton
-          // active={activeFilters.work}
-          // onClick={() => handleFilterToggle("work")}
+            active={selectedFilters.useTimeTable}
+            onClick={toggleTimeTableFilter}
           >
             시간표 맞춤 필터
           </S.StyledButton>

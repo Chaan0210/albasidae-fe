@@ -11,6 +11,7 @@ const InfoRow = ({ label, content }) => (
     <S.Content>{content}</S.Content>
   </S.InfoRow>
 );
+
 const InfoContainer = ({ title, children }) => (
   <S.JobDetailContainer>
     <S.InfoTitle>{title}</S.InfoTitle>
@@ -22,10 +23,12 @@ const JobDetail = () => {
   const navigate = useNavigate();
   const { email, role } = useContext(AuthContext) || {};
   const { id } = useParams();
-  const [job, setJob] = useState([]);
+  const [job, setJob] = useState({}); // 빈 객체로 초기화하여 안전하게 참조 가능하게 설정
   const [errorMessage, setErrorMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [wageType, wage] = job.pay ? job.pay.split(" ") : ["", ""];
+  const [wageType, wage] = job.pay?.split(" ") || ["", ""]; // 옵셔널 체이닝과 기본값을 설정하여 오류 방지
+
+  // 근무 기간 번역 함수
   const getTranslatedWorkTerm = (term) => {
     switch (term) {
       case "under_three_month":
@@ -42,6 +45,8 @@ const JobDetail = () => {
         return term;
     }
   };
+
+  // 요일 정렬 함수
   const dayOrder = [
     "월요일",
     "화요일",
@@ -51,11 +56,13 @@ const JobDetail = () => {
     "토요일",
     "일요일",
   ];
+
   const sortDays = (days) => {
     if (!Array.isArray(days)) return [];
     return [...days].sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
   };
 
+  // 공고 데이터 가져오기
   useEffect(() => {
     const fetchJobData = async () => {
       try {
@@ -66,7 +73,7 @@ const JobDetail = () => {
           throw new Error("Failed to fetch job data");
         }
         const responseData = await response.json();
-        setJob(responseData.data);
+        setJob(responseData.data || {}); // 빈 객체로 초기화하여 오류 방지
       } catch (error) {
         console.error("Fail to fetch: ", error);
         setErrorMessage("Job data could not be retrieved.");
@@ -75,12 +82,14 @@ const JobDetail = () => {
     fetchJobData();
   }, [id]);
 
+  // 에러 메시지가 있을 경우 모달을 닫음
   useEffect(() => {
     if (errorMessage) {
       setShowModal(false);
     }
   }, [errorMessage]);
 
+  // 공고 삭제 함수
   const handleDelete = async () => {
     const confirmation = window.confirm("공고를 삭제하시겠습니까?");
     if (!confirmation) return;
@@ -109,10 +118,12 @@ const JobDetail = () => {
     }
   };
 
+  // 공고 수정 함수
   const handleEdit = () => {
     navigate(`/editjob/${id}`, { state: { job } });
   };
 
+  // 알바 지원 함수
   const handleSubmit = async () => {
     setErrorMessage("");
     try {
@@ -155,6 +166,7 @@ const JobDetail = () => {
           <S.DetailCompanyName>{job.companyName}</S.DetailCompanyName>
           <S.DetailJobTitle>{job.title}</S.DetailJobTitle>
         </S.JobDetailContainer>
+
         <S.JobDetailContainer>
           <S.InfoContainerRow>
             <S.InfoColumn>
@@ -167,7 +179,7 @@ const JobDetail = () => {
             </S.InfoColumn>
             <S.InfoColumn>
               <S.Label>{"요일"}</S.Label>
-              <S.Content>{sortDays(job.workDays).join(", ")}</S.Content>
+              <S.Content>{sortDays(job.workDays)?.join(", ")}</S.Content>
             </S.InfoColumn>
             <S.InfoColumn>
               <S.Label>{"시간"}</S.Label>
@@ -177,14 +189,17 @@ const JobDetail = () => {
             </S.InfoColumn>
           </S.InfoContainerRow>
         </S.JobDetailContainer>
+
         <InfoContainer title="모집조건">
           <InfoRow label="모집기간" content={job.deadline} />
           <InfoRow label="모집인원" content={job.peopleNum} />
         </InfoContainer>
+
         <InfoContainer title="근무지 정보">
           <InfoRow label="근무지명" content={job.companyName} />
           <InfoRow label="근무지" content={job.place} />
         </InfoContainer>
+
         <InfoContainer title="근무조건">
           <InfoRow label="급여" content={job.pay} />
           <InfoRow
@@ -196,17 +211,27 @@ const JobDetail = () => {
             content={job.workTime === "any" ? "시간협의" : `${job.workTime}시`}
           />
         </InfoContainer>
+
         <S.JobDetailContainer>
           <S.InfoTitle>{"상세 모집내용"}</S.InfoTitle>
-          <S.CompanyImage src={job.companyImage} />
+          {job.companyImage && <S.CompanyImage src={job.companyImage} />}
+          <S.Content>{job.description || "상세 내용 없음"}</S.Content>
         </S.JobDetailContainer>
+
         <S.JobDetailContainer>
           <S.InfoTitle>{"지원방법"}</S.InfoTitle>
+          <S.Content>
+            {job.applyMethod || "지원 방법에 대한 정보가 없습니다."}
+          </S.Content>
         </S.JobDetailContainer>
+
         <S.JobDetailContainer>
           <S.InfoTitle>{"기업정보"}</S.InfoTitle>
+          <S.Content>{job.companyInfo || "기업 정보가 없습니다."}</S.Content>
         </S.JobDetailContainer>
+
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+
         {role === "PERSONAL" && (
           <>
             <S.SubmitButton onClick={() => setShowModal(true)}>
