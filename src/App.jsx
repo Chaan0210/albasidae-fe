@@ -26,6 +26,8 @@ import ResumeDetail from "./pages/ResumeDetail";
 import EditResume from "./pages/EditResume";
 import JobMap from "./pages/JobMap";
 import ApplicantsList from "./pages/ApplicantsList";
+import AdminLogin from "./pages/auth/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const location = useLocation();
@@ -36,6 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<JobList />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/admin" element={<AdminLogin />} />
         <Route path="/signup" element={<SignUpSelection />} />
         <Route path="/signup/personal" element={<PersonalSignUp />} />
         <Route path="/signup/company" element={<CompanySignUp />} />
@@ -54,6 +57,7 @@ function App() {
         <Route path="/profile/personal" element={<PersonalProfile />} />
         <Route path="/profile/company" element={<CompanyProfile />} />
         <Route path="/jobmap" element={<JobMap />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
       </Routes>
     </div>
   );

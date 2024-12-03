@@ -181,7 +181,7 @@ const JobDetail = () => {
       <Header />
       <S.DetailPageFrame>
         <S.JobDetailContainer>
-          {email && email === job.company?.email && (
+          {email && (email === job.company?.email || role === "ADMIN") && (
             <S.ButtonGroup>
               <S.EditButton onClick={handleEdit}>공고 수정</S.EditButton>
               <S.DeleteButton onClick={handleDelete}>공고 삭제</S.DeleteButton>

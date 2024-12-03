@@ -252,7 +252,9 @@ const Header = () => {
         <S.Nav>
           <ul>
             <li>
-              <S.AlbasidaeLogoA src={AlbasidaeLogoAType} alt="ALogo" />
+              <S.Link to="/" className="link">
+                <S.AlbasidaeLogoA src={AlbasidaeLogoAType} alt="ALogo" />
+              </S.Link>
             </li>
             <S.Split>|</S.Split>
             <li>
@@ -287,6 +289,11 @@ const Header = () => {
                 알바 한눈에 보기
               </S.Link>
             </li>
+            {role === "ADMIN" && (
+              <li>
+                <S.Link to="/admindashboard">관리자 대시보드</S.Link>
+              </li>
+            )}
           </ul>
         </S.Nav>
 

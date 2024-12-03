@@ -22,7 +22,7 @@ const calculateAge = (birthDate) => {
 };
 
 const ResumeDetail = () => {
-  const { email } = useContext(AuthContext);
+  const { email, role } = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [resume, setResume] = useState([]);
@@ -109,7 +109,7 @@ const ResumeDetail = () => {
       <Header />
       <S.DetailPageFrame>
         <S.InfoContainerColumn>
-          {email && email === resume.personal?.email && (
+          {email && (email === resume.personal?.email || role === "ADMIN") && (
             <S.ButtonGroup>
               <S.EditButton onClick={handleEdit}>이력서 수정</S.EditButton>
               <S.DeleteButton onClick={handleDelete}>
