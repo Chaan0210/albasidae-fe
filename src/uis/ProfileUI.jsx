@@ -5,7 +5,6 @@ import { ReactComponent as ChatIcon } from "../images/ChatIcon.svg";
 import { ReactComponent as GlassesIcon } from "../images/GlassesIcon.svg";
 import { ReactComponent as AlgorithmIcon } from "../images/AlgorithmIcon.svg";
 import { ReactComponent as PersonCheckIcon } from "../images/PersonCheckIcon.svg";
-import { ReactComponent as UOSLogo } from "../images/UOSLogo.svg";
 
 const S = {
   Wrapper: styled.div`
@@ -201,7 +200,7 @@ const S = {
       border-radius: 10px;
     }
   `,
-  UOSLogo: styled(UOSLogo)`
+  AlbasidaeLogo: styled.img`
     width: 80px;
     height: 80px;
   `,

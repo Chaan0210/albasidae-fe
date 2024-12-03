@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ReactComponent as UOSLogo } from "../../images/UOSLogo.svg";
+import AlbasidaeLogoLongType from "../../images/AlbasidaeLogo(Long_Type).png";
 
 const S = {
   HeaderWrapper: styled.header`
@@ -37,9 +37,9 @@ const S = {
     font-size: 23px;
     font-weight: lighter;
   `,
-  UOSLogo: styled(UOSLogo)`
-    width: 50px;
-    height: 50px;
+  AlbasidaeLogo: styled.img`
+    margin-top: 10px;
+    width: 250px;
   `,
   Left: styled.div`
     display: flex;
@@ -53,9 +53,8 @@ const HeaderSignUp = () => {
     <S.HeaderWrapper>
       <S.Left>
         <S.Link to="/" className="link">
-          <S.Title>알바시대</S.Title>
+          <S.AlbasidaeLogo src={AlbasidaeLogoLongType} alt="Logo" />
         </S.Link>
-        <S.UOSLogo />
       </S.Left>
 
       <S.Right>

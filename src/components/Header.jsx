@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ReactComponent as UOSLogo } from "../images/UOSLogo.svg";
 import { ReactComponent as SearchIcon } from "../images/SearchIcon.svg";
+import AlbasidaeLogoLongType from "../images/AlbasidaeLogo(Long_Type).png";
 import { AuthContext } from "./auth/AuthContext";
 
 const S = {
@@ -35,6 +35,7 @@ const S = {
     }
     li {
       cursor: pointer;
+      transition: all 0.2s ease;
       &:hover {
         color: #004094;
         font-weight: bold;
@@ -72,6 +73,7 @@ const S = {
     border-radius: 50%;
     border: 0.7px solid #fae04b;
     cursor: pointer;
+    transition: all 0.2s ease;
     &:hover {
       opacity: 0.8;
     }
@@ -81,6 +83,8 @@ const S = {
     display: flex;
     align-items: center;
     font-size: 13px;
+    transition: all 0.2s ease;
+
     &:hover {
       font-weight: bold;
       color: #004094;
@@ -91,6 +95,8 @@ const S = {
     display: flex;
     align-items: center;
     font-size: 13px;
+    transition: all 0.2s ease;
+
     &:hover {
       font-weight: bold;
       color: #004094;
@@ -119,20 +125,17 @@ const S = {
   Link: styled(Link)`
     color: inherit;
     text-decoration: none;
+    transition: 0.2s all ease;
   `,
-  UOSLogo: styled(UOSLogo)`
-    width: 50px;
-    height: 50px;
+  AlbasidaeLogo: styled.img`
+    width: 250px;
   `,
   SearchIcon: styled(SearchIcon)`
     width: 25px;
     height: 25px;
   `,
   Left: styled.div`
-    gap: 10px;
-    padding-bottom: 15px;
-    display: flex;
-    align-items: center;
+    padding-bottom: 10px;
     margin-right: 30px;
   `,
   Split: styled.div`
@@ -145,6 +148,8 @@ const S = {
     border-radius: 30px;
     padding: 10px 18px;
     cursor: pointer;
+    transition: all 0.2s ease;
+
     &:hover {
       opacity: 0.8;
     }
@@ -158,6 +163,8 @@ const S = {
     border-radius: 30px;
     padding: 10px 18px;
     cursor: pointer;
+    transition: all 0.2s ease;
+
     &:hover {
       opacity: 0.8;
     }
@@ -219,15 +226,14 @@ const Header = () => {
         <S.Header>
           <S.Left>
             <S.Link to="/" className="link">
-              <S.Title>알바시대</S.Title>
+              <S.AlbasidaeLogo src={AlbasidaeLogoLongType} alt="Logo" />
             </S.Link>
-            <S.UOSLogo />
           </S.Left>
           <S.SearchContainer>
             <S.HeaderSearch>
               <S.SearchInput
                 type="text"
-                placeholder="검색"
+                placeholder="채용정보 검색"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={handleKeyDown}

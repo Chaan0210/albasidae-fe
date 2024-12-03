@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import UserInfo from "../components/Profile/UserInfo";
 import TimeTable from "../components/Profile/TimeTable";
 import { AuthContext } from "../components/auth/AuthContext";
+import AlbasidaeLogo from "../images/AlbasidaeLogo(A_Type).png";
 
 const PersonalProfile = () => {
   const { isLoggedIn, role, email } = useContext(AuthContext);
@@ -113,8 +114,8 @@ const PersonalProfile = () => {
                     <S.GlassesIcon />
                     이력서열람
                   </S.ContentContainer>
-                  <S.ContentContainer>
-                    <S.UOSLogo />
+                  <S.ContentContainer onClick={() => handleNavigate("/")}>
+                    <S.AlbasidaeLogo src={AlbasidaeLogo} alt="Logo" />
                   </S.ContentContainer>
                 </S.ContentRight>
               </S.ContentWrapper>
