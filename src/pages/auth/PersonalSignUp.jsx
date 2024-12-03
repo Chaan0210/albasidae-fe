@@ -162,22 +162,13 @@ const PersonalSignUp = () => {
               여
             </S.TabRight>
           </S.TabWrapper>
-          <S.DoubleWrapper>
-            <S.InputFirst
-              type="text"
-              name="phone"
-              placeholder="휴대폰 번호"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-            <S.InputSecond
-              type="text"
-              name="verificationCode"
-              placeholder="인증번호(아직 구현 안함)"
-              value={formData.verificationCode}
-              onChange={handleChange}
-            />
-          </S.DoubleWrapper>
+          <S.Input
+            type="text"
+            name="phone"
+            placeholder="휴대폰 번호"
+            value={formData.phone}
+            onChange={handleChange}
+          />
         </S.InputWrapper>
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         <S.Button onClick={handleSubmit}>가입하기</S.Button>

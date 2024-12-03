@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as SearchIcon } from "../images/SearchIcon.svg";
 import AlbasidaeLogoLongType from "../images/AlbasidaeLogo(Long_Type).png";
+import AlbasidaeLogoAType from "../images/AlbasidaeLogo(A_Type).png";
 import { AuthContext } from "./auth/AuthContext";
 
 const S = {
@@ -27,6 +28,7 @@ const S = {
     white-space: nowrap;
     ul {
       display: flex;
+      align-items: center;
       list-style: none;
       gap: 20px;
       margin: 0;
@@ -35,7 +37,6 @@ const S = {
     }
     li {
       cursor: pointer;
-      transition: all 0.2s ease;
       &:hover {
         color: #004094;
         font-weight: bold;
@@ -83,7 +84,6 @@ const S = {
     display: flex;
     align-items: center;
     font-size: 13px;
-    transition: all 0.2s ease;
 
     &:hover {
       font-weight: bold;
@@ -95,7 +95,6 @@ const S = {
     display: flex;
     align-items: center;
     font-size: 13px;
-    transition: all 0.2s ease;
 
     &:hover {
       font-weight: bold;
@@ -129,6 +128,9 @@ const S = {
   `,
   AlbasidaeLogo: styled.img`
     width: 250px;
+  `,
+  AlbasidaeLogoA: styled.img`
+    width: 35px;
   `,
   SearchIcon: styled(SearchIcon)`
     width: 25px;
@@ -249,7 +251,9 @@ const Header = () => {
       <S.Menu>
         <S.Nav>
           <ul>
-            <li>전체메뉴</li>
+            <li>
+              <S.AlbasidaeLogoA src={AlbasidaeLogoAType} alt="ALogo" />
+            </li>
             <S.Split>|</S.Split>
             <li>
               <S.Link to="/job">채용정보</S.Link>

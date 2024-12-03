@@ -19,7 +19,7 @@ const CompanySignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "phone" && !/^[0-9]*$/.test(value)) {
+    if (name === "phone" && (!/^[0-9]*$/.test(value) || value.length > 11)) {
       return;
     }
     if (name === "password" && value.length > 15) {
@@ -28,10 +28,10 @@ const CompanySignUp = () => {
     if (name === "confirmPassword" && value.length > 15) {
       return;
     }
-    if (name === "businessNumber" && !/^[0-9]*$/.test(value)) {
-      return;
-    }
-    if (name === "phone" && value.length > 11) {
+    if (
+      name === "businessNumber" &&
+      (!/^[0-9]*$/.test(value) || value.length > 10)
+    ) {
       return;
     }
     setFormData({
@@ -98,14 +98,6 @@ const CompanySignUp = () => {
       <S.Container>
         <S.Title>기업회원가입</S.Title>
         <S.InputWrapper>
-          {/* <S.InputButton>
-            <S.Certify>
-              본인명의 휴대폰으로 인증 가능
-              <br />
-              (아직 구현 안함)
-            </S.Certify>
-            <S.CertifyButton>인증하기</S.CertifyButton>
-          </S.InputButton> */}
           <S.Input
             type="email"
             name="email"
@@ -144,22 +136,13 @@ const CompanySignUp = () => {
             value={formData.name}
             onChange={handleChange}
           />
-          <S.DoubleWrapper>
-            <S.InputFirst
-              type="text"
-              name="phone"
-              placeholder="휴대폰 번호"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-            <S.InputSecond
-              type="text"
-              name="verificationCode"
-              placeholder="인증번호(아직 구현 안함)"
-              value={formData.verificationCode}
-              onChange={handleChange}
-            />
-          </S.DoubleWrapper>
+          <S.Input
+            type="text"
+            name="phone"
+            placeholder="휴대폰 번호"
+            value={formData.phone}
+            onChange={handleChange}
+          />
         </S.InputWrapper>
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
         <S.CompanyButton onClick={handleSubmit}>가입하기</S.CompanyButton>

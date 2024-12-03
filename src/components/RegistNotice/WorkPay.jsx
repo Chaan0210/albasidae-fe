@@ -12,7 +12,7 @@ const WorkPay = ({ value, onChange }) => {
   };
 
   const handlePayAmountChange = (e) => {
-    const newPayAmount = e.target.value;
+    const newPayAmount = e.target.value.replace(/[^0-9]/g, "");
     setPayAmount(newPayAmount);
     onChange(`${payType === "hourly" ? "시급" : "월급"} ${newPayAmount}`);
   };
@@ -29,6 +29,7 @@ const WorkPay = ({ value, onChange }) => {
         value={payAmount}
         onChange={handlePayAmountChange}
         placeholder="예) 12000"
+        pattern="[0-9]*"
       />
       &nbsp;원
     </S.PayContainer>
