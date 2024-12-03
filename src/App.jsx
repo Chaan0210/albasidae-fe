@@ -25,6 +25,7 @@ import CompanyProfile from "./pages/CompanyProfile";
 import ResumeDetail from "./pages/ResumeDetail";
 import EditResume from "./pages/EditResume";
 import JobMap from "./pages/JobMap";
+import ApplicantsList from "./pages/ApplicantsList";
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/signup/company" element={<CompanySignUp />} />
         <Route path="/job" element={<Job />} />
         <Route path="/job/:id" element={<JobDetail />} />
+        <Route path="/applicants/:jobId" element={<ApplicantsList />} />
         <Route path="/editjob/:id" element={<EditJob />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/resume/:id" element={<ResumeDetail />} />

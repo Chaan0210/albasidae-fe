@@ -172,7 +172,9 @@ const JobDetail = () => {
     }
   };
 
-  const handleApplicant = {};
+  const handleApplicant = () => {
+    navigate(`/applicants/${id}`);
+  };
 
   return (
     <>

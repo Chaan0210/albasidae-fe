@@ -20,6 +20,7 @@ import WorkTime from "../components/RegistNotice/WorkTime";
 import WorkType from "../components/RegistNotice/WorkType";
 import Workplace from "../components/RegistNotice/Workplace";
 import ResumeProfile from "../components/RegistResume/ResumeProfile";
+import WorkAddress from "../components/RegistNotice/WorkAddress";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const EditJob = () => {
@@ -45,6 +46,7 @@ const EditJob = () => {
     deadline: "",
     submitMethod: [],
     place: "",
+    address: "",
   });
 
   useEffect(() => {
@@ -72,6 +74,7 @@ const EditJob = () => {
         deadline: location.state.job.deadline,
         submitMethod: location.state.job.submitMethod,
         place: location.state.job.place,
+        address: location.state.job.placeDetail,
       });
     }
   }, [isLoggedIn, role, navigate, location.state]);
@@ -121,6 +124,7 @@ const EditJob = () => {
       age: formData.age,
       deadline: formData.deadline,
       submitMethod: formData.submitMethod,
+      placeDetail: formData.address,
     };
     formDataToSend.append(
       "updatedJobPost",
@@ -187,7 +191,7 @@ const EditJob = () => {
         </S.SubTitleWrapper>
 
         <S.SubTitleWrapper>
-          <S.SubTitle>주요 사업내용</S.SubTitle>
+          <S.SubTitle>업무내용</S.SubTitle>
           <S.ComponentWrapper>
             <NoticeCompanyContent
               value={formData.noticeCompanyContent}
@@ -207,6 +211,19 @@ const EditJob = () => {
               onChange={handleChange("place")}
             />
             {errors.place && <S.ErrorMessage>{errors.place}</S.ErrorMessage>}
+          </S.ComponentWrapper>
+        </S.SubTitleWrapper>
+
+        <S.SubTitleWrapper>
+          <S.SubTitle>근무 상세주소</S.SubTitle>
+          <S.ComponentWrapper>
+            <WorkAddress
+              value={formData.address}
+              onChange={handleChange("address")}
+            />
+            {errors.address && (
+              <S.ErrorMessage>{errors.address}</S.ErrorMessage>
+            )}
           </S.ComponentWrapper>
         </S.SubTitleWrapper>
 

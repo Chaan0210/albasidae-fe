@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const S = {
   Wrapper: styled.div`
     margin: 20px auto 0px auto;
-    max-width: 1000px;
+    max-width: 1200px;
   `,
   Title: styled.div`
     font-size: 30px;
@@ -16,7 +16,7 @@ const S = {
   Map: styled.div`
     border: 2px solid #bbb;
     border-radius: 10px;
-    height: 600px;
+    height: 700px;
   `,
   MapContainer: styled.div`
     position: relative;
@@ -26,7 +26,7 @@ const S = {
     top: 2px;
     right: 2px;
     width: 250px;
-    height: 566px;
+    height: 666px;
     background-color: white;
     z-index: 10;
     border-radius: 9px;
