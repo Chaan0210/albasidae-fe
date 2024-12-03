@@ -8,7 +8,9 @@ import { AuthContext } from "../components/auth/AuthContext";
 const CompanyProfile = () => {
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);
+  const [applicantCounts, setApplicantCounts] = useState({});
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
@@ -19,7 +21,9 @@ const CompanyProfile = () => {
     const fetchJobData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/job-posts?${encodeURIComponent(email)}`
+          `http://localhost:8080/api/job-posts?email=${encodeURIComponent(
+            email
+          )}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch job data");
@@ -27,6 +31,24 @@ const CompanyProfile = () => {
         const responseData = await response.json();
         const data = responseData?.data || [];
         setJobs(data);
+
+        data.forEach(async (job) => {
+          try {
+            const applicantResponse = await fetch(
+              `http://localhost:8080/api/job-applications/applications/${job.id}`
+            );
+            if (!applicantResponse.ok) {
+              throw new Error("Failed to fetch applicant data");
+            }
+            const applicantData = await applicantResponse.json();
+            setApplicantCounts((prevCounts) => ({
+              ...prevCounts,
+              [job.id]: applicantData?.data?.totalApplicants || 0,
+            }));
+          } catch (error) {
+            console.error("Fail to fetch applicant count: ", error);
+          }
+        });
       } catch (error) {
         console.error("Fail to fetch: ", error);
       }
@@ -35,7 +57,11 @@ const CompanyProfile = () => {
   }, [isLoggedIn, role, navigate, email]);
 
   const handleNavigate = (path) => {
-    navigate(path);
+    if (path === "/job") {
+      navigate(`${path}?companyEmail=${encodeURIComponent(email)}`);
+    } else {
+      navigate(path);
+    }
   };
 
   const handleJobClick = (jobId) => {
@@ -67,29 +93,18 @@ const CompanyProfile = () => {
             {jobs.length > 0 ? (
               jobs.map((job) => (
                 <S.JobList key={job.id} onClick={() => handleJobClick(job.id)}>
-                  <S.JobTitle>{job.title}</S.JobTitle>
+                  <S.JobTitle>공고제목: {job.title}</S.JobTitle>
                   <S.JobDetails>
                     회사 이름: {job.title} | 마감기한 : {job.deadline}
                   </S.JobDetails>
+                  <S.JobDetailNumber>
+                    지원자 수: {applicantCounts[job.id] || 0}
+                  </S.JobDetailNumber>
                 </S.JobList>
               ))
             ) : (
               <div>등록된 공고가 없습니다.</div>
             )}
-          </S.BottomContainer>
-          <S.BottomContainer>
-            <S.MainTitle>공고지원현황</S.MainTitle>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
           </S.BottomContainer>
         </S.Container>
       </S.Wrapper>

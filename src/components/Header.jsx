@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as UOSLogo } from "../images/UOSLogo.svg";
@@ -175,6 +176,21 @@ const S = {
 const Header = () => {
   const { isLoggedIn, role, logout } = useContext(AuthContext);
   const [isHovered, setIsHovered] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (keyword.trim()) {
+      navigate(`/job?keyword=${encodeURIComponent(keyword)}`);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <S.HeaderWrapper>
       <S.MainHeader>
@@ -209,9 +225,15 @@ const Header = () => {
           </S.Left>
           <S.SearchContainer>
             <S.HeaderSearch>
-              <S.SearchInput type="text" placeholder="검색" />
+              <S.SearchInput
+                type="text"
+                placeholder="검색"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
             </S.HeaderSearch>
-            <S.SearchButton>
+            <S.SearchButton onClick={handleSearch}>
               <S.SearchIcon />
             </S.SearchButton>
           </S.SearchContainer>

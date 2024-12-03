@@ -9,6 +9,7 @@ import { AuthContext } from "../components/auth/AuthContext";
 const PersonalProfile = () => {
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [resumes, setResumes] = useState([]);
+  const [appliedJobs, setAppliedJobs] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     if (!isLoggedIn) {
@@ -20,7 +21,7 @@ const PersonalProfile = () => {
     const fetchResumeData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/resumes?${encodeURIComponent(email)}`
+          `http://localhost:8080/api/resumes?email=${encodeURIComponent(email)}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");
@@ -32,15 +33,43 @@ const PersonalProfile = () => {
         console.error("Fail to fetch: ", error);
       }
     };
+
+    const fetchAppliedJobs = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/job-applications/applied-jobs?email=${encodeURIComponent(
+            email
+          )}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch applied jobs data");
+        }
+        const responseData = await response.json();
+        const data = responseData?.data || [];
+        setAppliedJobs(data);
+      } catch (error) {
+        console.error("Fail to fetch applied jobs: ", error);
+      }
+    };
+
     fetchResumeData();
+    fetchAppliedJobs();
   }, [isLoggedIn, role, navigate, email]);
 
-  const handleNavigate = (path) => {
-    navigate(path);
+  const handleNavigate = (path, query = null) => {
+    if (query) {
+      navigate(`${path}?${query}`);
+    } else {
+      navigate(path);
+    }
   };
 
   const handleResumeClick = (resumeId) => {
     navigate(`/resume/${resumeId}`);
+  };
+
+  const handleJobClick = (jobId) => {
+    navigate(`/job/${jobId}`);
   };
 
   return (
@@ -60,13 +89,27 @@ const PersonalProfile = () => {
                     <S.AlgorithmIcon />
                     맞춤알바
                   </S.ContentContainer>
-                  <S.ContentContainer onClick={() => handleNavigate("/")}>
+                  <S.ContentContainer
+                    onClick={() =>
+                      handleNavigate(
+                        "/job",
+                        `email=${encodeURIComponent(email)}`
+                      )
+                    }
+                  >
                     <S.PaperPlaneIcon />
                     입사지원현황
                   </S.ContentContainer>
                 </S.ContentLeft>
                 <S.ContentRight>
-                  <S.ContentContainer onClick={() => handleNavigate("/resume")}>
+                  <S.ContentContainer
+                    onClick={() =>
+                      handleNavigate(
+                        "/resume",
+                        `email=${encodeURIComponent(email)}`
+                      )
+                    }
+                  >
                     <S.GlassesIcon />
                     이력서열람
                   </S.ContentContainer>
@@ -80,34 +123,40 @@ const PersonalProfile = () => {
               <S.MainTitle>내 이력서</S.MainTitle>
               {resumes.length > 0 ? (
                 resumes.map((resume) => (
-                  <S.ResumeList
+                  <S.AppliedJobList
                     key={resume.id}
                     onClick={() => handleResumeClick(resume.id)}
                   >
-                    <S.ResumeTitle>제목 : {resume.resumeTitle}</S.ResumeTitle>
-                    <S.ResumeDetails>
+                    <S.AppliedJobTitle>
+                      이력서 제목: {resume.resumeTitle}
+                    </S.AppliedJobTitle>
+                    <S.AppliedJobDetails>
                       희망근무지: {resume?.preferredWorkLocation.join(", ")} |
                       희망업직종: {resume?.employmentTypes.join(", ")}
-                    </S.ResumeDetails>
-                  </S.ResumeList>
+                    </S.AppliedJobDetails>
+                  </S.AppliedJobList>
                 ))
               ) : (
                 <div>등록된 이력서가 없습니다.</div>
               )}
             </S.BottomContainer>
             <S.BottomContainer>
-              <S.MainTitle>지원현황</S.MainTitle>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
+              <S.MainTitle>지원한 알바 목록</S.MainTitle>
+              {appliedJobs.length > 0 ? (
+                appliedJobs.map((job) => (
+                  <S.AppliedJobList
+                    key={job.id}
+                    onClick={() => handleJobClick(job.id)}
+                  >
+                    <S.AppliedJobTitle>공고제목: {job.title}</S.AppliedJobTitle>
+                    <S.AppliedJobDetails>
+                      회사명: {job.companyName}
+                    </S.AppliedJobDetails>
+                  </S.AppliedJobList>
+                ))
+              ) : (
+                <div>지원한 알바가 없습니다.</div>
+              )}
             </S.BottomContainer>
           </S.Left>
 

@@ -1,3 +1,4 @@
+import { ReactComponent as ProfileImage } from "../images/ProfileImage.svg";
 import styled from "styled-components";
 
 const S = {
@@ -170,8 +171,6 @@ const S = {
   ResumeDetailProfileImage: styled.div`
     width: 150px;
     height: 150px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -257,6 +256,14 @@ const S = {
   `,
   ButtonGroup: styled.div`
     display: flex;
+  `,
+  ProfileImage: styled(ProfileImage)`
+    width: 75px;
+    height: 75px;
+  `,
+  ProfileImage_2: styled(ProfileImage)`
+    width: 120px;
+    height: 120px;
   `,
 };
 

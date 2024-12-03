@@ -75,20 +75,34 @@ const S = {
     margin-bottom: 20px;
   `,
   JobList: styled.div`
-    display: flex;
-    padding: 20px;
-    border-top: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
     &:hover {
-      background-color: #f8f8f8;
+      background-color: #f3f3f3;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
   `,
   JobTitle: styled.div`
     font-size: 18px;
-    flex: 1;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
   `,
   JobDetails: styled.div`
-    font-size: 18px;
-    flex: 3;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  `,
+  JobDetailNumber: styled.div`
+    font-size: 14px;
+    font-weight: bold;
+    color: #004094;
   `,
 };
 

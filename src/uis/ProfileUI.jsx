@@ -210,21 +210,28 @@ const S = {
     font-size: 20px;
     margin-bottom: 20px;
   `,
-  ResumeList: styled.div`
-    display: flex;
-    padding: 20px;
-    border-top: 1px solid #ccc;
+  AppliedJobList: styled.div`
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
     &:hover {
-      background-color: #f8f8f8;
+      background-color: #f3f3f3;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
   `,
-  ResumeTitle: styled.div`
+  AppliedJobTitle: styled.div`
     font-size: 18px;
-    flex: 1;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
   `,
-  ResumeDetails: styled.div`
-    font-size: 18px;
-    flex: 3;
+  AppliedJobDetails: styled.div`
+    font-size: 14px;
+    color: #666;
   `,
 };
 

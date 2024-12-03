@@ -121,7 +121,11 @@ const ResumeDetail = () => {
 
           <S.ResumeDetailProfile>
             <S.ResumeDetailProfileImage>
-              <img src={resume.personal?.image} alt={"프로필 이미지"} />
+              {resume.personal?.image ? (
+                <img src={resume.personal.image} alt={"ProfileImage"} />
+              ) : (
+                <S.ProfileImage_2 />
+              )}
             </S.ResumeDetailProfileImage>
             <S.InfoContainerColumn>
               <S.InfoRow>

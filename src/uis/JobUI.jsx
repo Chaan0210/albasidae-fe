@@ -202,7 +202,7 @@ const S = {
   JobDetailContainer: styled.div`
     padding: 30px;
     background-color: #ffffff;
-    border: 1px solid #ddd;
+    // border: 1px solid #ddd;
     border-radius: 10px;
     width: 100%;
     max-width: 1075px;
@@ -255,7 +255,8 @@ const S = {
     display: flex;
     gap: 100px;
     font-size: 18px;
-    padding: 5px 0;
+    padding: 15px 0;
+    align-items: center;
   `,
 
   InfoColumn: styled.div`
@@ -263,13 +264,13 @@ const S = {
     flex-direction: column;
     font-size: 18px;
     padding: 5px 0;
+    gap: 10px;
   `,
 
   Label: styled.span`
     width: 80px;
     font-weight: normal;
     color: #333;
-    padding: 7px 0;
   `,
 
   Content: styled.span`
@@ -302,11 +303,25 @@ const S = {
     }
   `,
   CompanyImage: styled.img`
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
+  `,
+  ApplicantButton: styled.button`
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #fdf25d;
+    border: 1px solid #fae04b;
+    border-radius: 10px;
+    padding: 8px 15px;
+    &:hover {
+      opacity: 0.8;
+    }
+    margin-right: 20px;
   `,
   DeleteButton: styled.button`
     color: red;
+    font-size: 16px;
     background-color: white;
     border: 1px solid red;
     border-radius: 10px;
@@ -314,9 +329,11 @@ const S = {
     &:hover {
       background-color: #eee;
     }
+    margin-right: 20px;
   `,
   EditButton: styled.button`
     color: #2f6df6;
+    font-size: 16px;
     background-color: white;
     border: 1px solid #2f6df6;
     border-radius: 10px;
