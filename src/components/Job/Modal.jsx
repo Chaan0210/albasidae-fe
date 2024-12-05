@@ -21,6 +21,8 @@ const S = {
     border-radius: 10px;
     width: 700px;
     max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
   `,
   ModalHeader: styled.div`
     font-size: 20px;
@@ -89,6 +91,12 @@ const S = {
   ErrorMessage: styled.div`
     color: red;
   `,
+  ByteCounter: styled.div`
+    font-size: 14px;
+    color: #666;
+    text-align: right;
+    margin-top: 5px;
+  `,
 };
 
 const Modal = ({ show, onClose, title, name, handleSubmit }) => {
@@ -98,6 +106,7 @@ const Modal = ({ show, onClose, title, name, handleSubmit }) => {
   const [descriptionText, setDescriptionText] = useState("");
   const [resumeErrorMessage, setResumeErrorMessage] = useState("");
   const [descriptionErrorMessage, setDescriptionErrorMessage] = useState("");
+  const [byteCount, setByteCount] = useState(0);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -127,6 +136,19 @@ const Modal = ({ show, onClose, title, name, handleSubmit }) => {
     };
     fetchResumeData();
   }, [show, email]);
+
+  useEffect(() => {
+    const calculateBytes = (str) => {
+      let bytes = 0;
+      for (let i = 0; i < str.length; i++) {
+        const charCode = str.charCodeAt(i);
+        bytes += charCode > 0x007f ? 2 : 1;
+      }
+      return bytes;
+    };
+
+    setByteCount(calculateBytes(descriptionText));
+  }, [descriptionText]);
 
   const handleConfirm = () => {
     let hasError = false;
@@ -205,6 +227,7 @@ const Modal = ({ show, onClose, title, name, handleSubmit }) => {
             value={descriptionText}
             onChange={(e) => setDescriptionText(e.target.value)}
           />
+          <S.ByteCounter>({byteCount}/1000bytes)</S.ByteCounter>
           {descriptionErrorMessage && (
             <S.ErrorMessage>{descriptionErrorMessage}</S.ErrorMessage>
           )}

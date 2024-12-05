@@ -103,6 +103,8 @@ const S = {
     &:hover {
       background-color: #ddd;
     }
+    white-space: nowrap;
+    margin-left: 10px;
   `,
   ErrorMessage: styled.p`
     color: red;

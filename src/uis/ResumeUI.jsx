@@ -18,7 +18,6 @@ const S = {
     background-color: #f7f8fa;
     display: flex;
     flex-direction: column;
-    white-space: nowrap;
     padding: 0 0 50px 0;
   `,
 
@@ -70,6 +69,9 @@ const S = {
     margin: 0.5rem 0 0.5rem;
     color: #000000;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
   `,
 
   ResumeImage: styled.div`
@@ -93,18 +95,27 @@ const S = {
     color: #007bff;
     font-size: 0.9rem;
     margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
   `,
 
   ResumeSummary: styled.div`
     font-size: 0.9rem;
     color: #555;
     margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
   `,
 
   DesiredLocation: styled.div`
     color: #888;
     font-size: 0.9rem;
     margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
   `,
 
   PaginationContainer: styled.div`
@@ -180,7 +191,7 @@ const S = {
     flex-direction: column;
     background-color: white;
     margin: 20px auto 0 auto;
-    min-width: 1000px;
+    width: 1000px;
     padding: 10px 30px;
     border-radius: 20px;
   `,
@@ -192,6 +203,7 @@ const S = {
   Label: styled.div`
     flex: 1;
     color: #333;
+    white-space: nowrap;
   `,
   Content: styled.div`
     flex: 7;

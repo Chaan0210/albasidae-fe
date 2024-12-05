@@ -57,6 +57,8 @@ const S = {
     transition: background-color 0.3s ease;
     align-self: flex-start;
     margin-top: 10px;
+    white-space: nowrap;
+    margin-left: 10px;
     &:hover {
       opacity: 0.8;
     }

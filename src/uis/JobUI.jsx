@@ -190,14 +190,11 @@ const S = {
           return "black";
       }
     }};
-    align-content: center;
   `,
 
   Wage: styled.p`
     margin: 0.5rem 0 0;
     color: #000000;
-    font-weight: normal;
-    align-content: center;
   `,
   DetailPageFrame: styled.div`
     background-color: #f7f8fa;
@@ -209,8 +206,7 @@ const S = {
     padding: 30px;
     background-color: #ffffff;
     border-radius: 20px;
-    width: 100%;
-    max-width: 1100px;
+    width: 1100px;
     margin: 10px auto;
   `,
 
@@ -279,6 +275,7 @@ const S = {
   Content: styled.span`
     font-weight: bold;
     color: #333;
+    word-break: break-word;
   `,
   PaginationContainer: styled.div`
     margin-top: 20px;

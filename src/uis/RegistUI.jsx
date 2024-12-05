@@ -306,6 +306,18 @@ const S = {
       opacity: 0.8;
     }
   `,
+  ByteCounter: styled.div`
+    font-size: 12px;
+    text-align: right;
+    color: #666;
+    margin-top: 5px;
+    margin-right: 50px;
+  `,
+  ByteCounter_2: styled.div`
+    font-size: 12px;
+    text-align: right;
+    color: #666;
+  `,
 };
 
 export default S;

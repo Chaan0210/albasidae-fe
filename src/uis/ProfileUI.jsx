@@ -227,10 +227,16 @@ const S = {
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 850px;
   `,
   AppliedJobDetails: styled.div`
     font-size: 14px;
     color: #666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 850px;
   `,
 };
 

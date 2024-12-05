@@ -198,7 +198,7 @@ const JobDetail = () => {
           <S.InfoContainerRow>
             <S.InfoColumn>
               <S.Label>{wageType}</S.Label>
-              <S.Content>{wage}</S.Content>
+              <S.Content>{wage}원</S.Content>
             </S.InfoColumn>
             <S.InfoColumn>
               <S.Label>{"기간"}</S.Label>
