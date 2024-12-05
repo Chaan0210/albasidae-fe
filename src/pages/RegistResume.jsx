@@ -19,15 +19,15 @@ const RegistResume = () => {
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    title: "Default",
-    education: "대학교 1학년 재학 중",
-    career: "career_default",
-    place: ["휘경동"],
-    category: ["외식, 음료"],
-    type: ["아르바이트"],
-    term: "under_three_month",
-    days: "weekdays",
-    selfIntroduction: "selfIntroduction_default",
+    title: "",
+    education: "",
+    career: "",
+    place: [],
+    category: [],
+    type: [],
+    term: "",
+    days: "",
+    selfIntroduction: "",
   });
 
   useEffect(() => {

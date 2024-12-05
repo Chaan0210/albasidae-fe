@@ -278,6 +278,34 @@ const S = {
   PayContainer: styled.div`
     margin-left: 10px;
   `,
+  AddressContainer: styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  `,
+  AddressInput: styled.input`
+    flex: 8;
+    padding: 10px;
+    margin: 10px 0px 10px 20px;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  `,
+  SearchButton: styled.button`
+    flex: 1;
+    background-color: #004094;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
 };
 
 export default S;

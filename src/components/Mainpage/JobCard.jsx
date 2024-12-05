@@ -21,16 +21,25 @@ const S = {
   CompanyName: styled.h3`
     margin: 0;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
   JobTitle: styled.p`
     margin: 5px 0;
     font-size: 16px;
     color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
   JobLocation: styled.p`
     margin: 5px 0;
     font-size: 14px;
     color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
   IconWrapper: styled.div`
     display: flex;

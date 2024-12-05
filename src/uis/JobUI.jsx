@@ -21,7 +21,6 @@ const S = {
     width: 100%;
     max-width: 1075px;
     margin: 0 auto;
-    white-space: nowrap;
   `,
 
   PageTitle: styled.h1`
@@ -160,12 +159,20 @@ const S = {
     display: block;
     color: #000000;
     font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
   `,
 
   JobTitle: styled.p`
     margin: 0.5rem 0 0;
     color: #000000;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
   `,
 
   WageType: styled.span`
@@ -194,22 +201,17 @@ const S = {
   `,
   DetailPageFrame: styled.div`
     background-color: #f7f8fa;
-    min-height: 100vh;
+    padding: 10px 0 50px;
     display: flex;
     flex-direction: column;
-    white-space: nowrap;
   `,
   JobDetailContainer: styled.div`
     padding: 30px;
     background-color: #ffffff;
-    // border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 100%;
-    max-width: 1075px;
-    margin: 1rem auto 0;
-    &:last-child {
-      margin-bottom: 1rem;
-    }
+    max-width: 1100px;
+    margin: 10px auto;
   `,
 
   DetailCompanyName: styled.strong`
@@ -271,6 +273,7 @@ const S = {
     width: 80px;
     font-weight: normal;
     color: #333;
+    white-space: nowrap;
   `,
 
   Content: styled.span`

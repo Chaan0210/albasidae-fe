@@ -11,21 +11,15 @@ const S = {
     max-width: 1075px;
     margin: 10px auto;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 20px;
   `,
   DetailPageFrame: styled.div`
-    background-color: #ffffff;
-    min-height: 100vh;
+    background-color: #f7f8fa;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 1075px;
-    margin: 10px auto;
     white-space: nowrap;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
+    padding: 0 0 50px 0;
   `,
 
   ResumeTable: styled.table`
@@ -89,10 +83,6 @@ const S = {
     margin-right: 20px;
   `,
 
-  ResumeDetails: styled.div`
-    flex: 1;
-  `,
-
   ResumeNameGenderAge: styled.div`
     font-weight: bold;
     font-size: 1rem;
@@ -127,7 +117,7 @@ const S = {
     border: 1px solid #ddd;
     padding: 10px 15px;
     margin: 0 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -142,32 +132,34 @@ const S = {
       color: #aaa;
     }
   `,
-
   ResumeDetailHeader: styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
   `,
-
-  ResumeDetailTitle: styled.h1`
-    font-size: 1.5rem;
-    border-bottom: 3px solid #000;
+  ResumeDetailTitle: styled.div`
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom: 1px solid #bbb;
+    padding: 10px 0 10px 0;
   `,
 
   ResumeDetailProfile: styled.div`
     display: flex;
     padding: 20px;
     margin-bottom: 20px;
+    align-items: center;
   `,
-
+  ProfileInfo: styled.div`
+    flex-direction: column;
+  `,
   ResumeDetailInfo: styled.div`
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 20px;
   `,
-
   ResumeDetailProfileImage: styled.div`
     width: 150px;
     height: 150px;
@@ -183,55 +175,28 @@ const S = {
       object-fit: cover;
     }
   `,
-
-  ResumeDetailProfileInfo: styled.div`
-    flex: 1;
-  `,
-
-  ProfileName: styled.h2`
-    font-size: 1.2rem;
-    margin: 0 0 10px;
-  `,
-
-  InfoContainerRow: styled.div`
-    display: flex;
-    flex-direction: row;
-    padding: 5px 3px;
-    gap: 150px;
-  `,
-
   InfoContainerColumn: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    background-color: white;
+    margin: 20px auto 0 auto;
+    min-width: 1000px;
+    padding: 10px 30px;
+    border-radius: 20px;
   `,
-
   InfoRow: styled.div`
     display: flex;
-    gap: 100px;
     font-size: 18px;
-    padding: 5px 0;
+    margin: 20px;
   `,
-
-  InfoColumn: styled.div`
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    padding: 5px 0;
-  `,
-
-  Label: styled.span`
-    width: 80px;
-    font-weight: normal;
+  Label: styled.div`
+    flex: 1;
     color: #333;
-    padding: 0 0;
-    margin-left: 10px;
   `,
-
-  Content: styled.span`
+  Content: styled.div`
+    flex: 7;
     font-weight: bold;
-    color: #333;
-    padding: 0 0;
+    color: black;
   `,
   DeleteButton: styled.button`
     color: red;
@@ -256,6 +221,7 @@ const S = {
   `,
   ButtonGroup: styled.div`
     display: flex;
+    margin-top: 20px;
   `,
   ProfileImage: styled(ProfileImage)`
     width: 75px;

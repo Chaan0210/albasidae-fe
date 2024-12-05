@@ -118,7 +118,6 @@ const ResumeDetail = () => {
             </S.ButtonGroup>
           )}
           <S.ResumeDetailTitle>{resume?.resumeTitle}</S.ResumeDetailTitle>
-
           <S.ResumeDetailProfile>
             <S.ResumeDetailProfileImage>
               {resume.personal?.image ? (
@@ -127,7 +126,7 @@ const ResumeDetail = () => {
                 <S.ProfileImage_2 />
               )}
             </S.ResumeDetailProfileImage>
-            <S.InfoContainerColumn>
+            <S.ProfileInfo>
               <S.InfoRow>
                 <S.Content>
                   {resume.personal?.name +
@@ -141,62 +140,71 @@ const ResumeDetail = () => {
                 </S.Content>
               </S.InfoRow>
               <S.InfoRow>
-                <S.Label>{"연락처"}</S.Label>
+                <S.Label>
+                  {"연락처"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </S.Label>
                 <S.Content>{resume.personal?.phone}</S.Content>
               </S.InfoRow>
               <S.InfoRow>
-                <S.Label>{"이메일"}</S.Label>
+                <S.Label>
+                  {"이메일"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </S.Label>
                 <S.Content>{resume.personal?.email}</S.Content>
               </S.InfoRow>
-            </S.InfoContainerColumn>
+            </S.ProfileInfo>
           </S.ResumeDetailProfile>
+        </S.InfoContainerColumn>
+
+        <S.InfoContainerColumn>
           <S.ResumeDetailTitle>{"학력"}</S.ResumeDetailTitle>
-          <S.InfoContainerColumn>
-            <S.InfoRow>{resume?.educationLevel}</S.InfoRow>
-          </S.InfoContainerColumn>
+          <S.InfoRow>{resume?.educationLevel}</S.InfoRow>
+        </S.InfoContainerColumn>
+
+        <S.InfoContainerColumn>
           <S.ResumeDetailTitle>{"경력"}</S.ResumeDetailTitle>
-          <S.InfoContainerColumn>
-            <S.InfoRow>{resume?.career}</S.InfoRow>
-          </S.InfoContainerColumn>
+          <S.InfoRow>{resume?.career}</S.InfoRow>
+        </S.InfoContainerColumn>
+
+        <S.InfoContainerColumn>
           <S.ResumeDetailTitle>{"희망근무 조건"}</S.ResumeDetailTitle>
-          <S.InfoContainerColumn>
-            <S.InfoRow>
-              <S.Label>{"근무기간"}</S.Label>
-              <S.Content>{getTranslatedWorkTerm(resume?.workPeriod)}</S.Content>
-            </S.InfoRow>
-            <S.InfoRow>
-              <S.Label>{"근무요일"}</S.Label>
-              <S.Content>{getTranslatedWorkDays(resume?.workDays)}</S.Content>
-            </S.InfoRow>
-            <S.InfoRow>
-              <S.Label>{"근무형태"}</S.Label>
-              <S.Content>
-                {resume?.employmentTypes
-                  ? resume?.employmentTypes.join(", ")
-                  : "N/A"}
-              </S.Content>
-            </S.InfoRow>
-            <S.InfoRow>
-              <S.Label>{"근무지"}</S.Label>
-              <S.Content>
-                {resume?.preferredWorkLocation
-                  ? resume?.preferredWorkLocation.join(", ")
-                  : "N/A"}
-              </S.Content>
-            </S.InfoRow>
-            <S.InfoRow>
-              <S.Label>{"근무형태"}</S.Label>
-              <S.Content>
-                {resume?.preferredJobTypes
-                  ? resume?.preferredJobTypes.join(", ")
-                  : "N/A"}
-              </S.Content>
-            </S.InfoRow>
-          </S.InfoContainerColumn>
+
+          <S.InfoRow>
+            <S.Label>{"근무기간"}</S.Label>
+            <S.Content>{getTranslatedWorkTerm(resume?.workPeriod)}</S.Content>
+          </S.InfoRow>
+          <S.InfoRow>
+            <S.Label>{"근무요일"}</S.Label>
+            <S.Content>{getTranslatedWorkDays(resume?.workDays)}</S.Content>
+          </S.InfoRow>
+          <S.InfoRow>
+            <S.Label>{"근무형태"}</S.Label>
+            <S.Content>
+              {resume?.employmentTypes
+                ? resume?.employmentTypes.join(", ")
+                : "N/A"}
+            </S.Content>
+          </S.InfoRow>
+          <S.InfoRow>
+            <S.Label>{"근무지"}</S.Label>
+            <S.Content>
+              {resume?.preferredWorkLocation
+                ? resume?.preferredWorkLocation.join(", ")
+                : "N/A"}
+            </S.Content>
+          </S.InfoRow>
+          <S.InfoRow>
+            <S.Label>{"근무형태"}</S.Label>
+            <S.Content>
+              {resume?.preferredJobTypes
+                ? resume?.preferredJobTypes.join(", ")
+                : "N/A"}
+            </S.Content>
+          </S.InfoRow>
+        </S.InfoContainerColumn>
+
+        <S.InfoContainerColumn>
           <S.ResumeDetailTitle>{"자기소개서"}</S.ResumeDetailTitle>
-          <S.InfoContainerColumn>
-            <S.InfoRow>{resume?.selfIntroduction}</S.InfoRow>
-          </S.InfoContainerColumn>
+          <S.InfoRow>{resume?.selfIntroduction}</S.InfoRow>
         </S.InfoContainerColumn>
       </S.DetailPageFrame>
     </>

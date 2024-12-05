@@ -10,7 +10,6 @@ const S = {
   `,
   JobListWrapper: styled.div`
     padding: 15px;
-    white-space: nowrap;
     max-width: 1200px;
     min-width: 900px;
     margin: 0 auto;

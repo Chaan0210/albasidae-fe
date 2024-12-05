@@ -5,7 +5,7 @@ import S from "../uis/AdminUI";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const AdminDashboard = () => {
-  const { email } = useContext(AuthContext);
+  const { isLoggedIn, role, email } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [resumes, setResumes] = useState([]);
   const [jobPosts, setJobPosts] = useState([]);
@@ -13,6 +13,12 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else if (role !== "ADMIN") {
+      alert("이 페이지에 접근할 권한이 없습니다.");
+      navigate("/");
+    }
     const fetchData = async () => {
       try {
         const usersResponse = await fetch("http://localhost:8080/api/users");
@@ -41,7 +47,7 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isLoggedIn, role, navigate]);
 
   const deleteUser = async (userEmail) => {
     if (!window.confirm("정말로 사용자를 삭제하시겠습니까?")) return;
