@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import styled from "styled-components";
+import { AuthContext } from "../components/auth/AuthContext";
 
 const S = {
   ApplicantsContainer: styled.div`
@@ -66,6 +67,7 @@ const S = {
 };
 
 const ApplicantsList = () => {
+  const { isLoggedIn } = useContext(AuthContext);
   const { jobId } = useParams();
   const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
@@ -73,6 +75,11 @@ const ApplicantsList = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+
     const fetchApplicants = async () => {
       try {
         const response = await fetch(
@@ -90,7 +97,7 @@ const ApplicantsList = () => {
     };
 
     fetchApplicants();
-  }, [jobId]);
+  }, [jobId, isLoggedIn, navigate]);
 
   useEffect(() => {
     const fetchApplicantResumes = async () => {

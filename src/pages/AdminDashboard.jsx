@@ -149,7 +149,7 @@ const AdminDashboard = () => {
                   <S.UserLabel>이메일:</S.UserLabel>
                   <S.UserContent>{user.email}</S.UserContent>
                 </S.UserInfo>
-                <S.DeleteButton onClick={() => deleteUser(email)}>
+                <S.DeleteButton onClick={() => deleteUser(user.email)}>
                   사용자 삭제
                 </S.DeleteButton>
               </S.UserCard>

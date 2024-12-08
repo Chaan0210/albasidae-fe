@@ -30,9 +30,11 @@ const NoticeCompanyImage = ({ value, onChange }) => {
         <input type="file" accept="image/*" onChange={handleImageChange} />
       </S.InputWrapper>
 
-      <S.ImagePreview>
-        <img src={previewUrl} alt="Company" width="200px" height="200px" />
-      </S.ImagePreview>
+      {previewUrl && (
+        <S.ImagePreview>
+          <img src={previewUrl} alt="" width="200px" height="200px" />
+        </S.ImagePreview>
+      )}
     </S.ImageContainer>
   );
 };

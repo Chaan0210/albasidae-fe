@@ -228,7 +228,7 @@ const S = {
     outline: none;
   `,
   ImageContainer: styled.div`
-    margin: 10px 0px 0px 23px;
+    margin: 0px 0px 15px 23px;
   `,
   NoticeInput: styled.textarea`
     padding: 10px;

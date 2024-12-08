@@ -72,9 +72,11 @@ const RegistNotice = () => {
     const newErrors = {};
 
     Object.entries(formData).forEach(([key, value]) => {
+      const safeValue = value ?? (Array.isArray(value) ? [] : "");
+
       if (
         key !== "noticeCompanyImage" &&
-        (value === "" || value.length === 0)
+        (safeValue === "" || safeValue.length === 0)
       ) {
         newErrors[key] = "모든 필드를 입력해주세요.";
       }
