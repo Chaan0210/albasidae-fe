@@ -23,7 +23,7 @@ const ResumeTable = ({ resumes, onRowClick }) => {
     <S.ResumeTable>
       <S.ResumeTableHead>
         <S.ResumeTableHeaderRow>
-          <S.ResumeTableHeader>이름/경력</S.ResumeTableHeader>
+          <S.ResumeTableHeader>이름</S.ResumeTableHeader>
           <S.ResumeTableHeader>이력서 요약</S.ResumeTableHeader>
           <S.ResumeTableHeader>희망근무지역</S.ResumeTableHeader>
         </S.ResumeTableHeaderRow>
@@ -33,7 +33,6 @@ const ResumeTable = ({ resumes, onRowClick }) => {
           resumes.map((resume) => {
             const age = calculateAge(resume.personal?.birthDate);
             const imageUrl = resume.personal?.image;
-
             return (
               <S.ResumeTableRow
                 key={resume.id}
@@ -53,7 +52,7 @@ const ResumeTable = ({ resumes, onRowClick }) => {
                       (age !== null ? `${age}세` : "N/A") +
                       ")"}
                   </S.ResumeNameGenderAge>
-                  <S.ResumeCareer>{resume?.career}</S.ResumeCareer>
+                  {/* <S.ResumeCareer>{resume?.career}</S.ResumeCareer> */}
                 </S.ResumeTableCenter>
                 <S.ResumeTableLeft>
                   <S.ResumeTitle>{resume?.resumeTitle}</S.ResumeTitle>
