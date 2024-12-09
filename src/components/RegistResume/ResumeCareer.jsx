@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import S from "../../uis/RegistUI";
 
-const ResumeCareer = ({ value, onChange }) => {
+const ResumeCareer = ({ value = "", onChange }) => {
   const [byteCount, setByteCount] = useState(0);
 
   useEffect(() => {
@@ -14,14 +14,14 @@ const ResumeCareer = ({ value, onChange }) => {
       return bytes;
     };
 
-    setByteCount(calculateBytes(value));
+    setByteCount(calculateBytes(value || ""));
   }, [value]);
 
   return (
     <div>
       <S.CareerContent
         type="text"
-        value={value}
+        value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder="경력이 있다면 회사명, 근무기간, 담당업무와 내용을 작성해주세요."
       />

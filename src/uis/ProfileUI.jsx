@@ -15,8 +15,8 @@ const S = {
     padding-bottom: 50px;
   `,
   TopWrapper: styled.div`
-    margin: 40px auto 0px auto;
-    min-width: 1000px;
+    margin: 30px auto 0px auto;
+    width: 1200px;
     gap: 10px;
     display: flex;
     flex-direction: row;
@@ -229,14 +229,14 @@ const S = {
     margin-bottom: 5px;
     text-overflow: ellipsis;
     overflow: hidden;
-    max-width: 850px;
+    max-width: 800px;
   `,
   AppliedJobDetails: styled.div`
     font-size: 14px;
     color: #666;
     text-overflow: ellipsis;
     overflow: hidden;
-    max-width: 850px;
+    max-width: 800px;
   `,
 };
 

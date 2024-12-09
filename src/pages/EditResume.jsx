@@ -65,9 +65,8 @@ const EditResume = () => {
 
   const handleSubmit = async () => {
     const newErrors = {};
-
     Object.entries(formData).forEach(([key, value]) => {
-      if (value === "" || (Array.isArray(value) && value.length === 0)) {
+      if (value === "" || value.length === 0) {
         newErrors[key] = "모든 필드를 입력해주세요.";
       }
     });
@@ -86,6 +85,7 @@ const EditResume = () => {
       employmentTypes: formData.workCategory,
       workPeriod: formData.term,
       workDays: formData.days,
+      career: formData.career,
       user: [],
     };
 
@@ -106,7 +106,7 @@ const EditResume = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("이력서 수정이 완료되었습니다.");
-        navigate("/");
+        navigate(`/resume/${location.state.resume.id}`);
       } else {
         alert(data.message || "이력서 수정에 실패했습니다.");
       }
