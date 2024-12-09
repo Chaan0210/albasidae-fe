@@ -39,8 +39,15 @@ const JobList = () => {
     const fetchLatestJobs = async () => {
       try {
         const response = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/sorted?sort=latest"
+          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/sorted?sort=latest",
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+              "Content-Type": "application/json",
+            },
+          }
         );
+
         if (!response.ok) {
           throw new Error("Failed to fetch latest job posts");
         }
@@ -55,7 +62,13 @@ const JobList = () => {
     const fetchPopularJobs = async () => {
       try {
         const response = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/sorted?sort=popular"
+          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/sorted?sort=popular",
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+              "Content-Type": "application/json",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch popular job posts");
