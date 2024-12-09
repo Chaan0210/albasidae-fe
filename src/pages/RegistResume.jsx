@@ -78,7 +78,9 @@ const RegistResume = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/resumes?email=${encodeURIComponent(email)}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes?email=${encodeURIComponent(
+          email
+        )}`,
         {
           method: "POST",
           headers: {

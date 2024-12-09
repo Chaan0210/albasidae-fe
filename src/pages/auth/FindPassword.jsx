@@ -75,7 +75,7 @@ const FindPassword = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/verify-user?email=${formData.email}&name=${formData.name}&phone=${formData.phone}&role=${formData.role}&businessNumber=${formData.businessNumber}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/verify-user?email=${formData.email}&name=${formData.name}&phone=${formData.phone}&role=${formData.role}&businessNumber=${formData.businessNumber}`,
         {
           method: "POST",
           headers: {
@@ -116,7 +116,7 @@ const FindPassword = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/reset-password?email=${formData.email}&newPassword=${formData.password}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/reset-password?email=${formData.email}&newPassword=${formData.password}`,
         {
           method: "POST",
           headers: {

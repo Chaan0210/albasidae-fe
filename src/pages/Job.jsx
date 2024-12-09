@@ -12,7 +12,7 @@ const Job = () => {
   const location = useLocation();
 
   const fetchJobsByApplicant = async (applicantEmail) => {
-    const url = `http://localhost:8080/api/job-applications/applied-jobs?email=${encodeURIComponent(
+    const url = `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applied-jobs?email=${encodeURIComponent(
       applicantEmail
     )}`;
 
@@ -29,7 +29,7 @@ const Job = () => {
   };
 
   const fetchJobsByCompany = async (companyEmail) => {
-    const url = `http://localhost:8080/api/job-posts?email=${encodeURIComponent(
+    const url = `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts?email=${encodeURIComponent(
       companyEmail
     )}`;
 
@@ -47,8 +47,8 @@ const Job = () => {
 
   const fetchFilteredJobs = async (filters) => {
     const url = filters
-      ? "http://localhost:8080/api/job-posts/filter"
-      : "http://localhost:8080/api/job-posts";
+      ? "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/filter"
+      : "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts";
 
     const options = filters
       ? {
@@ -73,7 +73,7 @@ const Job = () => {
   };
 
   const fetchJobsByKeyword = async (keyword) => {
-    const url = `http://localhost:8080/api/job-posts/search?keyword=${encodeURIComponent(
+    const url = `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/search?keyword=${encodeURIComponent(
       keyword
     )}`;
 

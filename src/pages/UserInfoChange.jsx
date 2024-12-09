@@ -201,7 +201,9 @@ const UserInfoChange = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${encodeURIComponent(email)}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
+          email
+        )}`,
         {
           method: "PUT",
           headers: {
@@ -232,7 +234,9 @@ const UserInfoChange = () => {
       const fetchUserData = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8080/api/users/${encodeURIComponent(email)}`
+            `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
+              email
+            )}`
           );
           const data = await response.json();
           if (response.ok && data.result) {
@@ -262,7 +266,9 @@ const UserInfoChange = () => {
     if (!confirmation) return;
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${encodeURIComponent(email)}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
+          email
+        )}`,
         {
           method: "DELETE",
           headers: {

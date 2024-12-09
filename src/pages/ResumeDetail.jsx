@@ -58,7 +58,9 @@ const ResumeDetail = () => {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/resumes/${id}`);
+        const response = await fetch(
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${id}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");
         }
@@ -77,7 +79,7 @@ const ResumeDetail = () => {
     if (!confirmation) return;
     try {
       const response = await fetch(
-        `http://localhost:8080/api/resumes/${id}?email=${encodeURIComponent(
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${id}?email=${encodeURIComponent(
           email
         )}`,
         {

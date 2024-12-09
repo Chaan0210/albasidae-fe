@@ -15,12 +15,14 @@ const Resume = () => {
         let response;
         if (email) {
           response = await fetch(
-            `http://localhost:8080/api/resumes?email=${encodeURIComponent(
+            `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes?email=${encodeURIComponent(
               email
             )}`
           );
         } else {
-          response = await fetch(`http://localhost:8080/api/resumes`);
+          response = await fetch(
+            `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes`
+          );
         }
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");

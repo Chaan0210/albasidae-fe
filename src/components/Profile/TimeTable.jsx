@@ -89,7 +89,9 @@ const TimeTable = () => {
     const fetchTimeTable = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/timetable/${encodeURIComponent(email)}`
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/timetable/${encodeURIComponent(
+            email
+          )}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch timetable data");
@@ -228,7 +230,9 @@ const TimeTable = () => {
     try {
       const method = isExisting ? "PUT" : "POST";
       const response = await fetch(
-        `http://localhost:8080/api/timetable/${encodeURIComponent(email)}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/timetable/${encodeURIComponent(
+          email
+        )}`,
         {
           method: method,
           headers: {

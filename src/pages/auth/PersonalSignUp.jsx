@@ -78,7 +78,7 @@ const PersonalSignUp = () => {
     try {
       const response = await fetch(
         // `https://6153-211-178-236-156.ngrok-free.app/api/users/register`,
-        "http://localhost:8080/api/users/register",
+        "https://ee9a-222-109-143-220.ngrok-free.app/api/users/register",
         {
           method: "POST",
           headers: {

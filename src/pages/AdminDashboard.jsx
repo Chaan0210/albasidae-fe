@@ -21,12 +21,14 @@ const AdminDashboard = () => {
     }
     const fetchData = async () => {
       try {
-        const usersResponse = await fetch("http://localhost:8080/api/users");
+        const usersResponse = await fetch(
+          "https://ee9a-222-109-143-220.ngrok-free.app/api/users"
+        );
         const resumesResponse = await fetch(
-          "http://localhost:8080/api/resumes"
+          "https://ee9a-222-109-143-220.ngrok-free.app/api/resumes"
         );
         const jobPostsResponse = await fetch(
-          "http://localhost:8080/api/job-posts"
+          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts"
         );
 
         if (!usersResponse.ok || !resumesResponse.ok || !jobPostsResponse.ok) {
@@ -53,7 +55,9 @@ const AdminDashboard = () => {
     if (!window.confirm("정말로 사용자를 삭제하시겠습니까?")) return;
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/${encodeURIComponent(userEmail)}`,
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
+          userEmail
+        )}`,
         {
           method: "DELETE",
         }
@@ -77,7 +81,7 @@ const AdminDashboard = () => {
     if (!window.confirm("정말로 이력서를 삭제하시겠습니까?")) return;
     try {
       const response = await fetch(
-        `http://localhost:8080/api/resumes/${resumeId}?email=${encodeURIComponent(
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${resumeId}?email=${encodeURIComponent(
           userEmail
         )}`,
         {
@@ -103,7 +107,7 @@ const AdminDashboard = () => {
     if (!window.confirm("정말로 공고를 삭제하시겠습니까?")) return;
     try {
       const response = await fetch(
-        `http://localhost:8080/api/job-posts/${jobPostId}?email=${encodeURIComponent(
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${jobPostId}?email=${encodeURIComponent(
           userEmail
         )}`,
         {

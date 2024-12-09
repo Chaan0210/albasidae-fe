@@ -21,7 +21,7 @@ const CompanyProfile = () => {
     const fetchJobData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/job-posts?email=${encodeURIComponent(
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts?email=${encodeURIComponent(
             email
           )}`
         );
@@ -35,7 +35,7 @@ const CompanyProfile = () => {
         data.forEach(async (job) => {
           try {
             const applicantResponse = await fetch(
-              `http://localhost:8080/api/job-applications/applications/${job.id}`
+              `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applications/${job.id}`
             );
             if (!applicantResponse.ok) {
               throw new Error("Failed to fetch applicant data");

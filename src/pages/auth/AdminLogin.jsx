@@ -19,14 +19,17 @@ const AdminLogin = () => {
       role,
     };
     try {
-      const response = await fetch("http://localhost:8080/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-        mode: "cors",
-      });
+      const response = await fetch(
+        "https://ee9a-222-109-143-220.ngrok-free.app/api/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+          mode: "cors",
+        }
+      );
 
       const data = await response.json();
       if (response.ok && data.result === true) {

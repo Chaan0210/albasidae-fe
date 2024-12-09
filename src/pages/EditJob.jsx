@@ -133,7 +133,7 @@ const EditJob = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/job-posts/${
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${
           location.state.job.id
         }?email=${encodeURIComponent(email)}`,
         {

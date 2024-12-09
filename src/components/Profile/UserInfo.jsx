@@ -19,7 +19,9 @@ const UserInfo = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/users/${encodeURIComponent(email)}`
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
+            email
+          )}`
         );
         const data = await response.json();
         if (response.ok && data.result) {
@@ -59,7 +61,9 @@ const UserInfo = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:8080/api/users/${encodeURIComponent(email)}/image`,
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
+            email
+          )}/image`,
           {
             method: "PUT",
             headers: {

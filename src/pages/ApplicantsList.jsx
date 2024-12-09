@@ -83,7 +83,7 @@ const ApplicantsList = () => {
     const fetchApplicants = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/job-applications/applications/${jobId}`
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applications/${jobId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch applicants data");
@@ -104,7 +104,7 @@ const ApplicantsList = () => {
       try {
         const resumePromises = applicants.map(async (applicant) => {
           const response = await fetch(
-            `http://localhost:8080/api/resumes/${applicant.resume}`
+            `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${applicant.resume}`
           );
           if (!response.ok) {
             throw new Error("Failed to fetch resume data");

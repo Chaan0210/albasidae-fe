@@ -109,7 +109,9 @@ const JobMap = () => {
   useEffect(() => {
     const fetchJobData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/job-posts");
+        const response = await fetch(
+          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch job data");
         }

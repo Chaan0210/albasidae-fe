@@ -90,7 +90,7 @@ const JobDetail = () => {
     const fetchJobData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/job-posts/${id}`
+          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch job data");
@@ -116,7 +116,7 @@ const JobDetail = () => {
     if (!confirmation) return;
     try {
       const response = await fetch(
-        `http://localhost:8080/api/job-posts/${id}?email=${encodeURIComponent(
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${id}?email=${encodeURIComponent(
           email
         )}`,
         {
@@ -147,7 +147,7 @@ const JobDetail = () => {
     setErrorMessage("");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/job-applications/apply/${id}?email=${encodeURIComponent(
+        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/apply/${id}?email=${encodeURIComponent(
           email
         )}`,
         {
