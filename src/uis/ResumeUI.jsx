@@ -199,6 +199,7 @@ const S = {
     display: flex;
     font-size: 18px;
     margin: 20px;
+    white-space: pre-wrap;
   `,
   Label: styled.div`
     flex: 1;

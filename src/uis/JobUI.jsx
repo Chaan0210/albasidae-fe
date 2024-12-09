@@ -276,6 +276,7 @@ const S = {
     font-weight: bold;
     color: #333;
     word-break: break-word;
+    white-space: pre-wrap;
   `,
   PaginationContainer: styled.div`
     margin-top: 20px;
