@@ -44,7 +44,6 @@ const JobList = () => {
           {
             headers: {
               "ngrok-skip-browser-warning": "69420",
-              "Content-Type": "application/json",
             },
           }
         );
@@ -53,6 +52,7 @@ const JobList = () => {
           throw new Error("Failed to fetch latest job posts");
         }
         const data = await response.json();
+        console.log(response.text);
         setLatestJobs(data.data);
       } catch (error) {
         alert("최신 채용 정보를 가져오는 중 오류가 발생했습니다.");
@@ -67,7 +67,6 @@ const JobList = () => {
           {
             headers: {
               "ngrok-skip-browser-warning": "69420",
-              "Content-Type": "application/json",
             },
           }
         );
