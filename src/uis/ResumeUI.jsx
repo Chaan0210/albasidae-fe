@@ -244,6 +244,9 @@ const S = {
     width: 120px;
     height: 120px;
   `,
+  Tbody: styled.tbody`
+    cursor: pointer;
+  `,
 };
 
 export default S;

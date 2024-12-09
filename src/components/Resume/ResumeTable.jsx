@@ -28,7 +28,7 @@ const ResumeTable = ({ resumes, onRowClick }) => {
           <S.ResumeTableHeader>희망근무지역</S.ResumeTableHeader>
         </S.ResumeTableHeaderRow>
       </S.ResumeTableHead>
-      <tbody>
+      <S.Tbody>
         {resumes &&
           resumes.map((resume) => {
             const age = calculateAge(resume.personal?.birthDate);
@@ -69,7 +69,7 @@ const ResumeTable = ({ resumes, onRowClick }) => {
               </S.ResumeTableRow>
             );
           })}
-      </tbody>
+      </S.Tbody>
     </S.ResumeTable>
   );
 };
