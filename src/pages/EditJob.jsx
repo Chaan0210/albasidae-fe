@@ -148,7 +148,7 @@ const EditJob = () => {
       const data = await response.json();
       if (response.ok && data.result === true) {
         alert("공고 수정이 완료되었습니다.");
-        navigate("/job");
+        navigate(`/job/${location.state.job.id}`);
       } else {
         alert(data.message || "공고 수정에 실패했습니다.");
       }
