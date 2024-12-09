@@ -3,6 +3,7 @@ import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/FindUI";
 
 const FindPassword = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [activeTab, setActiveTab] = useState("personal");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -75,11 +76,12 @@ const FindPassword = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/verify-user?email=${formData.email}&name=${formData.name}&phone=${formData.phone}&role=${formData.role}&businessNumber=${formData.businessNumber}`,
+        `${API_URL}/api/users/verify-user?email=${formData.email}&name=${formData.name}&phone=${formData.phone}&role=${formData.role}&businessNumber=${formData.businessNumber}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );
@@ -116,11 +118,12 @@ const FindPassword = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/reset-password?email=${formData.email}&newPassword=${formData.password}`,
+        `${API_URL}/api/users/reset-password?email=${formData.email}&newPassword=${formData.password}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );

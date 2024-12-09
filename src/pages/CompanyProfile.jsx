@@ -6,6 +6,7 @@ import UserInfo from "../components/Profile/UserInfo";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const CompanyProfile = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);
   const [applicantCounts, setApplicantCounts] = useState({});
@@ -21,9 +22,12 @@ const CompanyProfile = () => {
     const fetchJobData = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts?email=${encodeURIComponent(
-            email
-          )}`
+          `${API_URL}/api/job-posts?email=${encodeURIComponent(email)}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch job data");
@@ -35,7 +39,12 @@ const CompanyProfile = () => {
         data.forEach(async (job) => {
           try {
             const applicantResponse = await fetch(
-              `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applications/${job.id}`
+              `${API_URL}/api/job-applications/applications/${job.id}`,
+              {
+                headers: {
+                  "ngrok-skip-browser-warning": "69420",
+                },
+              }
             );
             if (!applicantResponse.ok) {
               throw new Error("Failed to fetch applicant data");
@@ -54,7 +63,7 @@ const CompanyProfile = () => {
       }
     };
     fetchJobData();
-  }, [isLoggedIn, role, navigate, email]);
+  }, [isLoggedIn, role, navigate, email, API_URL]);
 
   const handleNavigate = (path) => {
     if (path === "/job") {

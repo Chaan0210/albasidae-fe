@@ -15,6 +15,7 @@ import SelfIntroduce from "../components/RegistResume/SelfIntroduce";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const EditResume = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
   const { isLoggedIn, role, email } = useContext(AuthContext);
@@ -91,13 +92,14 @@ const EditResume = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${
+        `${API_URL}/api/resumes/${
           location.state.resume.id
         }?email=${encodeURIComponent(email)}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
           body: JSON.stringify(requestBody),
           mode: "cors",

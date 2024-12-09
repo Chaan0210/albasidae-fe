@@ -123,6 +123,7 @@ const S = {
 };
 
 const UserInfoChange = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { isLoggedIn, email, role, logout } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState("");
@@ -201,13 +202,12 @@ const UserInfoChange = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-          email
-        )}`,
+        `${API_URL}/api/users/${encodeURIComponent(email)}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
           body: JSON.stringify(requestBody),
           mode: "cors",
@@ -234,9 +234,12 @@ const UserInfoChange = () => {
       const fetchUserData = async () => {
         try {
           const response = await fetch(
-            `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-              email
-            )}`
+            `${API_URL}/api/users/${encodeURIComponent(email)}`,
+            {
+              headers: {
+                "ngrok-skip-browser-warning": "69420",
+              },
+            }
           );
           const data = await response.json();
           if (response.ok && data.result) {
@@ -259,20 +262,19 @@ const UserInfoChange = () => {
       };
       fetchUserData();
     }
-  }, [isLoggedIn, navigate, email]);
+  }, [isLoggedIn, navigate, email, API_URL]);
 
   const handleDelete = async () => {
     const confirmation = window.confirm("회원 탈퇴를 하시겠습니까?");
     if (!confirmation) return;
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-          email
-        )}`,
+        `${API_URL}/api/users/${encodeURIComponent(email)}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );

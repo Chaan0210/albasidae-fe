@@ -5,6 +5,7 @@ import S from "../../uis/ProfileUI";
 import { useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { email } = useContext(AuthContext);
   const [formData, setFormData] = useState({
@@ -19,9 +20,12 @@ const UserInfo = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-            email
-          )}`
+          `${API_URL}/api/users/${encodeURIComponent(email)}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         );
         const data = await response.json();
         if (response.ok && data.result) {
@@ -43,7 +47,7 @@ const UserInfo = () => {
       }
     };
     fetchUserData();
-  }, [email]);
+  }, [email, API_URL]);
 
   const handleSettingClick = () => {
     navigate("/userinfochange");
@@ -61,13 +65,12 @@ const UserInfo = () => {
 
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-            email
-          )}/image`,
+          `${API_URL}/api/users/${encodeURIComponent(email)}/image`,
           {
             method: "PUT",
             headers: {
               Accept: "application/json",
+              "ngrok-skip-browser-warning": "69420",
             },
             body: formData,
           }

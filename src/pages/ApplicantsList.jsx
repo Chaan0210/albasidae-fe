@@ -67,6 +67,7 @@ const S = {
 };
 
 const ApplicantsList = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { isLoggedIn } = useContext(AuthContext);
   const { jobId } = useParams();
   const navigate = useNavigate();
@@ -83,7 +84,12 @@ const ApplicantsList = () => {
     const fetchApplicants = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applications/${jobId}`
+          `${API_URL}/api/job-applications/applications/${jobId}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch applicants data");
@@ -97,14 +103,19 @@ const ApplicantsList = () => {
     };
 
     fetchApplicants();
-  }, [jobId, isLoggedIn, navigate]);
+  }, [jobId, isLoggedIn, navigate, API_URL]);
 
   useEffect(() => {
     const fetchApplicantResumes = async () => {
       try {
         const resumePromises = applicants.map(async (applicant) => {
           const response = await fetch(
-            `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${applicant.resume}`
+            `${API_URL}/api/resumes/${applicant.resume}`,
+            {
+              headers: {
+                "ngrok-skip-browser-warning": "69420",
+              },
+            }
           );
           if (!response.ok) {
             throw new Error("Failed to fetch resume data");
@@ -131,7 +142,7 @@ const ApplicantsList = () => {
     if (applicants.length > 0) {
       fetchApplicantResumes();
     }
-  }, [applicants]);
+  }, [applicants, API_URL]);
 
   const handleResumeClick = (resumeId) => {
     navigate(`/resume/${resumeId}`);

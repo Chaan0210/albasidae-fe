@@ -20,6 +20,7 @@ const InfoContainer = ({ title, children }) => (
 );
 
 const JobDetail = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { email, role } = useContext(AuthContext) || {};
   const { id } = useParams();
@@ -89,9 +90,11 @@ const JobDetail = () => {
   useEffect(() => {
     const fetchJobData = async () => {
       try {
-        const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${id}`
-        );
+        const response = await fetch(`${API_URL}/api/job-posts/${id}`, {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch job data");
         }
@@ -103,7 +106,7 @@ const JobDetail = () => {
       }
     };
     fetchJobData();
-  }, [id]);
+  }, [id, API_URL]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -116,13 +119,12 @@ const JobDetail = () => {
     if (!confirmation) return;
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${id}?email=${encodeURIComponent(
-          email
-        )}`,
+        `${API_URL}/api/job-posts/${id}?email=${encodeURIComponent(email)}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );
@@ -147,13 +149,14 @@ const JobDetail = () => {
     setErrorMessage("");
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/apply/${id}?email=${encodeURIComponent(
+        `${API_URL}/api/job-applications/apply/${id}?email=${encodeURIComponent(
           email
         )}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
           body: JSON.stringify(requestData),
           mode: "cors",

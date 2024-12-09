@@ -31,6 +31,7 @@ const S = {
 };
 
 const JobList = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [latestJobs, setLatestJobs] = useState([]);
   const [popularJobs, setPopularJobs] = useState([]);
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const JobList = () => {
     const fetchLatestJobs = async () => {
       try {
         const response = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/sorted?sort=latest",
+          `${API_URL}/api/job-posts/sorted?sort=latest`,
           {
             headers: {
               "ngrok-skip-browser-warning": "69420",
@@ -62,7 +63,7 @@ const JobList = () => {
     const fetchPopularJobs = async () => {
       try {
         const response = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/sorted?sort=popular",
+          `${API_URL}/api/job-posts/sorted?sort=popular`,
           {
             headers: {
               "ngrok-skip-browser-warning": "69420",
@@ -82,7 +83,7 @@ const JobList = () => {
     };
     fetchLatestJobs();
     fetchPopularJobs();
-  }, []);
+  }, [API_URL]);
 
   const handleCardClick = (jobId) => {
     navigate(`/job/${jobId}`);

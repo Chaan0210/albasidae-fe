@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import ResumePagination from "../components/Resume/ResumePagination";
 
 const Resume = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [resumes, setResumes] = useState([]);
   const location = useLocation();
   const email = new URLSearchParams(location.search).get("email");
@@ -15,14 +16,17 @@ const Resume = () => {
         let response;
         if (email) {
           response = await fetch(
-            `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes?email=${encodeURIComponent(
-              email
-            )}`
+            `${API_URL}/api/resumes?email=${encodeURIComponent(email)}`,
+            {
+              headers: {
+                "ngrok-skip-browser-warning": "69420",
+              },
+            }
           );
         } else {
-          response = await fetch(
-            `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes`
-          );
+          response = await fetch(`${API_URL}/api/resumes`, {
+            headers: { "ngrok-skip-browser-warning": "69420" },
+          });
         }
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");
@@ -36,7 +40,7 @@ const Resume = () => {
       }
     };
     fetchResumeData();
-  }, [email]);
+  }, [email, API_URL]);
 
   return (
     <>

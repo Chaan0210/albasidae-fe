@@ -5,6 +5,7 @@ import S from "../../uis/SignupUI";
 import { AuthContext } from "../../components/auth/AuthContext";
 
 const PersonalSignUp = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -76,18 +77,15 @@ const PersonalSignUp = () => {
     };
 
     try {
-      const response = await fetch(
-        // `https://6153-211-178-236-156.ngrok-free.app/api/users/register`,
-        "https://ee9a-222-109-143-220.ngrok-free.app/api/users/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`${API_URL}/api/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "69420",
+        },
+        body: JSON.stringify(requestBody),
+        mode: "cors",
+      });
       const data = await response.json();
       if (response.ok && data.result === true) {
         signup(data.data.token, "PERSONAL", formData.email);

@@ -3,6 +3,7 @@ import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/FindUI";
 
 const FindID = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [activeTab, setActiveTab] = useState("personal");
   const [errorMessage, setErrorMessage] = useState("");
   const [resultMessage, setResultMessage] = useState("");
@@ -62,7 +63,7 @@ const FindID = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/find-id?name=${formData.name}&phone=${formData.phone}&role=${formData.role}` +
+        `${API_URL}/api/users/find-id?name=${formData.name}&phone=${formData.phone}&role=${formData.role}` +
           (formData.role === "COMPANY" && formData.businessNumber
             ? `&businessNumber=${formData.businessNumber}`
             : ""),
@@ -70,6 +71,7 @@ const FindID = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );

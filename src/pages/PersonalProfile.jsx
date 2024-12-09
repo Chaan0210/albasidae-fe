@@ -8,6 +8,7 @@ import { AuthContext } from "../components/auth/AuthContext";
 import AlbasidaeLogo from "../images/AlbasidaeLogo(A_Type).png";
 
 const PersonalProfile = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [resumes, setResumes] = useState([]);
   const [appliedJobs, setAppliedJobs] = useState([]);
@@ -22,9 +23,12 @@ const PersonalProfile = () => {
     const fetchResumeData = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes?email=${encodeURIComponent(
-            email
-          )}`
+          `${API_URL}/api/resumes?email=${encodeURIComponent(email)}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");
@@ -40,9 +44,14 @@ const PersonalProfile = () => {
     const fetchAppliedJobs = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applied-jobs?email=${encodeURIComponent(
+          `${API_URL}/api/job-applications/applied-jobs?email=${encodeURIComponent(
             email
-          )}`
+          )}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch applied jobs data");
@@ -57,7 +66,7 @@ const PersonalProfile = () => {
 
     fetchResumeData();
     fetchAppliedJobs();
-  }, [isLoggedIn, role, navigate, email]);
+  }, [isLoggedIn, role, navigate, email, API_URL]);
 
   const handleNavigate = (path, query = null) => {
     if (query) {

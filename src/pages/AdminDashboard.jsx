@@ -5,6 +5,7 @@ import S from "../uis/AdminUI";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const AdminDashboard = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [resumes, setResumes] = useState([]);
@@ -21,15 +22,21 @@ const AdminDashboard = () => {
     }
     const fetchData = async () => {
       try {
-        const usersResponse = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/users"
-        );
-        const resumesResponse = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/resumes"
-        );
-        const jobPostsResponse = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts"
-        );
+        const usersResponse = await fetch(`${API_URL}/api/users`, {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+        const resumesResponse = await fetch(`${API_URL}/api/resumes`, {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
+        const jobPostsResponse = await fetch(`${API_URL}/api/job-posts`, {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
 
         if (!usersResponse.ok || !resumesResponse.ok || !jobPostsResponse.ok) {
           throw new Error("Failed to fetch data.");
@@ -49,16 +56,17 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-  }, [isLoggedIn, role, navigate]);
+  }, [isLoggedIn, role, navigate, API_URL]);
 
   const deleteUser = async (userEmail) => {
     if (!window.confirm("정말로 사용자를 삭제하시겠습니까?")) return;
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-          userEmail
-        )}`,
+        `${API_URL}/api/users/${encodeURIComponent(userEmail)}`,
         {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
           method: "DELETE",
         }
       );
@@ -81,10 +89,13 @@ const AdminDashboard = () => {
     if (!window.confirm("정말로 이력서를 삭제하시겠습니까?")) return;
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${resumeId}?email=${encodeURIComponent(
+        `${API_URL}/api/resumes/${resumeId}?email=${encodeURIComponent(
           userEmail
         )}`,
         {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
           method: "DELETE",
         }
       );
@@ -107,10 +118,13 @@ const AdminDashboard = () => {
     if (!window.confirm("정말로 공고를 삭제하시겠습니까?")) return;
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${jobPostId}?email=${encodeURIComponent(
+        `${API_URL}/api/job-posts/${jobPostId}?email=${encodeURIComponent(
           userEmail
         )}`,
         {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
           method: "DELETE",
         }
       );

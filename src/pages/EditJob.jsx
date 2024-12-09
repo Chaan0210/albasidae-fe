@@ -24,6 +24,7 @@ import WorkAddress from "../components/RegistNotice/WorkAddress";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const EditJob = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
   const { isLoggedIn, role, email } = useContext(AuthContext);
@@ -133,13 +134,15 @@ const EditJob = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/${
+        `${API_URL}/api/job-posts/${
           location.state.job.id
         }?email=${encodeURIComponent(email)}`,
         {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
           method: "PUT",
           body: formDataToSend,
-          mode: "cors",
         }
       );
       const data = await response.json();

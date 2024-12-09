@@ -101,6 +101,7 @@ const S = {
 };
 
 const JobMap = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [jobData, setJobData] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [map, setMap] = useState(null);
@@ -109,9 +110,11 @@ const JobMap = () => {
   useEffect(() => {
     const fetchJobData = async () => {
       try {
-        const response = await fetch(
-          "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts"
-        );
+        const response = await fetch(`${API_URL}/api/job-posts`, {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch job data");
         }
@@ -123,7 +126,7 @@ const JobMap = () => {
       }
     };
     fetchJobData();
-  }, []);
+  }, [API_URL]);
 
   useEffect(() => {
     const script = document.createElement("script");

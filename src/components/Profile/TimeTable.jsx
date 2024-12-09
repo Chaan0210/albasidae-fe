@@ -78,6 +78,7 @@ const S = {
 };
 
 const TimeTable = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { email } = useContext(AuthContext);
   const hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
   const days = ["월", "화", "수", "목", "금", "토", "일"];
@@ -89,9 +90,13 @@ const TimeTable = () => {
     const fetchTimeTable = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/timetable/${encodeURIComponent(
-            email
-          )}`
+          `${API_URL}/api/timetable/${encodeURIComponent(email)}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+              "Content-Type": "application/json",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch timetable data");
@@ -144,7 +149,7 @@ const TimeTable = () => {
       }
     };
     fetchTimeTable();
-  }, [email]);
+  }, [email, API_URL]);
 
   const toggleCell = (day, hour) => {
     const cell = `${day}-${hour}`;
@@ -230,13 +235,12 @@ const TimeTable = () => {
     try {
       const method = isExisting ? "PUT" : "POST";
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/timetable/${encodeURIComponent(
-          email
-        )}`,
+        `${API_URL}/api/timetable/${encodeURIComponent(email)}`,
         {
           method: method,
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
           body: JSON.stringify(timetable),
         }

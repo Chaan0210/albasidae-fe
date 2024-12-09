@@ -7,87 +7,111 @@ import JobPagination from "../components/Job/JobPagination";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const Job = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { email } = useContext(AuthContext);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const location = useLocation();
 
-  const fetchJobsByApplicant = async (applicantEmail) => {
-    const url = `https://ee9a-222-109-143-220.ngrok-free.app/api/job-applications/applied-jobs?email=${encodeURIComponent(
-      applicantEmail
-    )}`;
+  const fetchFilteredJobs = useCallback(
+    async (filters) => {
+      const url = filters
+        ? `${API_URL}/api/job-posts/filter`
+        : `${API_URL}/api/job-posts`;
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Failed to fetch jobs by applicant");
-      }
-      const responseData = await response.json();
-      setFilteredJobs(responseData?.data || []);
-    } catch (error) {
-      console.error("Failed to fetch jobs by applicant: ", error);
-    }
-  };
+      const options = filters
+        ? {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ngrok-skip-browser-warning": "69420",
+            },
+            body: JSON.stringify(filters),
+          }
+        : {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          };
 
-  const fetchJobsByCompany = async (companyEmail) => {
-    const url = `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts?email=${encodeURIComponent(
-      companyEmail
-    )}`;
-
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Failed to fetch jobs by company");
-      }
-      const responseData = await response.json();
-      setFilteredJobs(responseData?.data || []);
-    } catch (error) {
-      console.error("Failed to fetch jobs by company: ", error);
-    }
-  };
-
-  const fetchFilteredJobs = async (filters) => {
-    const url = filters
-      ? "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/filter"
-      : "https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts";
-
-    const options = filters
-      ? {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(filters),
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error("Failed to fetch job data");
         }
-      : {};
-
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error("Failed to fetch job data");
+        const responseData = await response.json();
+        setFilteredJobs(responseData?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch: ", error);
       }
-      const responseData = await response.json();
-      setFilteredJobs(responseData?.data || []);
-    } catch (error) {
-      console.error("Failed to fetch: ", error);
-    }
-  };
+    },
+    [API_URL]
+  );
 
-  const fetchJobsByKeyword = async (keyword) => {
-    const url = `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts/search?keyword=${encodeURIComponent(
-      keyword
-    )}`;
+  const fetchJobsByApplicant = useCallback(
+    async (applicantEmail) => {
+      const url = `${API_URL}/api/job-applications/applied-jobs?email=${encodeURIComponent(
+        applicantEmail
+      )}`;
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Failed to fetch job data by keyword");
+      try {
+        const response = await fetch(url, {
+          headers: { "ngrok-skip-browser-warning": "69420" },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch jobs by applicant");
+        }
+        const responseData = await response.json();
+        setFilteredJobs(responseData?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch jobs by applicant: ", error);
       }
-      const responseData = await response.json();
-      setFilteredJobs(responseData?.data || []);
-    } catch (error) {
-      console.error("Failed to fetch by keyword: ", error);
-    }
-  };
+    },
+    [API_URL]
+  );
+
+  const fetchJobsByCompany = useCallback(
+    async (companyEmail) => {
+      const url = `${API_URL}/api/job-posts?email=${encodeURIComponent(
+        companyEmail
+      )}`;
+
+      try {
+        const response = await fetch(url, {
+          headers: { "ngrok-skip-browser-warning": "69420" },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch jobs by company");
+        }
+        const responseData = await response.json();
+        setFilteredJobs(responseData?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch jobs by company: ", error);
+      }
+    },
+    [API_URL]
+  );
+
+  const fetchJobsByKeyword = useCallback(
+    async (keyword) => {
+      const url = `${API_URL}/api/job-posts/search?keyword=${encodeURIComponent(
+        keyword
+      )}`;
+
+      try {
+        const response = await fetch(url, {
+          headers: { "ngrok-skip-browser-warning": "69420" },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch job data by keyword");
+        }
+        const responseData = await response.json();
+        setFilteredJobs(responseData?.data || []);
+      } catch (error) {
+        console.error("Failed to fetch by keyword: ", error);
+      }
+    },
+    [API_URL]
+  );
 
   const handleFilterChange = useCallback(
     (filters) => {
@@ -124,7 +148,7 @@ const Job = () => {
         fetchFilteredJobs(requestPayload);
       }
     },
-    [email]
+    [email, fetchFilteredJobs]
   );
 
   useEffect(() => {
@@ -142,7 +166,13 @@ const Job = () => {
     } else {
       fetchFilteredJobs(null);
     }
-  }, [location.search]);
+  }, [
+    location.search,
+    fetchJobsByApplicant,
+    fetchJobsByCompany,
+    fetchJobsByKeyword,
+    fetchFilteredJobs,
+  ]);
 
   return (
     <>

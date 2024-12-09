@@ -24,6 +24,7 @@ import WorkAddress from "../components/RegistNotice/WorkAddress";
 import { AuthContext } from "../components/auth/AuthContext";
 
 const RegistNotice = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { isLoggedIn, role, email } = useContext(AuthContext);
   const [errors, setErrors] = useState({});
@@ -116,10 +117,11 @@ const RegistNotice = () => {
 
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/job-posts?email=${encodeURIComponent(
-          email
-        )}`,
+        `${API_URL}/api/job-posts?email=${encodeURIComponent(email)}`,
         {
+          headers: {
+            "ngrok-skip-browser-warning": "69420",
+          },
           method: "POST",
           body: formDataToSend,
           mode: "cors",

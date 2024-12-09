@@ -22,6 +22,7 @@ const calculateAge = (birthDate) => {
 };
 
 const ResumeDetail = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { email, role } = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -58,9 +59,9 @@ const ResumeDetail = () => {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${id}`
-        );
+        const response = await fetch(`${API_URL}/api/resumes/${id}`, {
+          headers: { "ngrok-skip-browser-warning": "69420" },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");
         }
@@ -72,20 +73,19 @@ const ResumeDetail = () => {
       }
     };
     fetchResumeData();
-  }, [id]);
+  }, [id, API_URL]);
 
   const handleDelete = async () => {
     const confirmation = window.confirm("이력서를 삭제하시겠습니까?");
     if (!confirmation) return;
     try {
       const response = await fetch(
-        `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes/${id}?email=${encodeURIComponent(
-          email
-        )}`,
+        `${API_URL}/api/resumes/${id}?email=${encodeURIComponent(email)}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );

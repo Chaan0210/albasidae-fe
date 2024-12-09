@@ -4,6 +4,7 @@ import S from "../../uis/RegistUI";
 import { AuthContext } from "../auth/AuthContext";
 
 const ResumeProfile = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const { isLoggedIn, email, role } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
@@ -17,9 +18,12 @@ const ResumeProfile = () => {
       const fetchUserData = async () => {
         try {
           const response = await fetch(
-            `https://ee9a-222-109-143-220.ngrok-free.app/api/users/${encodeURIComponent(
-              email
-            )}`
+            `${API_URL}/api/users/${encodeURIComponent(email)}`,
+            {
+              headers: {
+                "ngrok-skip-browser-warning": "69420",
+              },
+            }
           );
           const data = await response.json();
           if (response.ok && data.result) {
@@ -53,7 +57,7 @@ const ResumeProfile = () => {
       };
       fetchUserData();
     }
-  }, [isLoggedIn, navigate, email]);
+  }, [isLoggedIn, navigate, email, API_URL]);
 
   return (
     <S.ProfileContainer>

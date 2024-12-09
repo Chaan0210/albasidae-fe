@@ -100,6 +100,7 @@ const S = {
 };
 
 const Modal = ({ show, onClose, title, name, handleSubmit }) => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const { email } = useContext(AuthContext);
   const [resumes, setResumes] = useState([]);
   const [selectedResumeId, setSelectedResumeId] = useState("");
@@ -122,9 +123,13 @@ const Modal = ({ show, onClose, title, name, handleSubmit }) => {
     const fetchResumeData = async () => {
       try {
         const response = await fetch(
-          `https://ee9a-222-109-143-220.ngrok-free.app/api/resumes?email=${encodeURIComponent(
-            email
-          )}`
+          `${API_URL}/api/resumes?email=${encodeURIComponent(email)}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+              "Content-Type": "application/json",
+            },
+          }
         );
         if (!response.ok) {
           throw new Error("Failed to fetch resume data");
@@ -137,7 +142,7 @@ const Modal = ({ show, onClose, title, name, handleSubmit }) => {
       }
     };
     fetchResumeData();
-  }, [show, email]);
+  }, [show, email, API_URL]);
 
   useEffect(() => {
     const calculateBytes = (str) => {
