@@ -7,6 +7,7 @@ const S = {
   Wrapper: styled.div`
     margin: 20px auto 0px auto;
     max-width: 1200px;
+    padding-bottom: 50px;
   `,
   Title: styled.div`
     font-size: 30px;
