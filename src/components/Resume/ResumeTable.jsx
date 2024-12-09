@@ -49,6 +49,7 @@ const ResumeTable = ({ resumes, onRowClick }) => {
                       "(" +
                       resume.personal?.gender +
                       "," +
+                      " 만 " +
                       (age !== null ? `${age}세` : "N/A") +
                       ")"}
                   </S.ResumeNameGenderAge>

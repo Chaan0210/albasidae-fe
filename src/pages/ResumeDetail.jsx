@@ -135,6 +135,7 @@ const ResumeDetail = () => {
                     resume.personal?.gender +
                     ")" +
                     " " +
+                    "만 " +
                     calculateAge(resume.personal?.birthDate) +
                     "세"}
                 </S.Content>
