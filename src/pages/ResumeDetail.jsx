@@ -1,3 +1,6 @@
+// 이력서 상세 페이지
+// 특정 이력서의 세부 정보를 볼 수 있으며, 수정 및 삭제 기능
+
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";

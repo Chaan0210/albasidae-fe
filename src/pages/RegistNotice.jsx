@@ -1,3 +1,6 @@
+// 공고 등록 페이지
+// 기업 사용자가 신규 알바 공고를 작성하고 등록할 수 있는 기능
+
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../uis/RegistUI";

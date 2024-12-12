@@ -1,3 +1,7 @@
+// 채용 공고 페이지
+// 사용자가 공고를 필터링하거나 검색어로 검색할 수 있으며,
+// 회사 이메일이나 지원자 이메일로 특정 조건의 공고를 조회할 수 있는 기능
+
 import React, { useState, useCallback, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import S from "../uis/JobUI";

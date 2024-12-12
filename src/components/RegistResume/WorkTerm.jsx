@@ -1,3 +1,5 @@
+// 일하는 기간 선택 컴포넌트
+
 import React from "react";
 import S from "../../uis/RegistUI";
 

@@ -1,3 +1,5 @@
+// Admin 페이지에 사용되는 스타일 컴포넌트를 정의
+
 import styled from "styled-components";
 
 const S = {

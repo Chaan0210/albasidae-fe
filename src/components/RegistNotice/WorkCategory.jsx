@@ -1,3 +1,5 @@
+// 직종 체크박스 선택 컴포넌트
+
 import React from "react";
 import S from "../../uis/RegistUI";
 

@@ -1,3 +1,5 @@
+// 받은 구인 정보 목록을 테이블 형태로 표시
+
 import S from "../../uis/JobUI";
 
 const JobTable = ({ jobs, onRowClick }) => {

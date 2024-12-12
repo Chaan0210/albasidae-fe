@@ -1,3 +1,6 @@
+// 로그인 페이지
+// 개인회원 및 기업회원이 이메일과 비밀번호로 로그인할 수 있으며, 성공 시 메인 페이지로 이동하는 기능
+
 import React, { useContext, useState } from "react";
 import HeaderLogin from "../../components/auth/HeaderLogin";
 import S from "../../uis/LoginUI";

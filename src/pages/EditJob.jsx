@@ -1,3 +1,6 @@
+// 공고 수정 페이지
+// 사용자가 기존에 등록한 알바 공고의 내용을 수정하고 저장할 수 있는 기능
+
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import S from "../uis/RegistUI";

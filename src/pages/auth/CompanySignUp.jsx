@@ -1,3 +1,6 @@
+// 기업 회원가입 페이지
+// 이메일, 비밀번호, 사업자번호, 담당자명, 전화번호 등의 정보를 입력하고 가입 요청을 보낼 수 있는 기능
+
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";

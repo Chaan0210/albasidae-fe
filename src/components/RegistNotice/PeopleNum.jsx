@@ -1,3 +1,5 @@
+// 사람 수 설정 선택 및 입력 컴포넌트
+
 import React from "react";
 import S from "../../uis/RegistUI";
 

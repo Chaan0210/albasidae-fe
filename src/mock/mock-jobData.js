@@ -1,3 +1,5 @@
+// 공고 목업 데이터
+
 const MOCK_JobData = [
   {
     id: 0,

@@ -1,3 +1,5 @@
+// 구인 공고 지원용 팝업 모달
+
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../auth/AuthContext";

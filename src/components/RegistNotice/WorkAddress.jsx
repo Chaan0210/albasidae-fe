@@ -1,3 +1,5 @@
+// 카카오 주소 검색 API를 이용한 주소 검색 컴포넌트
+
 import React, { useState, useEffect } from "react";
 import S from "../../uis/RegistUI";
 

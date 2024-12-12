@@ -1,3 +1,5 @@
+// 핸드폰 번호 입력 컴포넌트
+
 import S from "../../uis/RegistUI";
 
 const ManagerPhone = ({ value, onChange }) => {

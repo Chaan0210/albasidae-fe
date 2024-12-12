@@ -1,3 +1,7 @@
+// 알바지도 페이지
+// 사용자가 지도를 통해 구인공고 위치를 확인하고 상세정보를 볼 수 있으며,
+// 현재 위치로 지도를 이동할 수 있는 기능
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";

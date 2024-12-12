@@ -1,3 +1,8 @@
+// 개인 회원 프로필 페이지
+// 사용자가 자신의 이력서를 관리하고,
+// 지원한 알바 목록을 확인하며,
+// 타임테이블을 등록하고 관리할 수 있는 기능
+
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../uis/ProfileUI";

@@ -1,3 +1,8 @@
+// 공고 상세 페이지
+// 사용자가 공고의 세부 정보를 확인하고,
+// 개인 회원은 해당 공고에 지원할 수 있으며,
+// 회사 회원과 관리자는 공고를 수정하거나 삭제할 수 있는 기능
+
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";

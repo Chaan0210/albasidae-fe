@@ -1,3 +1,6 @@
+// 이력서 등록 페이지
+// 개인 사용자 또는 관리자가 이력서를 작성할 수 있는 기능
+
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../uis/RegistUI";

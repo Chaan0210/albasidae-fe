@@ -1,3 +1,5 @@
+// 애플리케이션의 Entry Point 파일
+
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 

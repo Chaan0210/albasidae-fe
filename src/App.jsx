@@ -1,3 +1,5 @@
+// 애플리케이션의 루트 컴포넌트
+
 import React from "react";
 import Header from "./components/Header";
 import JobList from "./components/Mainpage/JobList";

@@ -1,3 +1,5 @@
+// 사업내용 입력 컴포넌트
+
 import React, { useState, useEffect } from "react";
 import S from "../../uis/RegistUI";
 

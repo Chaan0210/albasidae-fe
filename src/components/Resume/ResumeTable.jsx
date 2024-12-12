@@ -1,3 +1,5 @@
+// 이력서 table 형태로 출력하는 컴포넌트
+
 import React from "react";
 import S from "../../uis/ResumeUI";
 

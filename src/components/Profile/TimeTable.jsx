@@ -1,3 +1,6 @@
+// 시간표를 클릭, 드래그로 등록, 수정할 수 있으며
+// 서버에서 불러온 기존 시간표 데이터를 표시하고 수정 결과를 서버에 저장하는 기능
+
 import React, { useEffect, useState, useRef, useContext } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../auth/AuthContext";

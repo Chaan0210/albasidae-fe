@@ -1,3 +1,6 @@
+// 개인 회원가입 페이지
+// 개인 사용자가 이메일, 비밀번호, 이름, 생년월일, 성별, 전화번호 등의 정보를 입력하여 회원가입할 수 있는 기능
+
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";

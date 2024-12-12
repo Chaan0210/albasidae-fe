@@ -1,3 +1,5 @@
+// 사용자 연령 선택하는 컴포넌트
+
 import React from "react";
 import S from "../../uis/RegistUI";
 

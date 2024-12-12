@@ -1,3 +1,6 @@
+// 관리자 로그인용 페이지
+// 이메일과 비밀번호를 입력받아 로그인 요청을 보내고, 성공 시 관리자 대시보드로 이동하는 기능
+
 import React, { useContext, useState } from "react";
 import HeaderLogin from "../../components/auth/HeaderLogin";
 import S from "../../uis/LoginUI";

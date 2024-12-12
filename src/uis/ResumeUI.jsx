@@ -1,3 +1,5 @@
+// 이력서 관련 컴포넌트에서 레이아웃과 디자인을 정의하는 스타일 컴포넌트
+
 import { ReactComponent as ProfileImage } from "../images/ProfileImage.svg";
 import styled from "styled-components";
 

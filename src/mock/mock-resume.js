@@ -1,3 +1,5 @@
+// 이력서 목업 데이터
+
 import ProfileImage from "../images/ProfileImage.svg";
 
 const MOCK_RESUME = [

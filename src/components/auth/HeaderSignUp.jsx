@@ -1,3 +1,5 @@
+// 회원가입 페이지용 헤더 컴포넌트
+
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";

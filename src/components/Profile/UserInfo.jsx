@@ -1,3 +1,5 @@
+// 사용자의 정보를 불러와 표시, 프로필 이미지 변경 기능
+
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { ReactComponent as SettingIcon } from "../../images/Setting.svg";
 import { AuthContext } from "../auth/AuthContext";

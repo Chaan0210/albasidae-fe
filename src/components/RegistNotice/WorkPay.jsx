@@ -1,3 +1,5 @@
+// 임금 유형 선택 및 값 입력 컴포넌트
+
 import React, { useState } from "react";
 import S from "../../uis/RegistUI";
 

@@ -1,3 +1,6 @@
+// 관리자 대시보드 페이지
+// 사용자 목록, 이력서 목록, 알바 공고 목록을 조회하고 각각의 사용자, 이력서, 공고를 삭제할 수 있는 기능
+
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";

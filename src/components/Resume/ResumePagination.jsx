@@ -1,3 +1,5 @@
+// 이력서 페이지 pagination 컴포넌트
+
 import React, { useState, useEffect } from "react";
 import S from "../../uis/ResumeUI";
 import ResumeTable from "./ResumeTable";

@@ -1,3 +1,6 @@
+// 비밀번호 찾기 페이지
+// 개인회원과 기업회원이 이메일, 이름, 전화번호 등을 통해 사용자 인증을 받고 비밀번호를 재설정할 수 있는 기능
+
 import React, { useState, useEffect } from "react";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/FindUI";

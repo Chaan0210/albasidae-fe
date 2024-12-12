@@ -1,3 +1,6 @@
+// 지원자 리스트 페이지
+// 특정 공고에 지원한 지원자들의 목록을 조회하고 각 지원자의 이력서를 확인할 수 있는 기능
+
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";

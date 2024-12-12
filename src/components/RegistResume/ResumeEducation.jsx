@@ -1,3 +1,5 @@
+// 학력 선택 컴포넌트
+
 import S from "../../uis/RegistUI";
 import React, { useState, useEffect } from "react";
 

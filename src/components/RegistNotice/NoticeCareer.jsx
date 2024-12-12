@@ -1,3 +1,5 @@
+// 경력 선택 설정 컴포넌트
+
 import React from "react";
 import S from "../../uis/RegistUI";
 

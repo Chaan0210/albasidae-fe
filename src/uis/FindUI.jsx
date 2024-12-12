@@ -1,3 +1,5 @@
+// 아이디/비밀번호 찾기 페이지의 레이아웃과 디자인 정의하는 스타일 컴포넌트
+
 import styled from "styled-components";
 
 const S = {

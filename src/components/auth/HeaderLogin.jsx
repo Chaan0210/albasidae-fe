@@ -1,3 +1,5 @@
+// 로그인 페이지용 헤더 컴포넌트
+
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";

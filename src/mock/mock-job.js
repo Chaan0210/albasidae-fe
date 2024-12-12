@@ -1,3 +1,5 @@
+// 알바 공고 목업 데이터
+
 const MOCK_JOBLIST = [
   { company: "A회사", title: "판매사원 모집", location: "전국, 공고별 확인" },
   { company: "B회사", title: "판매사원 모집", location: "전국, 공고별 확인" },

@@ -1,3 +1,6 @@
+// 회사 프로필 페이지
+// 회사 사용자가 자신의 정보와 등록한 알바 공고 목록을 조회하고, 공고의 지원자 수를 확인할 수 있는 기능
+
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../uis/CompanyProfileUI";

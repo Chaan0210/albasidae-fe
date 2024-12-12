@@ -1,3 +1,6 @@
+// 필터링된 구인 정보를 페이지 단위로 나누어 표시
+// Pagination 기능을 제공
+
 import React, { useState, useEffect } from "react";
 import S from "../../uis/JobUI";
 import JobTable from "./JobTable";

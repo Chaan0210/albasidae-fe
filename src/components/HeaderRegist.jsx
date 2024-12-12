@@ -1,3 +1,5 @@
+// 이력서 등록, 공고 등록용 헤더 컴포넌트
+
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";

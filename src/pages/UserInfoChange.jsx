@@ -1,3 +1,6 @@
+// 사용자 정보 변경 페이지
+// 사용자가 자신의 정보를 수정하거나 회원 탈퇴할 수 있는 기능
+
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeaderRegist from "../components/HeaderRegist";

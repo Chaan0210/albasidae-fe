@@ -1,3 +1,6 @@
+// 이력서 목록 페이지
+// 모든 이력서를 목록으로 표시하고, 페이지네이션을 통해 탐색할 수 있는 기능
+
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import S from "../uis/ResumeUI";

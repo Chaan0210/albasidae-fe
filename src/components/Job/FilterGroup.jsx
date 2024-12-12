@@ -1,3 +1,6 @@
+// 지역, 직종, 근무조건 등의 필터를 적용 및 해제하고,
+// 로그인 상태나 역할에 따라 시간표 맞춤 필터를 제공하여 필터링된 결과를 부모 컴포넌트로 전달
+
 import React, { useState, useContext } from "react";
 import S from "../../uis/JobUI";
 import { AuthContext } from "../auth/AuthContext";

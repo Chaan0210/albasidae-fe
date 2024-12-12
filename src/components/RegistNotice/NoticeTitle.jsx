@@ -1,3 +1,6 @@
+// 제목 입력 컴포넌트
+// Byte Counter 기능
+
 import React, { useState, useEffect } from "react";
 import S from "../../uis/RegistUI";
 

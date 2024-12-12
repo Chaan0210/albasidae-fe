@@ -1,3 +1,5 @@
+// 프로필 목업 데이터
+
 import ProfileImage from "../images/ProfileImage.svg";
 
 const MOCK_PROFILE = [

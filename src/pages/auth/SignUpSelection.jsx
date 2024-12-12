@@ -1,3 +1,6 @@
+// 회원가입 선택 페이지
+// 개인 회원과 기업 회원 중에서 선택하여 회원가입 페이지로 이동할 수 있는 기능
+
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";

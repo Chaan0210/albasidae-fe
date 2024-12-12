@@ -1,3 +1,6 @@
+// 아이디 찾기 페이지
+// 개인회원과 기업회원이 이름, 전화번호, 사업자등록번호 등을 입력하여 자신의 이메일을 찾을 수 있는 기능
+
 import React, { useState, useEffect } from "react";
 import HeaderSignUp from "../../components/auth/HeaderSignUp";
 import S from "../../uis/FindUI";

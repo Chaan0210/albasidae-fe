@@ -1,3 +1,5 @@
+// Mainpage에서 인기 채용정보와 최신 채용정보를 불러와 카드 형태로 나열
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import JobCard from "./JobCard";

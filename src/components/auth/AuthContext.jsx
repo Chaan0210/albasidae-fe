@@ -1,3 +1,6 @@
+// 로컬 스토리지 연동을 통해 사용자 인증 상태(로그인/로그아웃, 역할, 이메일)를 관리하고,
+// 이를 AuthContext로 제공하는 컨텍스트 프로바이더
+
 import React, { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();

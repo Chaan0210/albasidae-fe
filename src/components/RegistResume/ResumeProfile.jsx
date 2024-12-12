@@ -1,3 +1,5 @@
+// 사용자 정보를 가져와 화면에 표시하는 컴포넌트
+
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import S from "../../uis/RegistUI";

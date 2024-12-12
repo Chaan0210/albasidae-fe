@@ -1,3 +1,5 @@
+// 이미지 입력 컴포넌트
+
 import React, { useEffect } from "react";
 import S from "../../uis/RegistUI";
 
